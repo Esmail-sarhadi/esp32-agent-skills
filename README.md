@@ -189,6 +189,26 @@ they drop straight into CI or a pre-flash hook.
 | `examples/panic-log.txt` | A real `LoadProhibited` dump with a four frame backtrace. |
 | `tests/` | 30 unit tests covering all four tools. |
 
+## Verified on hardware
+
+The pin database is not taken on trust. It was checked against a real module:
+
+| Chip | Flash | Toolchain | Result |
+|---|---|---|---|
+| ESP32-D0WD-V3 rev 301, 2 cores | 4 MB | Arduino / ESP-IDF 5.5.5 | flashed, booted, serial read back |
+
+```
+=== board facts ===
+chip        : ESP32-D0WD-V3 rev 301, 2 core(s)
+cpu         : 240 MHz
+flash       : 4 MB (4194304 bytes)
+sdk         : v5.5.5
+free heap   : 331072 bytes
+=== end ===
+```
+
+Full boot log and the reproduction steps: [docs/hardware.md](docs/hardware.md).
+
 ## On accuracy
 
 The database encodes only constraints that are unambiguous across every module
