@@ -23,5 +23,17 @@ jobs:
       - name: Run unit tests
         run: python -m unittest discover -s tests -v
 
-      - name: Check the example pin map
+      - name: Pin map example (expected to report errors)
         run: python tools/pincheck.py --soc esp32 --file examples/pinmap.txt || true
+
+      - name: Partition table must pass
+        run: python tools/partition_check.py --file examples/partitions-ota-4mb.csv --flash 4MB --ota
+
+      - name: Broken partition table must fail
+        run: |
+          if python tools/partition_check.py --file examples/partitions-broken.csv --flash 4MB --ota; then
+            echo "expected a non-zero exit for the broken layout"; exit 1
+          fi
+
+      - name: Power budget smoke test
+        run: python tools/power_budget.py --battery 3000 --wakes-per-hour 12 --wake-ms 2000

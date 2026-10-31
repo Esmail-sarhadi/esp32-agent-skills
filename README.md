@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**Skills and a checker that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**Six skills and three checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -59,6 +59,46 @@ Check a whole pin map from a file instead:
 python tools/pincheck.py --soc esp32 --file examples/pinmap.txt
 ```
 
+Check the partition table before you flash it:
+
+```bash
+python tools/partition_check.py --file examples/partitions-ota-4mb.csv --flash 4MB --ota
+```
+
+```
+NAME           TYPE   SUBTYPE    OFFSET     SIZE
+nvs            data   nvs        0x9000     20KB
+otadata        data   ota        0xE000     8KB
+app0           app    ota_0      0x10000    1280KB
+app1           app    ota_1      0x150000   1280KB
+spiffs         data   spiffs     0x290000   1408KB
+coredump       data   coredump   0x3F0000   64KB
+
+  INFO  4060KB of 4MB used (99.1%), 36KB free
+```
+
+And the one that matters before a battery-powered build:
+
+```bash
+python tools/power_budget.py --battery 3000 --wakes-per-hour 12 --wake-ms 2000
+```
+
+```
+  duty cycle      0.67%
+  average current 0.677 mA
+  battery life    184.7 days (4433.9 hours)
+
+  where the charge goes
+    idle      0.467 mA   69.0%
+    tx        0.200 mA   29.6%
+    sleep     0.010 mA    1.5%
+
+  dominant term: idle (69.0%), fix that one first
+```
+
+That last line is the point of the tool: it tells you which number to attack
+instead of letting you guess.
+
 ## Install as an agent skill
 
 The `skills/` directory follows the Agent Skills layout (`SKILL.md` with `name`
@@ -91,13 +131,37 @@ python tools/pincheck.py --soc esp32 --assign "$(cat pinmap.txt)"
 
 ## What is inside
 
+### Skills
+
+| Skill | What it stops |
+|---|---|
+| `esp32-pin-safety` | Flash pins, input-only pins, strapping pins, ADC2 with Wi-Fi. |
+| `esp32-power-and-boot` | Brownout, boot strap states, deep-sleep leakage — the "random reset" triage. |
+| `esp32-i2c-bus` | Missing pull-ups, address conflicts, a bus that hangs mid-transfer. |
+| `esp32-partitions-and-ota` | Misaligned app slots, overlapping regions, an OTA that silently rolls back. |
+| `esp32-freertos` | Watchdog resets, stack overflow, ISR rules, shared data without a lock. |
+| `esp32-modbus-rs485` | DE-pin timing, the 3.5 character gap, the CRC, the 40001 off-by-one. |
+
+### Tools
+
+All three use the standard library only. All three exit non-zero on an error, so
+they drop straight into CI or a pre-flash hook.
+
+| Tool | Answers |
+|---|---|
+| `tools/pincheck.py` | Is this GPIO allowed to do this job on this SoC? |
+| `tools/partition_check.py` | Does this partition table fit the flash and support OTA? |
+| `tools/power_budget.py` | How long does this duty cycle actually last on this battery? |
+
+### Data and examples
+
 | Path | What it is |
 |---|---|
-| `skills/esp32-pin-safety/SKILL.md` | The five pin checks, in the order they must be applied, and the rules an agent must not break. |
-| `skills/esp32-power-and-boot/SKILL.md` | Brownout, boot strap states and deep-sleep leakage — the "random reset" triage. |
-| `data/esp32-pins.json` | Machine-readable constraints for `esp32`, `esp32s3`, `esp32c3`. |
-| `tools/pincheck.py` | Validator. Standard library only, no install step. |
+| `data/esp32-pins.json` | Machine-readable pin constraints for `esp32`, `esp32s3`, `esp32c3`. |
 | `examples/pinmap.txt` | A realistic pin map with the mistakes agents actually make. |
+| `examples/partitions-ota-4mb.csv` | A correct 4 MB OTA layout. |
+| `examples/partitions-broken.csv` | The same layout with misalignment, overlap and overflow. |
+| `tests/` | 23 unit tests covering all three tools. |
 
 ## On accuracy
 
@@ -114,8 +178,9 @@ number and it gets fixed. That is the only way a database like this stays useful
 
 - [ ] ESP32-C6 and ESP32-H2 pin maps
 - [ ] `--board` profiles for common dev boards (DevKitC, WROVER-KIT, M5Stack)
-- [ ] Rule for I2C pull-ups and bus capacitance
-- [ ] GitHub Action that runs the checker on every PR touching `pins.h`
+- [ ] A `esp32-wifi-reliability` skill (reconnect storms, power save, AP+STA)
+- [ ] `tools/panic_decode.py` to turn a Guru Meditation backtrace into file:line
+- [ ] Reusable GitHub Action that runs all three checkers on every PR
 
 ## License
 
