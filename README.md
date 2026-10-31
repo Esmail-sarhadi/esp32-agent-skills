@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**Eight skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**Eleven skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -143,6 +143,9 @@ python tools/pincheck.py --soc esp32 --assign "$(cat pinmap.txt)"
 | `esp32-modbus-rs485` | DE-pin timing, the 3.5 character gap, the CRC, the 40001 off-by-one. |
 | `esp32-addressable-leds` | Power sizing, the 3.3 V data problem, GRB vs RGBW, refresh budget, flicker under Wi-Fi. |
 | `esp32-gaming-rgb` | The OpenRGB SDK wire format, SignalRGB's real options, and what latency Wi-Fi cannot do. |
+| `esp32-debugging` | Reading a panic dump, the exception decoder filter, core dumps, and telling a crash from a watchdog from a brownout. |
+| `esp32-wifi-reliability` | Reconnect storms, power save as a latency setting, AP+STA, and what RSSI actually means. |
+| `esp32-mqtt-and-cloud` | The 256 byte buffer that truncates payloads, keepalive and last will, TLS memory, why QoS 0 loses data. |
 
 ### Tools
 
@@ -182,7 +185,6 @@ number and it gets fixed. That is the only way a database like this stays useful
 
 - [ ] ESP32-C6 and ESP32-H2 pin maps
 - [ ] `--board` profiles for common dev boards (DevKitC, WROVER-KIT, M5Stack)
-- [ ] A `esp32-wifi-reliability` skill (reconnect storms, power save, AP+STA)
 - [ ] Reusable GitHub Action that runs all four checkers on every PR
 
 ## License
