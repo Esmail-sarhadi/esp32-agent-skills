@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**Eleven skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**Thirteen skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -146,6 +146,8 @@ python tools/pincheck.py --soc esp32 --assign "$(cat pinmap.txt)"
 | `esp32-debugging` | Reading a panic dump, the exception decoder filter, core dumps, and telling a crash from a watchdog from a brownout. |
 | `esp32-wifi-reliability` | Reconnect storms, power save as a latency setting, AP+STA, and what RSSI actually means. |
 | `esp32-mqtt-and-cloud` | The 256 byte buffer that truncates payloads, keepalive and last will, TLS memory, why QoS 0 loses data. |
+| `esp32-adc-and-sensors` | ADC1 vs ADC2, attenuation and the compressed top of the range, calibration, source impedance, averaging. |
+| `esp32-pwm-and-timing` | LEDC's frequency/resolution trade-off, duty as a count not a percent, servo timing, the core 3.x API change. |
 
 ### How a skill is laid out
 
