@@ -40,3 +40,29 @@ jobs:
 
       - name: Panic decode smoke test
         run: python tools/panic_decode.py --file examples/panic-log.txt
+
+  compile:
+    # The skills recommend APIs. If one of those calls stops compiling, the
+    # advice is wrong and this job says so before a reader finds out.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache the PlatformIO toolchain
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio
+          key: pio-${{ runner.os }}-espressif32-8.0.0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PlatformIO
+        run: pip install platformio
+
+      - name: Compile every rule in the skills
+        run: pio run -d examples/compiled

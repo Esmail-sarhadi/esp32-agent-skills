@@ -211,6 +211,27 @@ free heap   : 331072 bytes
 
 Full boot log and the reproduction steps: [docs/hardware.md](docs/hardware.md).
 
+## Every rule is compiled
+
+A skill is advice, and advice that does not compile is worthless. So each rule in
+`skills/` also exists as code that the compiler has to accept:
+
+```bash
+pio run -d examples/compiled
+```
+
+One sketch, one function per skill - PWM duty from the resolution, an ADC1-only
+reading in calibrated millivolts, an I2C scan with a timeout, an ISR that hands
+work to a task through a queue, the LED current shortfall, the partition
+alignment check, the Modbus CRC, the reset reason switch. It is not meant to run;
+it exists so that `ledcAttach`, `analogReadMilliVolts`, `Wire.setTimeOut` and the
+rest are proven to exist with the signature the skills claim, on the core
+version the README names.
+
+CI runs it on every push. If an upstream core renames something, this job goes
+red before a reader copies an API that no longer exists - which is exactly the
+failure mode a skill library is supposed to prevent.
+
 ## On accuracy
 
 The database encodes only constraints that are unambiguous across every module
@@ -227,6 +248,7 @@ number and it gets fixed. That is the only way a database like this stays useful
 - [ ] ESP32-C6 and ESP32-H2 pin maps
 - [ ] `--board` profiles for common dev boards (DevKitC, WROVER-KIT, M5Stack)
 - [ ] Reusable GitHub Action that runs all four checkers on every PR
+- [ ] Compile the examples against the previous Arduino core, not just the current one
 
 ## License
 
