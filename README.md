@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**Six skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**Eight skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -141,6 +141,8 @@ python tools/pincheck.py --soc esp32 --assign "$(cat pinmap.txt)"
 | `esp32-partitions-and-ota` | Misaligned app slots, overlapping regions, an OTA that silently rolls back. |
 | `esp32-freertos` | Watchdog resets, stack overflow, ISR rules, shared data without a lock. |
 | `esp32-modbus-rs485` | DE-pin timing, the 3.5 character gap, the CRC, the 40001 off-by-one. |
+| `esp32-addressable-leds` | Power sizing, the 3.3 V data problem, GRB vs RGBW, refresh budget, flicker under Wi-Fi. |
+| `esp32-gaming-rgb` | The OpenRGB SDK wire format, SignalRGB's real options, and what latency Wi-Fi cannot do. |
 
 ### Tools
 
