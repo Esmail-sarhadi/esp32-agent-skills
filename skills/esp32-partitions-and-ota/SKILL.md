@@ -75,3 +75,7 @@ python tools/partition_check.py --file partitions.csv --flash 4MB --ota
 - If the user reports "Sketch too big", report the binary size, the slot size
   and the difference. Do not silently switch to a different partition scheme
   that removes OTA.
+
+## Reference
+
+[`reference/partition-layouts.md`](reference/partition-layouts.md) - Verified 2/4/8/16 MB layouts, ready to copy and already checked.

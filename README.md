@@ -147,6 +147,25 @@ python tools/pincheck.py --soc esp32 --assign "$(cat pinmap.txt)"
 | `esp32-wifi-reliability` | Reconnect storms, power save as a latency setting, AP+STA, and what RSSI actually means. |
 | `esp32-mqtt-and-cloud` | The 256 byte buffer that truncates payloads, keepalive and last will, TLS memory, why QoS 0 loses data. |
 
+### How a skill is laid out
+
+Each skill is a directory, following the layout used by the official Anthropic
+skill repository:
+
+```
+skills/esp32-pin-safety/
+  SKILL.md          the rules, loaded when the task touches pins
+  LICENSE.txt       so the directory can be copied out on its own
+  reference/        the long tables, read only when needed
+```
+
+`SKILL.md` stays short on purpose: an agent loads it for every relevant task, so
+it carries the decisions. The tables live in `reference/` and are pulled in only
+when someone actually needs the full pin map.
+
+The pin table is generated from `data/esp32-pins.json` by
+`tools/render_pin_table.py`, and a test fails if the two drift apart.
+
 ### Tools
 
 All four use the standard library only. All four exit non-zero on an error, so

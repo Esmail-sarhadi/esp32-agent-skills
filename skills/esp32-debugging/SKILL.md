@@ -78,3 +78,7 @@ That filter is the single highest-value line in an ESP32 project.
   is blocking; the fix is to yield or move the work, not to feed the dog.
 - After fixing a panic, say what the pointer was and why it was invalid. "Added
   a null check" without that sentence is a patch, not a diagnosis.
+
+## Reference
+
+[`reference/panic-codes.md`](reference/panic-codes.md) - Every panic reason and reset reason, with the first thing to check.

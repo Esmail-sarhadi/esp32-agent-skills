@@ -79,3 +79,7 @@ after it.
 - Never allocate `numLeds * 3` without checking whether the strip is RGBW.
 - When a user reports flicker, ask whether it started when Wi-Fi was enabled.
   That single question separates a power problem from a timing problem.
+
+## Reference
+
+[`reference/timing-and-power.md`](reference/timing-and-power.md) - Protocol, bit timing, current per LED and the refresh budget table.

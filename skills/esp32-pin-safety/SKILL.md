@@ -69,3 +69,7 @@ $ python tools/pincheck.py --soc esp32 --assign "12=relay1,34=button,6=status_le
 The fix in that case is `GPIO26` for the relay, `GPIO32` for the button with a
 10 kΩ pull-up, and `GPIO2` or `GPIO25` for the status LED — `GPIO2` is itself a
 strapping pin, so `GPIO25` is the safer of the two.
+
+## Reference
+
+[`reference/pin-table.md`](reference/pin-table.md) - Every GPIO of all three SoCs, with the strapping reason spelled out.
