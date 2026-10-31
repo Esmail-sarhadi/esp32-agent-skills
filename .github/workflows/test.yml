@@ -37,3 +37,6 @@ jobs:
 
       - name: Power budget smoke test
         run: python tools/power_budget.py --battery 3000 --wakes-per-hour 12 --wake-ms 2000
+
+      - name: Panic decode smoke test
+        run: python tools/panic_decode.py --file examples/panic-log.txt

@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**Six skills and three checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**Six skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -144,7 +144,7 @@ python tools/pincheck.py --soc esp32 --assign "$(cat pinmap.txt)"
 
 ### Tools
 
-All three use the standard library only. All three exit non-zero on an error, so
+All four use the standard library only. All four exit non-zero on an error, so
 they drop straight into CI or a pre-flash hook.
 
 | Tool | Answers |
@@ -152,6 +152,7 @@ they drop straight into CI or a pre-flash hook.
 | `tools/pincheck.py` | Is this GPIO allowed to do this job on this SoC? |
 | `tools/partition_check.py` | Does this partition table fit the flash and support OTA? |
 | `tools/power_budget.py` | How long does this duty cycle actually last on this battery? |
+| `tools/panic_decode.py` | Which `addr2line` command turns this crash dump into file:line? |
 
 ### Data and examples
 
@@ -161,7 +162,8 @@ they drop straight into CI or a pre-flash hook.
 | `examples/pinmap.txt` | A realistic pin map with the mistakes agents actually make. |
 | `examples/partitions-ota-4mb.csv` | A correct 4 MB OTA layout. |
 | `examples/partitions-broken.csv` | The same layout with misalignment, overlap and overflow. |
-| `tests/` | 23 unit tests covering all three tools. |
+| `examples/panic-log.txt` | A real `LoadProhibited` dump with a four frame backtrace. |
+| `tests/` | 30 unit tests covering all four tools. |
 
 ## On accuracy
 
@@ -179,8 +181,7 @@ number and it gets fixed. That is the only way a database like this stays useful
 - [ ] ESP32-C6 and ESP32-H2 pin maps
 - [ ] `--board` profiles for common dev boards (DevKitC, WROVER-KIT, M5Stack)
 - [ ] A `esp32-wifi-reliability` skill (reconnect storms, power save, AP+STA)
-- [ ] `tools/panic_decode.py` to turn a Guru Meditation backtrace into file:line
-- [ ] Reusable GitHub Action that runs all three checkers on every PR
+- [ ] Reusable GitHub Action that runs all four checkers on every PR
 
 ## License
 
