@@ -4,11 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ESP32 Agent Skills — firmware that compiles, then works</title>
-<meta name="description" content="Twenty-six agent skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board. Standard library only, 150 tests, verified on real hardware.">
+<meta name="description" content="Twenty-six agent skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board. Standard library only, 153 tests, verified on real hardware.">
 <meta name="color-scheme" content="dark">
 <meta property="og:title" content="ESP32 Agent Skills">
 <meta property="og:description" content="Agent skills and checkers for ESP32 firmware that compiles and then bricks the board.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://esmail-sarhadi.github.io/esp32-agent-skills/">
+<meta property="og:image" content="https://esmail-sarhadi.github.io/esp32-agent-skills/assets/social.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="A dark circuit board on the left and a glowing red terminal panel on the right, joined by a light streak.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://esmail-sarhadi.github.io/esp32-agent-skills/assets/social.jpg">
+<link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233df5b0'/%3E%3Cpath d='M9 21l7-11 7 11' stroke='%23061218' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -279,7 +287,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
     <div class="stats">
       <div class="stat"><b>26</b><span>skills</span></div>
       <div class="stat"><b>4</b><span>checkers</span></div>
-      <div class="stat"><b>150</b><span>tests</span></div>
+      <div class="stat"><b>153</b><span>tests</span></div>
       <div class="stat"><b>1</b><span>board verified</span></div>
     </div>
   </header>
@@ -306,7 +314,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
   <!-- poster -->
   <section id="poster" style="padding-top:0">
     <div class="media">
-      <img src="assets/poster.jpg" alt="ESP32 Agent Skills poster: 13 skills and 4 tools" width="1536" height="1024" loading="lazy">
+      <img src="assets/hero.jpg" alt="A dark technical composition: a column of colour-coded data bars inside two orbiting rings, with an ESP32 module glowing in the lower right corner" width="1536" height="1024" loading="lazy">
     </div>
   </section>
 
@@ -337,6 +345,11 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
         <p>A 12&nbsp;ms wake every second looks cheap until you multiply by 60&nbsp;mA. Nobody does that arithmetic by hand.</p>
       </article>
     </div>
+
+    <div class="media" style="margin-top:28px">
+      <img src="assets/split.jpg" alt="One board rendered twice and split down the middle: the left half in cyan light, the right half in amber, each with floating telemetry panels" width="1536" height="1024" loading="lazy">
+    </div>
+    <p class="caption">The same board, two readings — what the agent assumes on the left, what the silicon does on the right.</p>
   </section>
 
   <!-- skills -->

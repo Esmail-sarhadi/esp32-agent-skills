@@ -9,7 +9,7 @@
 
 **[Read this on a page instead of a README →](https://esmail-sarhadi.github.io/esp32-agent-skills/)**
 
-![ESP32 Agent Skills](docs/assets/poster.jpg)
+![ESP32 Agent Skills: twenty-six skills and four checkers for ESP32 firmware](docs/assets/hero.jpg)
 
 ---
 
@@ -42,6 +42,8 @@ memory.
 
 This repository gives the agent that memory, and gives you a checker that
 verifies the result in one command.
+
+![Two readings of the same board: what the agent assumes, and what the silicon does](docs/assets/split.jpg)
 
 ## Quickstart
 
