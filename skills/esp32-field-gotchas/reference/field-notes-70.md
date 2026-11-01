@@ -1,7 +1,8 @@
 # Seventy ESP32 failures, with the cause and the fix
 
-Collected from the questions people actually ask on Stack Overflow, each entry
-linked to the thread where the answer was worked out. Read by symptom.
+Collected from the questions people actually ask on Stack Overflow. Each entry
+links to the thread that covers it - a few share one thread when the accepted
+answer explains both cases. Read by symptom.
 
 Legend: **see** = what the board does, **cause** = why, **fix** = what to change.
 
@@ -114,10 +115,10 @@ Legend: **see** = what the board does, **cause** = why, **fix** = what to change
 
 ## Why these seventy
 
-They are the questions with the most votes and the most answers in the `esp32`
-tag, filtered to the ones where the accepted answer names a concrete cause
-rather than "try another library". Every entry above was checked against the
-thread it links to.
+They come from the highest voted questions in the `esp32` tag, filtered to the
+ones where the accepted answer names a concrete cause rather than "try another
+library". Every entry was written against the thread it links to; where two
+entries share a link, that answer covers both.
 
 The pattern worth noticing: almost none of them are about the code being wrong.
 They are about the board being a physical object — a supply that sags, a pin
