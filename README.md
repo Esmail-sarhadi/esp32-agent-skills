@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**Twenty-six skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**Forty-six skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -9,7 +9,7 @@
 
 **[Read this on a page instead of a README →](https://esmail-sarhadi.github.io/esp32-agent-skills/)**
 
-![ESP32 Agent Skills: twenty-six skills and four checkers for ESP32 firmware](docs/assets/hero.jpg)
+![ESP32 Agent Skills: forty-six skills and four checkers for ESP32 firmware](docs/assets/hero.jpg)
 
 ---
 
@@ -179,6 +179,26 @@ python tools/pincheck.py --soc esp32 --assign "$(cat pinmap.txt)"
 | `esp32-testing-and-ci` | Host tests, on-target Unity, size budgets and a build matrix that covers the chips the README claims. |
 | `esp32-hardware-bringup` | Measure the rail before the firmware: current, strapping levels, the blink-first order, and reading a boot loop. |
 | `esp32-field-gotchas` | A hundred and sixty failures people actually hit — brownout, dead I2C, garbled UART, watchdog resets, OTA that writes and boots nothing, cameras that brown out, ISRs that fault — indexed by symptom, each linked to the Stack Overflow thread where the cause was found. |
+| `esp32-ethernet` | RMII clock on a strapping pin, the PHY address, and a link that never comes up. |
+| `esp32-esp-now` | The channel that moves under you, the 250-byte frame limit, six encrypted peers, and LR that only one end speaks. |
+| `esp32-lora-and-lorawan` | DIO0 that never fires, airtime against a 1 % duty cycle, and joins that fail after a reset. |
+| `esp32-gps-and-nmea` | Baud, cold starts, valid time with no fix, and the checksum nobody validates. |
+| `esp32-uart-and-serial` | UART0 and the bootloader, the 128-byte FIFO, DE timing on RS485, and logs that corrupt a protocol. |
+| `esp32-watchdogs-and-timers` | Which of the three watchdogs reset you, and why feeding it from the wrong task tells you nothing. |
+| `esp32-lvgl-and-displays` | SPI vs RGB panels, DMA buffers, tearing from the flush callback, and framebuffers in PSRAM. |
+| `esp32-touch-and-input` | Baseline drift, water on the pad, no pull-ups on GPIO34-39, and strapping pins behind a button. |
+| `esp32-actuators-and-relays` | Flyback diodes, inrush, SSR leakage, and servos on the wrong rail. |
+| `esp32-multicore-and-ipc` | Core 0 belongs to the radio, priorities are absolute, and an ISR is not a task. |
+| `esp32-nvs-and-config` | The 20 kB that fills up, encryption off by default, and a schema that needs migrating. |
+| `esp32-json-and-payloads` | Capacity, streaming instead of String, float precision, and the cJSON leak on an early return. |
+| `esp32-tls-and-certificates` | 40 kB per handshake, cert bundles, SNI, and a clock stuck in 1970. |
+| `esp32-build-and-sdkconfig` | sdkconfig.defaults that is ignored, PlatformIO flags that are not Kconfig, and a binary that no longer fits. |
+| `esp32-factory-test-and-calibration` | A rig that decides in seconds, per-unit identity, and calibration that survives a reflash. |
+| `esp32-batch-provisioning` | SoftAP vs BLE, QR payloads phones reject, and batch flashing with unique serials. |
+| `esp32-ota-server` | Version comparison, staged rollout, and a rollback that needs a trigger. |
+| `esp32-battery-and-charging` | The charger is not a power path, the divider drains the cell, and the transmit peak browns out. |
+| `esp32-sd-card-and-logging` | Mount failures, a power cut mid-write, and writes that block the control loop. |
+| `esp32-emc-and-enclosure` | Antenna keepout, cables as antennas, and heat in a sealed box. |
 
 ### How a skill is laid out
 

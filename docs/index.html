@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ESP32 Agent Skills — firmware that compiles, then works</title>
-<meta name="description" content="Twenty-six agent skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board. Standard library only, 153 tests, verified on real hardware.">
+<meta name="description" content="Forty-six agent skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board. Standard library only, 270 tests, verified on real hardware.">
 <meta name="color-scheme" content="dark">
 <meta property="og:title" content="ESP32 Agent Skills">
 <meta property="og:description" content="Agent skills and checkers for ESP32 firmware that compiles and then bricks the board.">
@@ -251,11 +251,11 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
         <p>
           An agent writes <code>pinMode(6, OUTPUT)</code> and the build is green.
           GPIO6 is wired to the SPI flash — the module stops booting.
-          Twenty-six skills and four checkers catch that before the flash.
+          Forty-six skills and four checkers catch that before the flash.
         </p>
         <div class="hero-actions">
           <a class="btn primary" href="#install">Install in 30 seconds</a>
-          <a class="btn ghost" href="#skills">See the 26 skills</a>
+          <a class="btn ghost" href="#skills">See the 46 skills</a>
         </div>
       </div>
 
@@ -285,9 +285,9 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
     </div>
 
     <div class="stats">
-      <div class="stat"><b>26</b><span>skills</span></div>
+      <div class="stat"><b>46</b><span>skills</span></div>
       <div class="stat"><b>4</b><span>checkers</span></div>
-      <div class="stat"><b>153</b><span>tests</span></div>
+      <div class="stat"><b>270</b><span>tests</span></div>
       <div class="stat"><b>1</b><span>board verified</span></div>
     </div>
   </header>
@@ -355,7 +355,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
   <!-- skills -->
   <section id="skills">
     <span class="eyebrow">What is inside</span>
-    <h2>Twenty-six skills, one per failure domain</h2>
+    <h2>Forty-six skills, one per failure domain</h2>
     <p class="lede">
       Each skill is a directory with a short <code>SKILL.md</code>, a license, and a
       <code>reference/</code> folder holding the long tables — the layout the official
@@ -389,6 +389,26 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
       <article class="card skill"><span class="name">esp32-testing-and-ci</span><span class="stops">Host tests, on-target Unity, size budgets and a build matrix that covers the chips the README claims.</span></article>
       <article class="card skill"><span class="name">esp32-hardware-bringup</span><span class="stops">Measure the rail before the firmware: current, strapping levels, the blink-first order, and reading a boot loop.</span></article>
       <article class="card skill"><span class="name">esp32-field-gotchas</span><span class="stops">A hundred and sixty failures from Stack Overflow — brownout, dead I2C, garbled UART, OTA rollback, ULP wake, cameras, ISRs, secure boot, JTAG — indexed by symptom, each linked to its thread.</span></article>
+      <article class="card skill"><span class="name">esp32-ethernet</span><span class="stops">RMII clock on a strapping pin, the PHY address, and a link that never comes up.</span></article>
+      <article class="card skill"><span class="name">esp32-esp-now</span><span class="stops">The channel that moves under you, the 250-byte frame limit, six encrypted peers, and LR that only one end speaks.</span></article>
+      <article class="card skill"><span class="name">esp32-lora-and-lorawan</span><span class="stops">DIO0 that never fires, airtime against a 1 % duty cycle, and joins that fail after a reset.</span></article>
+      <article class="card skill"><span class="name">esp32-gps-and-nmea</span><span class="stops">Baud, cold starts, valid time with no fix, and the checksum nobody validates.</span></article>
+      <article class="card skill"><span class="name">esp32-uart-and-serial</span><span class="stops">UART0 and the bootloader, the 128-byte FIFO, DE timing on RS485, and logs that corrupt a protocol.</span></article>
+      <article class="card skill"><span class="name">esp32-watchdogs-and-timers</span><span class="stops">Which of the three watchdogs reset you, and why feeding it from the wrong task tells you nothing.</span></article>
+      <article class="card skill"><span class="name">esp32-lvgl-and-displays</span><span class="stops">SPI vs RGB panels, DMA buffers, tearing from the flush callback, and framebuffers in PSRAM.</span></article>
+      <article class="card skill"><span class="name">esp32-touch-and-input</span><span class="stops">Baseline drift, water on the pad, no pull-ups on GPIO34-39, and strapping pins behind a button.</span></article>
+      <article class="card skill"><span class="name">esp32-actuators-and-relays</span><span class="stops">Flyback diodes, inrush, SSR leakage, and servos on the wrong rail.</span></article>
+      <article class="card skill"><span class="name">esp32-multicore-and-ipc</span><span class="stops">Core 0 belongs to the radio, priorities are absolute, and an ISR is not a task.</span></article>
+      <article class="card skill"><span class="name">esp32-nvs-and-config</span><span class="stops">The 20 kB that fills up, encryption off by default, and a schema that needs migrating.</span></article>
+      <article class="card skill"><span class="name">esp32-json-and-payloads</span><span class="stops">Capacity, streaming instead of String, float precision, and the cJSON leak on an early return.</span></article>
+      <article class="card skill"><span class="name">esp32-tls-and-certificates</span><span class="stops">40 kB per handshake, cert bundles, SNI, and a clock stuck in 1970.</span></article>
+      <article class="card skill"><span class="name">esp32-build-and-sdkconfig</span><span class="stops">sdkconfig.defaults that is ignored, PlatformIO flags that are not Kconfig, and a binary that no longer fits.</span></article>
+      <article class="card skill"><span class="name">esp32-factory-test-and-calibration</span><span class="stops">A rig that decides in seconds, per-unit identity, and calibration that survives a reflash.</span></article>
+      <article class="card skill"><span class="name">esp32-batch-provisioning</span><span class="stops">SoftAP vs BLE, QR payloads phones reject, and batch flashing with unique serials.</span></article>
+      <article class="card skill"><span class="name">esp32-ota-server</span><span class="stops">Version comparison, staged rollout, and a rollback that needs a trigger.</span></article>
+      <article class="card skill"><span class="name">esp32-battery-and-charging</span><span class="stops">The charger is not a power path, the divider drains the cell, and the transmit peak browns out.</span></article>
+      <article class="card skill"><span class="name">esp32-sd-card-and-logging</span><span class="stops">Mount failures, a power cut mid-write, and writes that block the control loop.</span></article>
+      <article class="card skill"><span class="name">esp32-emc-and-enclosure</span><span class="stops">Antenna keepout, cables as antennas, and heat in a sealed box.</span></article>
     </div>
   </section>
 
