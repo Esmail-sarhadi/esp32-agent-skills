@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**Thirteen skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**Fourteen skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -164,6 +164,7 @@ python tools/pincheck.py --soc esp32 --assign "$(cat pinmap.txt)"
 | `esp32-mqtt-and-cloud` | The 256 byte buffer that truncates payloads, keepalive and last will, TLS memory, why QoS 0 loses data. |
 | `esp32-adc-and-sensors` | ADC1 vs ADC2, attenuation and the compressed top of the range, calibration, source impedance, averaging. |
 | `esp32-pwm-and-timing` | LEDC's frequency/resolution trade-off, duty as a count not a percent, servo timing, the core 3.x API change. |
+| `esp32-field-gotchas` | Seventy failures people actually hit — brownout, dead I2C, garbled UART, watchdog resets — indexed by symptom, each linked to the Stack Overflow thread where the cause was found. |
 
 ### How a skill is laid out
 
@@ -265,6 +266,27 @@ number and it gets fixed. That is the only way a database like this stays useful
 - [ ] `--board` profiles for common dev boards (DevKitC, WROVER-KIT, M5Stack)
 - [ ] Reusable GitHub Action that runs all four checkers on every PR
 - [ ] Compile the examples against the previous Arduino core, not just the current one
+
+## Contributing
+
+The useful contributions here are not code, they are corrections and coverage:
+
+- **A wrong constraint.** Open an issue with the datasheet page number. A rule
+  that is wrong for your module is the most valuable bug report this repo can
+  get, because it means someone else will hit it too.
+- **A chip we do not cover.** `data/esp32-pins.json` has `esp32`, `esp32s3` and
+  `esp32c3`. C6 and H2 are missing.
+- **A skill from your domain.** CAN, BLE, camera, SD card, anything you fight
+  with weekly. Copy the shape of an existing skill: a short `SKILL.md`, a
+  `reference/` folder for the long tables, and a license so it can be copied out
+  on its own.
+- **A failure we have not written down.** `esp32-field-gotchas` has seventy
+  entries, each with a link to the thread where it was solved. If you have one
+  that is not there, send it with the symptom and the fix.
+
+Every skill has to survive `python -m unittest discover -s tests`, and every
+rule that can be expressed as code has to compile - `examples/compiled` is built
+in CI for exactly that reason.
 
 ## License
 

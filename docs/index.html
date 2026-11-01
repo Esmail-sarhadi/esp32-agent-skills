@@ -243,7 +243,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
         <p>
           An agent writes <code>pinMode(6, OUTPUT)</code> and the build is green.
           GPIO6 is wired to the SPI flash — the module stops booting.
-          Thirteen skills and four checkers catch that before the flash.
+          Fourteen skills and four checkers catch that before the flash.
         </p>
         <div class="hero-actions">
           <a class="btn primary" href="#install">Install in 30 seconds</a>
@@ -277,7 +277,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
     </div>
 
     <div class="stats">
-      <div class="stat"><b>13</b><span>skills</span></div>
+      <div class="stat"><b>14</b><span>skills</span></div>
       <div class="stat"><b>4</b><span>checkers</span></div>
       <div class="stat"><b>32</b><span>tests</span></div>
       <div class="stat"><b>1</b><span>board verified</span></div>
@@ -342,7 +342,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
   <!-- skills -->
   <section id="skills">
     <span class="eyebrow">What is inside</span>
-    <h2>Thirteen skills, one per failure domain</h2>
+    <h2>Fourteen skills, one per failure domain</h2>
     <p class="lede">
       Each skill is a directory with a short <code>SKILL.md</code>, a license, and a
       <code>reference/</code> folder holding the long tables — the layout the official
@@ -363,6 +363,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
       <article class="card skill"><span class="name">esp32-mqtt-and-cloud</span><span class="stops">The 256 byte buffer that truncates payloads, keepalive, last will, TLS memory.</span></article>
       <article class="card skill"><span class="name">esp32-adc-and-sensors</span><span class="stops">ADC1 vs ADC2, attenuation, calibration, source impedance, averaging.</span></article>
       <article class="card skill"><span class="name">esp32-pwm-and-timing</span><span class="stops">LEDC's frequency/resolution trade-off, duty as a count, the core 3.x API change.</span></article>
+      <article class="card skill"><span class="name">esp32-field-gotchas</span><span class="stops">Seventy failures from Stack Overflow — brownout, dead I2C, garbled UART, watchdog resets — indexed by symptom, each with a link.</span></article>
     </div>
   </section>
 
