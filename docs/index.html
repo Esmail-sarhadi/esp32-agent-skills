@@ -254,21 +254,25 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
       <div class="terminal">
         <div class="terminal-bar">
           <i class="dot r"></i><i class="dot y"></i><i class="dot g"></i>
-          <span>pincheck.py</span>
+          <span>skills/esp32-pin-safety/SKILL.md</span>
         </div>
-<pre><span class="t-cmd">$ python tools/pincheck.py --soc esp32 \
-    --assign "12=relay1,34=button,6=status_led"</span>
+<pre><span class="t-dim">---</span>
+<span class="t-ok">name</span>: esp32-pin-safety
+<span class="t-ok">description</span>: <span class="t-dim">Use when choosing or debugging
+  ESP32 GPIO assignments in firmware.</span>
+<span class="t-dim">---</span>
 
-  <span class="t-err">GPIO6   ERROR  status_led</span>
-          <span class="t-dim">GPIO6 is connected to the SPI flash,
-          using it bricks the module</span>
-  <span class="t-warn">GPIO12  WARN   relay1</span>
-          <span class="t-dim">strapping pin, must be LOW at boot</span>
-  <span class="t-warn">GPIO34  WARN   button</span>
-          <span class="t-dim">input-only, no output driver</span>
+<span class="t-ok">## Check before you assign a pin</span>
 
-  <span class="t-dim">1 error(s), 2 warning(s), 1 note(s)</span>
-  <span class="t-ok">exit 1</span></pre>
+- GPIO6-11 are the SPI flash.
+  Driving one bricks the module.
+- GPIO34-39 are input-only.
+  There is no output driver to enable.
+- GPIO12 high at reset selects
+  1.8 V flash: it boots once, then not.
+- ADC2 is unusable while Wi-Fi is on.
+
+<span class="t-dim"># then: python tools/pincheck.py --soc esp32</span></pre>
       </div>
     </div>
 
