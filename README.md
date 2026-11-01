@@ -16,7 +16,8 @@
 ## Watch it catch one
 
 Same command twice: the first run exits 1 on a pin wired to the flash, the second
-exits 0 after the pin is moved. The animation is the real output, frame by frame.
+exits 0 after the pin is moved. The text is the real output of those two runs,
+replayed line by line; the frame around it is drawn, not a screen recording.
 
 ![pincheck catching GPIO6, then passing GPIO25](docs/assets/demo.gif)
 

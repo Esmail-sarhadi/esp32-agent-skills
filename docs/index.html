@@ -289,9 +289,10 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
     <span class="eyebrow">Watch it catch one</span>
     <h2>The agent picks GPIO6. The checker says no.</h2>
     <p class="lede">
-      Same command, two runs: the first one exits 1 with a dead pin, the second one
-      with a working pin exits 0. This is the real output, animated frame by frame
-      from an actual run — not a mockup.
+      Same command, two runs: the first exits 1 on a pin wired to the flash, the
+      second exits 0 after the pin is moved. The text is the real output of those
+      two runs, replayed line by line; the terminal frame around it is drawn, not a
+      screen recording.
     </p>
     <div class="media" style="margin-top:24px">
       <img src="assets/demo.gif" alt="Terminal animation: pincheck rejects GPIO6, then accepts GPIO25" width="1100" height="600" loading="lazy">
