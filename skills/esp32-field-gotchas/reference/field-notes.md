@@ -1,4 +1,4 @@
-# Seventy ESP32 failures, with the cause and the fix
+# One hundred and ten ESP32 failures, with the cause and the fix
 
 Collected from the questions people actually ask on Stack Overflow. Each entry
 links to the thread that covers it - a few share one thread when the accepted
@@ -124,3 +124,65 @@ The pattern worth noticing: almost none of them are about the code being wrong.
 They are about the board being a physical object — a supply that sags, a pin
 that is not a GPIO, a radio that takes the ADC away, a flash that wears out.
 An agent that only reads the code cannot see any of that.
+
+---
+
+# Part two: sleep, storage, security, buses and tasks (71-110)
+
+## Sleep, ULP and wake sources (71-79)
+
+71. **Deep sleep still draws milliamps** — see: 8 mA instead of 10 µA. cause: the USB-serial chip is still powered, a GPIO is left driving a load, or the regulator has high quiescent current. fix: measure on the battery rail only, `gpio_hold_en` the pins that must keep state, use a board without an always-on USB bridge. · [56548700](https://stackoverflow.com/q/56548700)
+72. **A GPIO change does not wake the chip** — see: the interrupt works while awake, nothing after deep sleep. cause: only RTC-capable pins (0-15 on the classic ESP32) can wake from deep sleep. fix: use `esp_sleep_enable_ext1_wakeup()` with a bitmask of RTC pins and the level you want. · [54500282](https://stackoverflow.com/q/54500282)
+73. **The ULP cannot touch a normal peripheral** — see: ULP code reads zero or hangs. cause: the ULP has its own tiny instruction set and can only reach RTC memory and a few registers. fix: keep the ULP to sampling and simple arithmetic, and let the main cores do everything else. · [61484531](https://stackoverflow.com/q/61484531)
+74. **ULP wake period drifts by minutes** — see: a "60 s" wake drifts. cause: the RTC slow clock is an RC oscillator with several percent tolerance. fix: calibrate it against the XTAL, or accept the drift and resync time when the radio is on. · [66606880](https://stackoverflow.com/q/66606880)
+75. **Variables lose their value after sleep** — see: a counter resets every wake. cause: deep sleep powers down normal RAM; only RTC memory survives. fix: `RTC_DATA_ATTR` on the few values that must persist, and keep them small. · [56548700](https://stackoverflow.com/q/56548700)
+76. **`ext0` wake never fires** — see: no wake on a valid pin. cause: `ext0` works on a single RTC pin and a specific level, and the pin must be configured as an RTC IO first. fix: `rtc_gpio_init` + `rtc_gpio_pullup`, then `esp_sleep_enable_ext0_wakeup(pin, level)`. · [54500282](https://stackoverflow.com/q/54500282)
+77. **Touch does not wake the board** — see: touch works while awake, not as a wake source. cause: touch wake has to be armed separately and only works on touch-capable pins. fix: `esp_sleep_enable_touchpad_wakeup()` plus `touch_pad_set_fsm_mode`. · [54500282](https://stackoverflow.com/q/54500282)
+78. **Light sleep and deep sleep behave differently** — see: a sketch that survives light sleep dies after deep sleep. cause: light sleep keeps RAM and the peripherals; deep sleep keeps almost nothing. fix: treat them as different features, not a tuning knob. · [56548700](https://stackoverflow.com/q/56548700)
+79. **Brownout right after waking** — see: a reset exactly when the radio starts. cause: the bulk capacitor is discharged after a long sleep and the RF inrush pulls the rail down. fix: larger capacitor, and bring the radio up after a short delay so the supply recovers. · [60171641](https://stackoverflow.com/q/60171641)
+
+## OTA, partitions and storage (80-87)
+
+80. **OTA uploads but nothing changes** — see: the write succeeds, the old firmware still runs. cause: the OTA API writes to the inactive partition; without `set_boot_partition` and a reboot the bootloader still starts the old one. fix: `esp_ota_end()` then `esp_ota_set_boot_partition()` then restart. · [55354110](https://stackoverflow.com/q/55354110)
+81. **A bad OTA bricks the device** — see: the new image boots once and dies. cause: no rollback configured, so a broken image stays active. fix: enable `CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE` and call `esp_ota_mark_app_valid_cancel_rollback()` only after the device proves itself. · [55354110](https://stackoverflow.com/q/55354110)
+82. **Boot loop after editing the partition table** — see: `invalid header` or an immediate reset. cause: the table moved the app offset but the bootloader and `otadata` were not reflashed with it. fix: flash bootloader, partition table and otadata together, and keep the app offset 0x10000-aligned. · [79573140](https://stackoverflow.com/q/79573140)
+83. **SPIFFS shows far less than 4 MB** — see: `SPIFFS.totalBytes()` reports a few hundred KB. cause: the filesystem size is whatever the partition table gives it, not the flash size. fix: enlarge the `spiffs`/`littlefs` partition in the table. · [63568190](https://stackoverflow.com/q/63568190)
+84. **The filesystem corrupts after a power cut** — see: mount fails after an unexpected reset. cause: SPIFFS is not power-loss resilient. fix: move to LittleFS, which keeps a journal, or call `format` on mount failure and rebuild. · [63568190](https://stackoverflow.com/q/63568190)
+85. **The device crashes during OTA writes** — see: a panic inside a flash write. cause: writing flash disables the cache, so any code running from flash — including ISRs — faults. fix: put interrupt handlers in IRAM (`IRAM_ATTR`) and stop other flash users during the write. · [55354110](https://stackoverflow.com/q/55354110)
+86. **HTTPS OTA fails the handshake** — see: `HTTPClient` returns -1 over `https`. cause: no certificate, or a clock so wrong that the cert looks not-yet-valid. fix: set the time first and pin a CA; `setInsecure()` works but removes the only protection OTA has. · [69998482](https://stackoverflow.com/q/69998482)
+87. **OTA over a slow link times out** — see: the download stalls near the end. cause: the default HTTP timeout is shorter than the transfer. fix: raise the timeout, stream into `esp_ota_write` in chunks, and never buffer the whole image. · [69998482](https://stackoverflow.com/q/69998482)
+
+## TLS, HTTPS and time (88-92)
+
+88. **TLS handshake fails with a valid certificate** — see: `setCACert` still fails. cause: the system clock is at 1970, so the certificate is not valid yet. fix: sync time over SNTP before the first HTTPS call. · [68356924](https://stackoverflow.com/q/68356924)
+89. **The certificate expires and the product dies** — see: every device stops talking on the same day. cause: a leaf certificate was pinned instead of a CA, or the root changed. fix: pin a CA bundle, ship an update path for the bundle, and monitor expiry. · [79290534](https://stackoverflow.com/q/79290534)
+90. **`time(nullptr)` returns a 1970 timestamp** — see: time is never valid. cause: `configTime` is asynchronous and returns immediately. fix: wait until the value is above a sane floor (e.g. 1.6e9) before trusting it, with a timeout. · [68356924](https://stackoverflow.com/q/68356924)
+91. **WebSocket closes with code 1006** — see: the socket dies with no close frame. cause: nothing was sent for longer than the proxy or server idle timeout. fix: send a ping every 20-30 s and handle a reconnect instead of assuming the link is alive. · [66246069](https://stackoverflow.com/q/66246069)
+92. **UDP packets vanish on the soft-AP** — see: heavy loss when the ESP32 is the access point. cause: modem sleep parks the radio between beacons. fix: `WiFi.setSleep(false)` while streaming, and expect lower throughput than the datasheet suggests. · [68803924](https://stackoverflow.com/q/68803924)
+
+## CAN, RMT, DAC and touch (93-99)
+
+93. **TWAI receives nothing** — see: no frames at all. cause: no transceiver on the bus, TX/RX swapped, no 120 Ω termination, or a bitrate mismatch. fix: check the transceiver first, then the termination, then the timing. · [68527367](https://stackoverflow.com/q/68527367)
+94. **The LED strip flickers when CAN is active** — see: WS2812 glitches under bus load. cause: the strip refresh is timing-critical and the CAN ISR delays it. fix: drive the strip from RMT, keep the CAN ISR short, and do not refresh from inside a handler. · [78921826](https://stackoverflow.com/q/78921826)
+95. **`rmtWrite` blocks the whole loop** — see: the main loop stutters during a strip update. cause: the blocking variant waits for the transmission. fix: `rmt_write_items(..., false)` and wait on the done semaphore, or double-buffer two transactions. · [78921826](https://stackoverflow.com/q/78921826)
+96. **DAC output does nothing** — see: `dacWrite` has no effect. cause: the DAC exists only on GPIO25 and GPIO26, and both are also ADC2 channels. fix: use those two pins only, and do not expect them to work as ADC while Wi-Fi is on. · [79276197](https://stackoverflow.com/q/79276197)
+97. **Touch readings drift over hours** — see: thresholds that worked stop working. cause: the touch baseline is not recalibrated and the environment changed. fix: run `touch_pad_set_meas_time` sensibly, recalibrate the baseline periodically, and add a guard ring on the PCB. · [54500282](https://stackoverflow.com/q/54500282)
+98. **A PCNT pin cannot be used for wake** — see: `ext1` wake does nothing on a pin that works elsewhere. cause: the pulse counter has taken the pin. fix: `pcnt_unit_disable` and release the GPIO before arming the wake source. · [54316980](https://stackoverflow.com/q/54316980)
+99. **The servo jitters** — see: random twitches even with a clean PWM signal. cause: the servo's current spikes brown out the shared 5 V rail. fix: separate supply, common ground, and a capacitor at the servo. · [60171641](https://stackoverflow.com/q/60171641)
+
+## RTOS, memory and watchdogs (100-105)
+
+100. **A queue send from an ISR crashes** — see: `LoadProhibited` inside the interrupt. cause: `xQueueSend` was used instead of the ISR variant. fix: `xQueueSendFromISR` with the woken flag, and create the queue before attaching the interrupt. · [71185014](https://stackoverflow.com/q/71185014)
+101. **The task stack overflows when parsing JSON** — see: a reset inside `deserializeJson`. cause: JSON parsing needs several KB of stack, and the default task stack is smaller than that. fix: parse on a dedicated task with 8-16 KB, or use a filter to read only the fields you need. · [78288058](https://stackoverflow.com/q/78288058)
+102. **PSRAM allocation fails** — see: `ps_malloc` returns NULL on a module with PSRAM. cause: PSRAM is not enabled in the build, or the allocator was asked for internal RAM. fix: enable SPIRAM in the board config and use `heap_caps_malloc(size, MALLOC_CAP_SPIRAM)`. · [71083711](https://stackoverflow.com/q/71083711)
+103. **The watchdog still fires after disabling it** — see: WDT resets continue. cause: there are three watchdogs — task, interrupt and RTC — and they are configured separately. fix: identify which one from the reset reason, then handle that one. · [62786654](https://stackoverflow.com/q/62786654)
+104. **`LoadProhibited` only in a task** — see: the same code works in `loop()`. cause: the task stack is too small, or it holds a pointer to another task's stack. fix: size the stack in bytes, pass data by value or by heap, never by a pointer into a stack frame. · [79705623](https://stackoverflow.com/q/79705623)
+105. **Heap shrinks over days** — see: free heap falls and never recovers. cause: fragmentation from `String` concatenation and many small allocations of different sizes. fix: fixed-size buffers, reserve() up front, and check `heap_caps_get_largest_free_block` rather than the total. · [63780850](https://stackoverflow.com/q/63780850)
+
+## Network servers, BLE and RF (106-110)
+
+106. **The captive portal never opens on Android** — see: the phone connects and does nothing. cause: Android probes `connectivitycheck.gstatic.com/generate_204` and expects a 204 or a redirect. fix: answer that path explicitly and resolve every DNS name to the AP address. · [79693016](https://stackoverflow.com/q/79693016)
+107. **Clients on the soft-AP have no internet** — see: they connect but cannot reach the web. cause: the ESP32 is an access point, not a router; there is no NAT in the default stack. fix: add a NAT layer (`esp_netif_napt_enable` on newer IDF) or accept an offline-only AP. · [76529566](https://stackoverflow.com/q/76529566)
+108. **The AP IP is printed before it exists** — see: `WiFi.softAPIP()` returns 0.0.0.0. cause: the AP starts asynchronously. fix: wait for the `AP_START` / `got_ip` event before printing or advertising the address. · [73999244](https://stackoverflow.com/q/73999244)
+109. **Two BLE profiles fight over one callback** — see: notifications stop when a second service is added. cause: a single GATTS handler cannot own two profiles' events. fix: register one handler per profile and dispatch on `gatts_if`. · [56791714](https://stackoverflow.com/q/56791714)
+110. **A phone will not reconnect after reflashing** — see: the device is invisible to a phone that paired before. cause: the phone still holds the old bond while the ESP32 lost its keys. fix: delete the bond on the phone, or call `esp_ble_remove_bond_device` and re-pair. · [68614591](https://stackoverflow.com/q/68614591)

@@ -1,6 +1,6 @@
 ---
 name: esp32-field-gotchas
-description: Use when an ESP32 misbehaves in a way the code does not explain - reboots, brownouts, dead I2C, garbled UART, a sketch that will not flash, a crash with no line number. Seventy failures collected from Stack Overflow, each with the cause and the fix.
+description: Use when an ESP32 misbehaves in a way the code does not explain - reboots, brownouts, dead I2C, garbled UART, a sketch that will not flash, a crash with no line number. One hundred and ten failures collected from Stack Overflow, each with the cause and the fix.
 ---
 
 # ESP32 field notes
@@ -10,8 +10,8 @@ stops working. They are grouped by symptom, because that is what you have when
 you arrive: not "an ADC problem" but "the reading is garbage since I enabled
 Wi-Fi".
 
-The full list with links to the source question for each one is in
-[`reference/field-notes-70.md`](reference/field-notes-70.md). This page is the
+The full list - 110 entries, each linked to the thread that solved it - is in
+[`reference/field-notes.md`](reference/field-notes.md). This page is the
 part to read first.
 
 ## The five that account for most "random" failures
@@ -55,7 +55,7 @@ into file:line without manual work.
 
 ## How to use this skill
 
-Start from the symptom in `reference/field-notes-70.md`, not from the section
+Start from the symptom in `reference/field-notes.md`, not from the section
 title. Each entry is three lines: what you see, why it happens, what to change.
 The link goes to the Stack Overflow question where the answer was worked out, so
 you can read the full context when the short version is not enough.
