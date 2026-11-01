@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ESP32 Agent Skills — firmware that compiles, then works</title>
-<meta name="description" content="Fourteen agent skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board. Standard library only, 150 tests, verified on real hardware.">
+<meta name="description" content="Twenty-six agent skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board. Standard library only, 150 tests, verified on real hardware.">
 <meta name="color-scheme" content="dark">
 <meta property="og:title" content="ESP32 Agent Skills">
 <meta property="og:description" content="Agent skills and checkers for ESP32 firmware that compiles and then bricks the board.">
@@ -243,11 +243,11 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
         <p>
           An agent writes <code>pinMode(6, OUTPUT)</code> and the build is green.
           GPIO6 is wired to the SPI flash — the module stops booting.
-          Fourteen skills and four checkers catch that before the flash.
+          Twenty-six skills and four checkers catch that before the flash.
         </p>
         <div class="hero-actions">
           <a class="btn primary" href="#install">Install in 30 seconds</a>
-          <a class="btn ghost" href="#skills">See the 14 skills</a>
+          <a class="btn ghost" href="#skills">See the 26 skills</a>
         </div>
       </div>
 
@@ -277,7 +277,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
     </div>
 
     <div class="stats">
-      <div class="stat"><b>14</b><span>skills</span></div>
+      <div class="stat"><b>26</b><span>skills</span></div>
       <div class="stat"><b>4</b><span>checkers</span></div>
       <div class="stat"><b>150</b><span>tests</span></div>
       <div class="stat"><b>1</b><span>board verified</span></div>
@@ -342,7 +342,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
   <!-- skills -->
   <section id="skills">
     <span class="eyebrow">What is inside</span>
-    <h2>Fourteen skills, one per failure domain</h2>
+    <h2>Twenty-six skills, one per failure domain</h2>
     <p class="lede">
       Each skill is a directory with a short <code>SKILL.md</code>, a license, and a
       <code>reference/</code> folder holding the long tables — the layout the official
@@ -363,6 +363,18 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
       <article class="card skill"><span class="name">esp32-mqtt-and-cloud</span><span class="stops">The 256 byte buffer that truncates payloads, keepalive, last will, TLS memory.</span></article>
       <article class="card skill"><span class="name">esp32-adc-and-sensors</span><span class="stops">ADC1 vs ADC2, attenuation, calibration, source impedance, averaging.</span></article>
       <article class="card skill"><span class="name">esp32-pwm-and-timing</span><span class="stops">LEDC's frequency/resolution trade-off, duty as a count, the core 3.x API change.</span></article>
+      <article class="card skill"><span class="name">esp32-ble-gatt</span><span class="stops">Connection parameters and the timeout inequality, MTU and the 20-byte default, notify vs indicate, and the bond that lives on the phone.</span></article>
+      <article class="card skill"><span class="name">esp32-memory-and-heap</span><span class="stops">Internal SRAM vs PSRAM, MALLOC_CAP_DMA, the largest free block as the number that matters, stack sizing in bytes vs words.</span></article>
+      <article class="card skill"><span class="name">esp32-storage-and-filesystem</span><span class="stops">NVS vs LittleFS vs FAT, commit and rename as the only atomic operations, wear, and mount failure as a decision.</span></article>
+      <article class="card skill"><span class="name">esp32-spi-and-devices</span><span class="stops">Bus then device, one initialisation per host, chip select ownership, and why 40 MHz works on the bench and not in the box.</span></article>
+      <article class="card skill"><span class="name">esp32-can-twai</span><span class="stops">Which chips have TWAI at all, the transceiver that is not optional, termination at both ends, and bus-off recovery.</span></article>
+      <article class="card skill"><span class="name">esp32-audio-i2s</span><span class="stops">Master/slave roles, MCLK, DMA buffer counts, underruns as clicks, and why the pitch is wrong.</span></article>
+      <article class="card skill"><span class="name">esp32-camera-pipeline</span><span class="stops">OV2640 limits, PSRAM framebuffers, init once with no de-init, and the camera plus Wi-Fi brownout.</span></article>
+      <article class="card skill"><span class="name">esp32-http-server</span><span class="stops">Wildcard matching off by default, handler limits, never blocking the server task, and chunked responses.</span></article>
+      <article class="card skill"><span class="name">esp32-time-and-rtc</span><span class="stops">SNTP is asynchronous, TZ strings with DST rules, RTC drift across sleep, and certificates that depend on the clock.</span></article>
+      <article class="card skill"><span class="name">esp32-security-and-provisioning</span><span class="stops">Secure boot, flash encryption and NVS keys in the order that does not brick the board, and what a factory reset really erases.</span></article>
+      <article class="card skill"><span class="name">esp32-testing-and-ci</span><span class="stops">Host tests, on-target Unity, size budgets and a build matrix that covers the chips the README claims.</span></article>
+      <article class="card skill"><span class="name">esp32-hardware-bringup</span><span class="stops">Measure the rail before the firmware: current, strapping levels, the blink-first order, and reading a boot loop.</span></article>
       <article class="card skill"><span class="name">esp32-field-gotchas</span><span class="stops">A hundred and sixty failures from Stack Overflow — brownout, dead I2C, garbled UART, OTA rollback, ULP wake, cameras, ISRs, secure boot, JTAG — indexed by symptom, each linked to its thread.</span></article>
     </div>
   </section>

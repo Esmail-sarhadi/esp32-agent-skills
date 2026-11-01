@@ -613,6 +613,40 @@ class ReferenceIntegrityTest(unittest.TestCase):
             low, high = soc["valid_range"]
             self.assertLess(low, high, key)
 
+    def _skill_dirs(self):
+        skills = os.path.join(ROOT, "skills")
+        return sorted(
+            name for name in os.listdir(skills)
+            if os.path.isdir(os.path.join(skills, name))
+        )
+
+    def test_every_skill_declares_name_and_description(self):
+        for name in self._skill_dirs():
+            with open(os.path.join(ROOT, "skills", name, "SKILL.md"), encoding="utf-8") as handle:
+                text = handle.read()
+            self.assertTrue(text.startswith("---\n"), name)
+            front = text.split("---", 2)[1]
+            self.assertIn("name:", front, name)
+            self.assertIn("description:", front, name)
+
+    def test_frontmatter_name_matches_the_directory(self):
+        for name in self._skill_dirs():
+            with open(os.path.join(ROOT, "skills", name, "SKILL.md"), encoding="utf-8") as handle:
+                front = handle.read().split("---", 2)[1]
+            declared = [line.split(":", 1)[1].strip() for line in front.splitlines()
+                        if line.startswith("name:")][0]
+            self.assertEqual(declared, name)
+
+    def test_every_reference_link_resolves(self):
+        import re
+        for name in self._skill_dirs():
+            skill_dir = os.path.join(ROOT, "skills", name)
+            with open(os.path.join(skill_dir, "SKILL.md"), encoding="utf-8") as handle:
+                text = handle.read()
+            for link in re.findall(r"\]\((reference/[^)]+)\)", text):
+                self.assertTrue(os.path.exists(os.path.join(skill_dir, link)),
+                                "%s -> %s" % (name, link))
+
     def test_flash_pins_are_inside_the_valid_range(self):
         for key, soc in DB["socs"].items():
             low, high = soc["valid_range"]

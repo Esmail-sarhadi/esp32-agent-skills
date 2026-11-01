@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**Fourteen skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**Twenty-six skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -164,6 +164,18 @@ python tools/pincheck.py --soc esp32 --assign "$(cat pinmap.txt)"
 | `esp32-mqtt-and-cloud` | The 256 byte buffer that truncates payloads, keepalive and last will, TLS memory, why QoS 0 loses data. |
 | `esp32-adc-and-sensors` | ADC1 vs ADC2, attenuation and the compressed top of the range, calibration, source impedance, averaging. |
 | `esp32-pwm-and-timing` | LEDC's frequency/resolution trade-off, duty as a count not a percent, servo timing, the core 3.x API change. |
+| `esp32-ble-gatt` | Connection parameters and the timeout inequality, MTU and the 20-byte default, notify vs indicate, and the bond that lives on the phone. |
+| `esp32-memory-and-heap` | Internal SRAM vs PSRAM, `MALLOC_CAP_DMA`, the largest free block as the number that matters, stack sizing in bytes vs words. |
+| `esp32-storage-and-filesystem` | NVS vs LittleFS vs FAT, commit and rename as the only atomic operations, wear, and mount failure as a decision. |
+| `esp32-spi-and-devices` | Bus then device, one initialisation per host, chip select ownership, and why 40 MHz works on the bench and not in the box. |
+| `esp32-can-twai` | Which chips have TWAI at all, the transceiver that is not optional, termination at both ends, and bus-off recovery. |
+| `esp32-audio-i2s` | Master/slave roles, MCLK, DMA buffer counts, underruns as clicks, and why the pitch is wrong. |
+| `esp32-camera-pipeline` | OV2640 limits, PSRAM framebuffers, init once with no de-init, and the camera plus Wi-Fi brownout. |
+| `esp32-http-server` | Wildcard matching off by default, handler limits, never blocking the server task, and chunked responses. |
+| `esp32-time-and-rtc` | SNTP is asynchronous, TZ strings with DST rules, RTC drift across sleep, and certificates that depend on the clock. |
+| `esp32-security-and-provisioning` | Secure boot, flash encryption and NVS keys in the order that does not brick the board, and what a factory reset really erases. |
+| `esp32-testing-and-ci` | Host tests, on-target Unity, size budgets and a build matrix that covers the chips the README claims. |
+| `esp32-hardware-bringup` | Measure the rail before the firmware: current, strapping levels, the blink-first order, and reading a boot loop. |
 | `esp32-field-gotchas` | A hundred and sixty failures people actually hit — brownout, dead I2C, garbled UART, watchdog resets, OTA that writes and boots nothing, cameras that brown out, ISRs that fault — indexed by symptom, each linked to the Stack Overflow thread where the cause was found. |
 
 ### How a skill is laid out
