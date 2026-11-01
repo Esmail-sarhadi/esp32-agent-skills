@@ -9,7 +9,19 @@
 
 **[Read this on a page instead of a README →](https://esmail-sarhadi.github.io/esp32-agent-skills/)**
 
+![ESP32 Agent Skills](docs/assets/poster.jpg)
+
 ---
+
+## Watch it catch one
+
+Same command twice: the first run exits 1 on a pin wired to the flash, the second
+exits 0 after the pin is moved. The animation is the real output, frame by frame.
+
+![pincheck catching GPIO6, then passing GPIO25](docs/assets/demo.gif)
+
+Swap `6` for `25` and the same command goes from `1 error(s) ... exit 1` to
+`0 error(s) ... exit 0`. Nothing else changed.
 
 ## The problem
 
