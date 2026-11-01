@@ -164,7 +164,7 @@ python tools/pincheck.py --soc esp32 --assign "$(cat pinmap.txt)"
 | `esp32-mqtt-and-cloud` | The 256 byte buffer that truncates payloads, keepalive and last will, TLS memory, why QoS 0 loses data. |
 | `esp32-adc-and-sensors` | ADC1 vs ADC2, attenuation and the compressed top of the range, calibration, source impedance, averaging. |
 | `esp32-pwm-and-timing` | LEDC's frequency/resolution trade-off, duty as a count not a percent, servo timing, the core 3.x API change. |
-| `esp32-field-gotchas` | A hundred and ten failures people actually hit — brownout, dead I2C, garbled UART, watchdog resets — indexed by symptom, each linked to the Stack Overflow thread where the cause was found. |
+| `esp32-field-gotchas` | A hundred and sixty failures people actually hit — brownout, dead I2C, garbled UART, watchdog resets, OTA that writes and boots nothing, cameras that brown out, ISRs that fault — indexed by symptom, each linked to the Stack Overflow thread where the cause was found. |
 
 ### How a skill is laid out
 
@@ -280,7 +280,7 @@ The useful contributions here are not code, they are corrections and coverage:
   with weekly. Copy the shape of an existing skill: a short `SKILL.md`, a
   `reference/` folder for the long tables, and a license so it can be copied out
   on its own.
-- **A failure we have not written down.** `esp32-field-gotchas` has a hundred and ten
+- **A failure we have not written down.** `esp32-field-gotchas` has a hundred and sixty
   entries, each with a link to the thread where it was solved. If you have one
   that is not there, send it with the symptom and the fix.
 
