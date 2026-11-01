@@ -1,0 +1,9 @@
+# Everything textual is stored with LF, on every platform. The corpus test that
+# rejects CRLF would otherwise fail for anyone who clones this on Windows with
+# core.autocrlf=true, which is most of the people who would clone it.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
