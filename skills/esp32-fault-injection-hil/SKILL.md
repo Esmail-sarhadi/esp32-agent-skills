@@ -37,3 +37,7 @@ Define recovery time, data-loss bound, safe output state and maximum retry count
 
 Never label a software unit test as hardware validation. Keep test wiring, fixture firmware and DUT firmware versioned. Make failures reproducible from captured artifacts. Ensure fault injection cannot create unsafe field outputs.
 
+
+## Evidence record
+
+For each fixture run, save the wiring revision, instrument settings, firmware hash, raw capture and pass/fail criteria so another engineer can reproduce the same fault.
