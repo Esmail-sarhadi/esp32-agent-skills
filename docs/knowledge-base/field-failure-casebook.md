@@ -139,9 +139,54 @@ reproduced. Grades and statuses are deliberately conservative.
 - **Mitigation:** preserve full boot log and ELF; decode backtrace against the exact ELF; distinguish interrupt/task watchdog, brownout, stack canary and memory access exceptions before changing code.
 - **Source:** https://github.com/espressif/esp-idf/blob/master/docs/en/api-guides/fatal-errors.rst
 
+## FF-0019 — I2C LCD initialization blocks forever when panel is absent
+- **Grade:** A; **status:** upstream response documents a bounded-timeout correction.
+- **Scope:** ESP-IDF 6, ESP32-S3 report, I2C LCD panel IO.
+- **Symptom:** `esp_lcd_panel_init()` never returns when the panel is missing or the I2C transaction cannot complete.
+- **Root cause:** the I2C LCD panel IO used an infinite transaction timeout by default.
+- **Fix:** configure a positive `transaction_timeout_ms` in `esp_lcd_panel_io_i2c_config_t`; optionally probe the expected address first with the supported I2C master probe API. A probe is not a substitute for a timeout on the actual transaction.
+- **Regression:** boot with panel connected, disconnected, SDA held low and panel power removed; each case must return within the configured bound and expose a useful error.
+- **Source:** https://github.com/espressif/esp-idf/issues/18713
+
+## FF-0020 — I2C master timeout race can dereference a null read buffer
+- **Grade:** C; **status:** issue closed internally, public resolution unavailable.
+- **Scope:** ESP-IDF development revision based on v5.4, classic ESP32-D0WD.
+- **Symptom:** a timeout and ISR interleaving can lead to a null pointer read in the I2C ISR.
+- **Reported mechanism:** the reporter identified a window where transaction indices are cleared before status is changed to timeout; the ISR can still take the READ branch and access an unallocated operation buffer.
+- **Handling:** do not apply a copied source patch without reviewing the exact upstream revision. Check release notes and current driver source for the target release; preserve a minimal timeout stress reproducer and backtrace.
+- **Regression:** repeatedly trigger short I2C timeouts while varying task/interrupt timing; require no panic, no stale transaction state and deterministic error return.
+- **Source:** https://github.com/espressif/esp-idf/issues/15444
+
+## FF-0021 — HTTPClient socket exhaustion after repeated requests in a FreeRTOS task
+- **Grade:** B; **status:** maintainer stated the disconnect issue was fixed in Arduino-ESP32 3.0.0; separate heap observations need independent interpretation.
+- **Scope:** Arduino-ESP32 2.0.14 report on ESP32 / ESP32-MINI-1 using HTTPClient in a task.
+- **Symptom:** repeated requests eventually fail with socket error 105 although earlier requests succeed.
+- **Root cause and fix:** the report identified a disconnect path that did not reliably stop the underlying client socket in a particular disconnected state. A maintainer stated this was fixed in core 3.0.0. Use a current supported core and verify socket reclamation in the application's exact lifecycle.
+- **Important distinction:** the reporter also observed heap reduction per request; the socket fix does not by itself prove that every observed heap change was the same defect or that all memory was leaked.
+- **Regression:** run hundreds of task-based requests with connection reuse both enabled and disabled; record socket failures, internal free heap and largest block after an idle reclamation interval.
+- **Sources:** https://github.com/espressif/arduino-esp32/issues/8804
+
+## FF-0022 — Repeated Wi-Fi connect/disconnect reports heap loss on Arduino core
+- **Grade:** C; **status:** issue closed for lack of follow-up; not a universal fix confirmation.
+- **Scope:** ESP32-S3 report with Arduino-ESP32 3.0.7 and 3.1.0-RC1; a Wokwi reproducer was supplied.
+- **Symptom:** repeated station connect/disconnect cycles appeared to reduce free heap.
+- **Evidence:** a commenter reported that an ESP-IDF-only variant did not show the same behavior, suggesting an Arduino network-layer lifecycle issue in the tested versions. Later comments requested testing newer core versions; the issue was closed after no further feedback, with a maintainer noting no leak in core 3.2.0.
+- **Handling:** test the exact release and reproducer before assigning root cause. Measure internal heap and largest block, wait for TCP cleanup, and compare Arduino and ESP-IDF baselines.
+- **Regression:** run repeated connect/disconnect cycles on the same board and AP; include an idle wait and assert memory reaches a stable plateau rather than assuming every immediate heap dip is a leak.
+- **Source:** https://github.com/espressif/arduino-esp32/issues/10664
+
+## FF-0023 — W5500 Matter device fails to reconnect after a long power-off interval
+- **Grade:** D; **status:** closed as an older-version report without a published technical resolution.
+- **Scope:** ESP32-WROOM-32UE, SPI W5500 and Arduino Matter report.
+- **Symptom:** commissioning succeeds and short power cycles recover, but after a longer outage the device does not reappear in Home Assistant without recommissioning.
+- **Handling:** do not assume the W5500 silicon is defective or that recommissioning is the correct recovery. Capture Ethernet link, DHCP lease, IP address, Matter fabric/node identity, endpoint state and reconnect logs across short and long outages. Compare cold boot with link flap and router restart.
+- **Regression:** repeat power-off durations around the failure boundary and verify the same commissioned node reconnects without fabric reset.
+- **Source:** https://github.com/espressif/arduino-esp32/issues/11621
+
 ## Casebook maintenance
 
 New reports must use the template in `templates/field-failure.md`. Add cases
 only after checking for duplicates by symptom, root cause and affected versions.
-Open reports stay grade D until corroborated. This casebook is a starting point,
-not a substitute for reading the linked upstream discussion.
+Open reports and closed issues without a public technical resolution remain
+unresolved or anecdotal. This casebook is a starting point, not a substitute
+for reading the linked upstream discussion.
