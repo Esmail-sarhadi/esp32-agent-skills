@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ESP32 Agent Skills — firmware that compiles, then works</title>
-<meta name="description" content="A hundred and one agent skills and seven checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board. Standard library only, 477 tests, verified on real hardware.">
+<meta name="description" content="A hundred and one agent skills and seven checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board. Standard library only, 540 tests, verified on real hardware.">
 <meta name="color-scheme" content="dark">
 <meta property="og:title" content="ESP32 Agent Skills">
 <meta property="og:description" content="Agent skills and checkers for ESP32 firmware that compiles and then bricks the board.">
@@ -286,8 +286,8 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
 
     <div class="stats">
       <div class="stat"><b>101</b><span>skills</span></div>
-      <div class="stat"><b>7</b><span>checkers</span></div>
-      <div class="stat"><b>477</b><span>tests</span></div>
+      <div class="stat"><b>10</b><span>checkers</span></div>
+      <div class="stat"><b>540</b><span>tests</span></div>
       <div class="stat"><b>1</b><span>board verified</span></div>
     </div>
   </header>
@@ -470,7 +470,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
   <!-- tools -->
   <section id="tools">
     <span class="eyebrow">Checkers</span>
-    <h2>Seven commands, standard library only</h2>
+    <h2>Ten commands, standard library only</h2>
     <p class="lede">
       Each one exits non-zero on a real problem, so they drop straight into CI or a
       pre-flash hook. No dependencies, no virtualenv, no network.
@@ -501,6 +501,21 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
         <span class="kicker">airtime.py</span>
         <h3>Does this interval fit the duty cycle?</h3>
         <p>Semtech time on air, including the low data rate optimize bit most hand calculations skip, then the earliest next packet at 1&nbsp;% and the packets per hour it allows.</p>
+      </article>
+      <article class="card">
+        <span class="kicker">mqtt_topic_check.py</span>
+        <h3>Is this topic legal?</h3>
+        <p>Wildcards only in filters, <code>#</code> only as the last level, and a Sparkplug B namespace check that names the wrong message type.</p>
+      </article>
+      <article class="card">
+        <span class="kicker">flash_layout.py</span>
+        <h3>Do these images overlap?</h3>
+        <p>Offset and size for each image, checked for overlap, for the end of the flash, and for the 0x1000 / 0x8000 / 0x10000 layout.</p>
+      </article>
+      <article class="card">
+        <span class="kicker">i2c_address_check.py</span>
+        <h3>Two devices on one address?</h3>
+        <p>Duplicate detection, the ranges the I2C specification reserves, and a note on the parts that collide in practice.</p>
       </article>
     </div>
 

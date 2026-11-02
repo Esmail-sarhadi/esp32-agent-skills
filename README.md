@@ -277,7 +277,7 @@ The pin table is generated from `data/esp32-pins.json` by
 
 ### Tools
 
-All seven use the standard library only. All seven exit non-zero on an error, so
+All ten use the standard library only. All ten exit non-zero on an error, so
 they drop straight into CI or a pre-flash hook.
 
 | Tool | Answers |
@@ -289,6 +289,9 @@ they drop straight into CI or a pre-flash hook.
 | `tools/airtime.py` | Does this LoRa payload fit the duty cycle at this spreading factor? |
 | `tools/modbus_map_check.py` | Does this register map overlap itself or lie about its types? |
 | `tools/modbus_frame.py` | Is this RTU frame valid, and does the 3.5 character gap fit your timer? |
+| `tools/mqtt_topic_check.py` | Is this topic legal, and does the filter match the topic it is meant for? |
+| `tools/flash_layout.py` | Do these images overlap, and do they fit the flash at these offsets? |
+| `tools/i2c_address_check.py` | Do two devices share an address, or use one the spec reserves? |
 | `tools/modbus_map_check.py` | Is this Modbus register map valid, non-overlapping and fully described? |
 
 ### Data and examples
@@ -302,7 +305,7 @@ they drop straight into CI or a pre-flash hook.
 | `examples/panic-log.txt` | A real `LoadProhibited` dump with a four frame backtrace. |
 | `examples/modbus-register-map.csv` | Valid example register map with explicit offsets, types and scaling. |
 | `examples/modbus-register-map-broken.csv` | Deliberately invalid map covering overlap, zero scale and coil type errors. |
-| `tests/` | 477 unit tests: the six tools, the pin and partition databases, and one shape test per skill. |
+| `tests/` | 540 unit tests: the six tools, the pin and partition databases, and one shape test per skill. |
 
 ## Verified on hardware
 
@@ -387,7 +390,7 @@ test/example corpus. These are targets, not current counts.
 
 - [ ] ESP32-C6 and ESP32-H2 pin maps
 - [ ] `--board` profiles for common dev boards (DevKitC, WROVER-KIT, M5Stack)
-- [ ] Reusable GitHub Action that runs all seven checkers on every PR
+- [ ] Reusable GitHub Action that runs all ten checkers on every PR
 - [ ] Compile the examples against the previous Arduino core, not just the current one
 
 ## Contributing
@@ -410,6 +413,35 @@ The useful contributions here are not code, they are corrections and coverage:
 Every skill has to survive `python -m unittest discover -s tests`, and every
 rule that can be expressed as code has to compile - `examples/compiled` is built
 in CI for exactly that reason.
+
+## Binaries
+
+Every tool is also available as one executable, so a machine without Python can
+run the checkers:
+
+```bash
+python build.py            # dist/esp32-skills.pyz and dist/esp32-skills(.exe)
+./dist/esp32-skills pincheck --soc esp32 --assign "6=led"
+./dist/esp32-skills --list
+```
+
+Two artifacts come out of it. The `.pyz` is 25 kB and runs on any Python 3.8+
+with no installation. The native executable is built with PyInstaller and is the
+one to hand to someone who does not have Python at all.
+
+PyInstaller cannot cross-compile, so `.github/workflows/release.yml` builds the
+Windows and Linux binaries on their own runners and attaches both to a tag. The
+build fails the release if the artifact does not run: the smoke test executes a
+real command, not just `--list`, because a module that is imported dynamically is
+exactly the thing PyInstaller leaves out.
+
+## Where this is going
+
+![Roadmap: 300 to 500 skills, 2,000 to 3,000 field cases, 1,500 to 2,500 tests](docs/assets/roadmap.jpg)
+
+The numbers in that image are **targets, not counts**. Today the repository has
+101 skills, 477 tests, 160 field notes and ten checkers; every figure in the
+README is read from the repository itself.
 
 ## License
 

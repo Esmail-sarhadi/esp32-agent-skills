@@ -16,10 +16,12 @@ Exit code is 1 when at least one error is found, 0 otherwise.
 from __future__ import annotations
 
 import argparse
+import io
 import json
 import os
 import re
 import sys
+import zipfile
 from typing import Dict, List, Tuple
 
 ERROR = "error"
@@ -27,14 +29,42 @@ WARN = "warn"
 INFO = "info"
 OK = "ok"
 
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "esp32-pins.json")
+def _resource_path(*parts: str) -> str:
+    """Find a data file both from the source tree and from a frozen binary.
+
+    PyInstaller unpacks --add-data into sys._MEIPASS, so a path built from
+    __file__ points into a temporary directory that does not contain data/.
+    """
+    if getattr(sys, "frozen", False):
+        base = getattr(sys, "_MEIPASS", os.path.dirname(sys.executable))
+        return os.path.join(base, *parts)
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(root, *parts)
+
+
+DB_PATH = _resource_path("data", "esp32-pins.json")
 
 PIN_RE = re.compile(r"^(?:gpio)?(\d{1,2})$", re.IGNORECASE)
 
 
 def load_db(path: str = DB_PATH) -> dict:
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    """Read the pin database from the source tree, a frozen binary, or a zipapp.
+
+    A zipapp is a zip archive: the path looks like a file inside it, but open()
+    cannot read it. sys.argv[0] is the archive in that case, so read the member
+    out of the zip instead.
+    """
+    if os.path.exists(path):
+        with open(path, "r", encoding="utf-8") as handle:
+            return json.load(handle)
+
+    archive = sys.argv[0] if sys.argv else ""
+    if archive and zipfile.is_zipfile(archive):
+        with zipfile.ZipFile(archive) as bundle:
+            with bundle.open("data/esp32-pins.json") as raw:
+                return json.load(io.TextIOWrapper(raw, encoding="utf-8"))
+
+    raise FileNotFoundError(path)
 
 
 def parse_assignment(raw: str) -> List[Tuple[int, str]]:
