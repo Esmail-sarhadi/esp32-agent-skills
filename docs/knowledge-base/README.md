@@ -18,7 +18,7 @@ field-service teams. It complements the short, task-triggered skills in
 
 ## Current expansion tranche
 
-The first tranche adds thirteen industrial and reliability skills plus a sourced
+The first two tranches add twenty-five industrial, instrumentation and reliability skills plus a sourced
 field-failure casebook. The casebook deliberately separates confirmed behavior
 from hypotheses and open reports. References point to the original discussions
 and upstream implementation; no forum post is treated as a universal design rule.
