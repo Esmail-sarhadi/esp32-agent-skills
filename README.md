@@ -234,7 +234,7 @@ The pin table is generated from `data/esp32-pins.json` by
 
 ### Tools
 
-All five use the standard library only. All five exit non-zero on an error, so
+All six use the standard library only. All six exit non-zero on an error, so
 they drop straight into CI or a pre-flash hook.
 
 | Tool | Answers |
@@ -244,6 +244,7 @@ they drop straight into CI or a pre-flash hook.
 | `tools/power_budget.py` | How long does this duty cycle actually last on this battery? |
 | `tools/panic_decode.py` | Which `addr2line` command turns this crash dump into file:line? |
 | `tools/airtime.py` | Does this LoRa payload fit the duty cycle at this spreading factor? |
+| `tools/modbus_map_check.py` | Is this Modbus register map valid, non-overlapping and fully described? |
 
 ### Data and examples
 
@@ -254,7 +255,9 @@ they drop straight into CI or a pre-flash hook.
 | `examples/partitions-ota-4mb.csv` | A correct 4 MB OTA layout. |
 | `examples/partitions-broken.csv` | The same layout with misalignment, overlap and overflow. |
 | `examples/panic-log.txt` | A real `LoadProhibited` dump with a four frame backtrace. |
-| `tests/` | 332 unit tests: the five tools, the pin and partition databases, and one shape test per skill. |
+| `examples/modbus-register-map.csv` | Valid example register map with explicit offsets, types and scaling. |
+| `examples/modbus-register-map-broken.csv` | Deliberately invalid map covering overlap, zero scale and coil type errors. |
+| `tests/` | 338 unit tests: the six tools, the pin and partition databases, and one shape test per skill. |
 
 ## Verified on hardware
 
