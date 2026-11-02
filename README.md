@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**Seventy-one skills and six checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**Seventy-nine skills and six checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -9,7 +9,7 @@
 
 **[Read this on a page instead of a README →](https://esmail-sarhadi.github.io/esp32-agent-skills/)**
 
-![ESP32 Agent Skills: seventy-one skills and six checkers for ESP32 firmware](docs/assets/hero.jpg)
+![ESP32 Agent Skills: seventy-nine skills and six checkers for ESP32 firmware](docs/assets/hero.jpg)
 
 ---
 
@@ -212,6 +212,14 @@ python tools/pincheck.py --soc esp32 --assign "$(cat pinmap.txt)"
 | `esp32-heap-forensics` | Heap leak vs retention, fragmentation, tracing and capability pools. |
 | `esp32-wifi-roaming` | Multi-AP handoff, hysteresis, reconnect state machines and RF validation. |
 | `esp32-max31865-rtd` | RTD wiring topology, reference resistor, linearization and MAX31865 faults. |
+| `esp32-rmt-waveform-io` | Hardware-timed pulse generation/capture, symbol buffers and RMT API generations. |
+| `esp32-mcpwm-power-stage` | Complementary PWM, dead time, hardware fault shutdown and motor power-stage safety. |
+| `esp32-pcnt-encoder-feedback` | Pulse counting, quadrature direction, glitch filtering and counter overflow. |
+| `esp32-sdmmc-card-lifecycle` | SDMMC/SPI selection, hot removal, power-loss logging and bounded storage latency. |
+| `esp32-usb-otg-serial-jtag` | SoC-specific USB host/device/OTG and USB-Serial-JTAG capability boundaries. |
+| `esp32-lwip-network-diagnostics` | DHCP, DNS, TCP stream framing, socket lifecycle and reconnect forensics. |
+| `esp32-industrial-safety-interlocks` | Safe output states, interlocks, E-stop boundaries and restart inhibition. |
+| `esp32-thermal-enclosure-derating` | Enclosure thermal budgets, hotspot measurements and temperature derating. |
 
 ### How a skill is laid out
 
@@ -257,7 +265,7 @@ they drop straight into CI or a pre-flash hook.
 | `examples/panic-log.txt` | A real `LoadProhibited` dump with a four frame backtrace. |
 | `examples/modbus-register-map.csv` | Valid example register map with explicit offsets, types and scaling. |
 | `examples/modbus-register-map-broken.csv` | Deliberately invalid map covering overlap, zero scale and coil type errors. |
-| `tests/` | 342 unit tests: the six tools, the pin and partition databases, and one shape test per skill. |
+| `tests/` | 350 unit tests: the six tools, the pin and partition databases, and one shape test per skill. |
 
 ## Verified on hardware
 
