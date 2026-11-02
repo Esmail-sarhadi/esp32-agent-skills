@@ -16,6 +16,10 @@ field-service teams. It complements the short, task-triggered skills in
 | Test patterns | Repeatable verification | Host, simulator, target and HIL tests |
 | Decision records | Trade-offs and architecture | Assumptions, alternatives, failure consequences |
 
+## Research execution tracker
+
+The executive brief is translated into a measurable baseline, scope-to-repository map and release acceptance gates in [research-execution-matrix.md](research-execution-matrix.md). Counts distinguish skills, cases, software tests, buildable example projects and hardware validation; these categories must not be conflated.
+
 ## Current expansion tranche
 
 The first three tranches add thirty-three industrial, instrumentation, runtime and reliability skills plus a sourced
