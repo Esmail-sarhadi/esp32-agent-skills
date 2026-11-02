@@ -241,7 +241,7 @@ they drop straight into CI or a pre-flash hook.
 | `examples/partitions-ota-4mb.csv` | A correct 4 MB OTA layout. |
 | `examples/partitions-broken.csv` | The same layout with misalignment, overlap and overflow. |
 | `examples/panic-log.txt` | A real `LoadProhibited` dump with a four frame backtrace. |
-| `tests/` | 307 unit tests: the five tools, the pin and partition databases, and one shape test per skill. |
+| `tests/` | 320 unit tests: the five tools, the pin and partition databases, and one shape test per skill. |
 
 ## Verified on hardware
 
