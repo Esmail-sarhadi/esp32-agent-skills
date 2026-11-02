@@ -727,7 +727,7 @@ class ModbusMapCheckTest(unittest.TestCase):
 
     def test_empty_map_is_rejected(self):
         with tempfile.NamedTemporaryFile("w", encoding="utf-8", newline="", delete=False) as handle:
-            handle.write(",".join(modbus_map_check.REQUIRED) + "\\n")
+            handle.write(",".join(modbus_map_check.REQUIRED) + "\n")
             path = handle.name
         try:
             with self.assertRaisesRegex(ValueError, "no data rows"):
