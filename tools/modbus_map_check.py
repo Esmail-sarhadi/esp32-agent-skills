@@ -41,6 +41,8 @@ def parse_map(path: str) -> List[dict]:
                 continue
             row["line"] = line
             rows.append(row)
+    if not rows:
+        raise ValueError("register map contains no data rows")
     return rows
 
 
