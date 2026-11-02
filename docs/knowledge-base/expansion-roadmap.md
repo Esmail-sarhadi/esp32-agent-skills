@@ -24,6 +24,10 @@ Do not inflate counts with thin variants, duplicated skills, generated boilerpla
 or multiple test names for the same assertion. A case can be counted only when
 its evidence metadata and acceptance gate are complete.
 
+## Executive-brief traceability
+
+Use [research-execution-matrix.md](research-execution-matrix.md) as the auditable baseline and gap tracker. It records the repository snapshot, distinguishes software tests from case-linked regressions and HIL, and maps the requested domains to concrete implementation work. Update that ledger whenever a release changes the measured counts; do not report target counts as current achievements.
+
 ## Workstreams
 
 ### A. Silicon, modules and board profiles
