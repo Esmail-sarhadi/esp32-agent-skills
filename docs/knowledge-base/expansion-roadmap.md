@@ -81,7 +81,7 @@ its evidence metadata and acceptance gate are complete.
 | Phase | Deliverables | Exit condition |
 |---|---|---|
 | 0. Baseline | Inventory, evidence policy, branch/CI baseline | Existing claims reconciled |
-| 1. Foundation | Knowledge taxonomy, templates, 13 new skills, first incident corpus | Skills shape tests and links pass |
+| 1. Foundation | Knowledge taxonomy, templates, 25 new skills, first incident corpus | Skills shape tests and links pass |
 | 2. Industrial core | 50–80 skills, 150 cases, 50 examples, 5 checkers | Protocol and hardware review |
 | 3. Broad coverage | 150 skills, 500 cases, 300 scenarios | Versioned matrix and CI gates |
 | 4. Scale | 300–500 skills, 2k–3k cases, 1.5k–2.5k tests | Deduplication and evidence audit |
