@@ -1,4 +1,4 @@
-"""Unit coverage for the four checkers and the repository invariants.
+"""Unit coverage for the checker tools and repository invariants.
 
 The existing test files drive the tools through subprocess, which proves the CLI
 contract but leaves the pure functions untested. Everything here imports the modules
