@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**Fifty-nine skills and five checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**Seventy-one skills and five checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -9,7 +9,7 @@
 
 **[Read this on a page instead of a README →](https://esmail-sarhadi.github.io/esp32-agent-skills/)**
 
-![ESP32 Agent Skills: forty-six skills and five checkers for ESP32 firmware](docs/assets/hero.jpg)
+![ESP32 Agent Skills: seventy-one skills and five checkers for ESP32 firmware](docs/assets/hero.jpg)
 
 ---
 
@@ -200,6 +200,19 @@ python tools/pincheck.py --soc esp32 --assign "$(cat pinmap.txt)"
 | `esp32-sd-card-and-logging` | Mount failures, a power cut mid-write, and writes that block the control loop. |
 | `esp32-emc-and-enclosure` | Antenna keepout, cables as antennas, and heat in a sealed box. |
 
+| `esp32-modbus-security-and-mapping` | Register addressing, word order, scaling, write access and vendor map contracts. |
+| `esp32-opc-ua-gateway` | OPC UA information models, certificates, quality and edge gateway boundaries. |
+| `esp32-ethercat-gateway-boundary` | EtherCAT capability boundaries and safe northbound gateway architecture. |
+| `esp32-cc1101-subghz` | CC1101 modem profiles, FIFO/IRQ handling and sub-GHz regulatory checks. |
+| `esp32-sx126x-lora` | SX126x BUSY/DIO1 sequencing, RF switch and LoRa airtime. |
+| `esp32-load-cells-hx711` | Load-cell mechanics, bridge wiring, calibration and drift. |
+| `esp32-thermocouple-max31855` | Thermocouple wiring, cold-junction compensation and fault decoding. |
+| `esp32-voltage-current-monitoring` | Shunt selection, INA219/INA226 calibration and transient sampling. |
+| `esp32-dma-cache-psram` | DMA memory capabilities, cache ownership and PSRAM constraints. |
+| `esp32-heap-forensics` | Heap leak vs retention, fragmentation, tracing and capability pools. |
+| `esp32-wifi-roaming` | Multi-AP handoff, hysteresis, reconnect state machines and RF validation. |
+| `esp32-thermocouple-max31865` | RTD wiring topology, reference resistor, linearization and MAX31865 faults. |
+
 ### How a skill is laid out
 
 Each skill is a directory, following the layout used by the official Anthropic
@@ -241,7 +254,7 @@ they drop straight into CI or a pre-flash hook.
 | `examples/partitions-ota-4mb.csv` | A correct 4 MB OTA layout. |
 | `examples/partitions-broken.csv` | The same layout with misalignment, overlap and overflow. |
 | `examples/panic-log.txt` | A real `LoadProhibited` dump with a four frame backtrace. |
-| `tests/` | 320 unit tests: the five tools, the pin and partition databases, and one shape test per skill. |
+| `tests/` | 332 unit tests: the five tools, the pin and partition databases, and one shape test per skill. |
 
 ## Verified on hardware
 
