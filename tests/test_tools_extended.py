@@ -735,11 +735,11 @@ class ModbusMapCheckTest(unittest.TestCase):
         finally:
             os.unlink(path)
 
-    def test_non_numeric_address_is_an_error(self):
+    def test_decimal_address_is_parsed_as_decimal_offset(self):
         rows = [{
             "name": "bad", "table": "holding", "address": "40001",
             "type": "U16", "access": "R", "scale": "1",
-            "unit": "1", "description": "display notation is not an offset", "line": 2,
+            "unit": "1", "description": "decimal offset accepted", "line": 2,
         }]
         findings, errors = modbus_map_check.check(rows)
         self.assertEqual(errors, 0)
@@ -754,3 +754,14 @@ class ModbusMapCheckTest(unittest.TestCase):
         findings, errors = modbus_map_check.check(rows)
         self.assertEqual(errors, 1)
         self.assertIn("finite non-zero", " ".join(item["message"] for item in findings))
+
+
+    def test_non_numeric_address_is_rejected(self):
+        rows = [{
+            "name": "bad", "table": "holding", "address": "offset-1",
+            "type": "U16", "access": "R", "scale": "1",
+            "unit": "1", "description": "invalid address", "line": 2,
+        }]
+        findings, errors = modbus_map_check.check(rows)
+        self.assertEqual(errors, 1)
+        self.assertIn("address must be", " ".join(item["message"] for item in findings))
