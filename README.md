@@ -211,7 +211,7 @@ python tools/pincheck.py --soc esp32 --assign "$(cat pinmap.txt)"
 | `esp32-dma-cache-psram` | DMA memory capabilities, cache ownership and PSRAM constraints. |
 | `esp32-heap-forensics` | Heap leak vs retention, fragmentation, tracing and capability pools. |
 | `esp32-wifi-roaming` | Multi-AP handoff, hysteresis, reconnect state machines and RF validation. |
-| `esp32-thermocouple-max31865` | RTD wiring topology, reference resistor, linearization and MAX31865 faults. |
+| `esp32-max31865-rtd` | RTD wiring topology, reference resistor, linearization and MAX31865 faults. |
 
 ### How a skill is laid out
 
