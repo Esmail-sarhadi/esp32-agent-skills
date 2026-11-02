@@ -257,7 +257,7 @@ they drop straight into CI or a pre-flash hook.
 | `examples/panic-log.txt` | A real `LoadProhibited` dump with a four frame backtrace. |
 | `examples/modbus-register-map.csv` | Valid example register map with explicit offsets, types and scaling. |
 | `examples/modbus-register-map-broken.csv` | Deliberately invalid map covering overlap, zero scale and coil type errors. |
-| `tests/` | 341 unit tests: the six tools, the pin and partition databases, and one shape test per skill. |
+| `tests/` | 342 unit tests: the six tools, the pin and partition databases, and one shape test per skill. |
 
 ## Verified on hardware
 
