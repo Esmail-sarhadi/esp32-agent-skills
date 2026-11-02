@@ -295,6 +295,27 @@ board and a checker that cries wolf gets switched off.
 If a constraint is wrong for your module, open an issue with the datasheet page
 number and it gets fixed. That is the only way a database like this stays useful.
 
+## Expanded engineering knowledge base
+
+The repository now also maintains an evidence-oriented knowledge system in
+[docs/knowledge-base/](docs/knowledge-base/README.md). It separates task skills,
+field failures, protocol dossiers, test patterns and source confidence. The
+initial casebook records both confirmed patterns and unresolved reports without
+presenting open issues as solved.
+
+New industrial and reliability skills in this expansion:
+- `esp32-modbus-tcp` — MBAP framing, TCP stream parsing and RTU gateway behavior.
+- `esp32-rs232-rs422` — serial physical-layer selection, wiring and protection.
+- `esp32-industrial-analog-io` — 4–20 mA and 0–10 V analog front ends.
+- `esp32-pt100-pt1000-rtd` — RTD wiring, excitation and calibration.
+- `esp32-w5500-ethernet` — SPI Ethernet controller integration and diagnostics.
+- `esp32-ethernet-rmii-phy` — MAC/PHY separation, RMII clock and PHY bring-up.
+- `esp32-can-fd-gateway` — Classical CAN vs CAN-FD architecture and gateway safety.
+
+See [the expansion roadmap](docs/knowledge-base/expansion-roadmap.md) for the
+multi-release target of 300–500 skills, 2,000–3,000 field cases and a much larger
+test/example corpus. These are targets, not current counts.
+
 ## Roadmap
 
 - [ ] ESP32-C6 and ESP32-H2 pin maps
