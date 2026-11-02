@@ -34,6 +34,17 @@ The first protocol dossier set lives in `protocols/`:
 These documents cover architecture and verification boundaries; they do not replace
 device datasheets, installation standards or regulatory review.
 
+## Component dossiers
+
+The initial component notes are in `components/`:
+- [W5500 Ethernet controller](components/w5500.md)
+- [MAX31865 RTD converter](components/max31865-rtd.md)
+- [CC1101 sub-GHz transceiver](components/cc1101.md)
+- [HX711 load-cell ADC](components/hx711-load-cell.md)
+
+Each dossier separates device capability from breakout-board implementation and
+includes integration checks and a verification matrix.
+
 ## Evidence grades
 
 - **A — upstream verified:** fix or behavior is confirmed by upstream code,
