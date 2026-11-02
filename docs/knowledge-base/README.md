@@ -23,6 +23,17 @@ field-failure casebook. The casebook deliberately separates confirmed behavior
 from hypotheses and open reports. References point to the original discussions
 and upstream implementation; no forum post is treated as a universal design rule.
 
+## Protocol dossiers
+
+The first protocol dossier set lives in `protocols/`:
+- [Modbus TCP framing and gateway behavior](protocols/modbus-tcp.md)
+- [RS-485 physical layer, termination and direction timing](protocols/rs485-physical-layer.md)
+- [4–20 mA and 0–10 V analog input design](protocols/industrial-4-20ma.md)
+- [LoRa and sub-GHz radio planning](protocols/lora-radio-planning.md)
+
+These documents cover architecture and verification boundaries; they do not replace
+device datasheets, installation standards or regulatory review.
+
 ## Evidence grades
 
 - **A — upstream verified:** fix or behavior is confirmed by upstream code,
