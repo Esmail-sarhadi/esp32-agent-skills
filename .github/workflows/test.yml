@@ -38,6 +38,15 @@ jobs:
       - name: Power budget smoke test
         run: python tools/power_budget.py --battery 3000 --wakes-per-hour 12 --wake-ms 2000
 
+      - name: LoRa airtime smoke test
+        run: python tools/airtime.py --sf 12 --bw 125 --payload 20
+
+      - name: A 30 second interval must fail the duty cycle
+        run: |
+          if python tools/airtime.py --sf 12 --payload 20 --interval 30; then
+            echo "expected a non-zero exit for a 30 s interval at SF12"; exit 1
+          fi
+
       - name: Panic decode smoke test
         run: python tools/panic_decode.py --file examples/panic-log.txt
 

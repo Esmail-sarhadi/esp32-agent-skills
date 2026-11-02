@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**Forty-six skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**Forty-six skills and five checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -9,7 +9,7 @@
 
 **[Read this on a page instead of a README →](https://esmail-sarhadi.github.io/esp32-agent-skills/)**
 
-![ESP32 Agent Skills: forty-six skills and four checkers for ESP32 firmware](docs/assets/hero.jpg)
+![ESP32 Agent Skills: forty-six skills and five checkers for ESP32 firmware](docs/assets/hero.jpg)
 
 ---
 
@@ -221,7 +221,7 @@ The pin table is generated from `data/esp32-pins.json` by
 
 ### Tools
 
-All four use the standard library only. All four exit non-zero on an error, so
+All five use the standard library only. All five exit non-zero on an error, so
 they drop straight into CI or a pre-flash hook.
 
 | Tool | Answers |
@@ -230,6 +230,7 @@ they drop straight into CI or a pre-flash hook.
 | `tools/partition_check.py` | Does this partition table fit the flash and support OTA? |
 | `tools/power_budget.py` | How long does this duty cycle actually last on this battery? |
 | `tools/panic_decode.py` | Which `addr2line` command turns this crash dump into file:line? |
+| `tools/airtime.py` | Does this LoRa payload fit the duty cycle at this spreading factor? |
 
 ### Data and examples
 
@@ -240,7 +241,7 @@ they drop straight into CI or a pre-flash hook.
 | `examples/partitions-ota-4mb.csv` | A correct 4 MB OTA layout. |
 | `examples/partitions-broken.csv` | The same layout with misalignment, overlap and overflow. |
 | `examples/panic-log.txt` | A real `LoadProhibited` dump with a four frame backtrace. |
-| `tests/` | 270 unit tests: the four tools, the pin and partition databases, and one shape test per skill. |
+| `tests/` | 307 unit tests: the five tools, the pin and partition databases, and one shape test per skill. |
 
 ## Verified on hardware
 
@@ -298,7 +299,7 @@ number and it gets fixed. That is the only way a database like this stays useful
 
 - [ ] ESP32-C6 and ESP32-H2 pin maps
 - [ ] `--board` profiles for common dev boards (DevKitC, WROVER-KIT, M5Stack)
-- [ ] Reusable GitHub Action that runs all four checkers on every PR
+- [ ] Reusable GitHub Action that runs all five checkers on every PR
 - [ ] Compile the examples against the previous Arduino core, not just the current one
 
 ## Contributing

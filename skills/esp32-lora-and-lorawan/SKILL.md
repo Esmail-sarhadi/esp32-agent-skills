@@ -20,10 +20,26 @@ the wiring, the interrupt line, or the duty cycle.
 
 ## Airtime is the design constraint
 
-A 20 byte payload at SF12/125 kHz occupies the channel for about 1.5 seconds. In
-the EU868 band the legal duty cycle is 1 %, so that packet may be sent once every
-150 seconds. Any design that reports every 30 seconds must use a lower spreading
-factor, a shorter payload, or a different band.
+A 20 byte payload at SF12/125 kHz occupies the channel for 1.319 seconds. In the
+EU868 band the legal duty cycle is 1 %, so that same packet may be sent once
+every 132 seconds - 27 packets an hour, and no more. A design that reports every
+30 seconds has to use a lower spreading factor, a shorter payload, or a
+different band.
+
+Those are not estimates. `tools/airtime.py` computes them from the Semtech
+formula, including the low data rate optimize bit that changes the denominator
+at SF11 and SF12 and that most hand calculations forget:
+
+```bash
+python tools/airtime.py --sf 12 --bw 125 --payload 20 --interval 30
+#   airtime       1318.912 ms   (1.319 s)
+#   earliest next packet  131.9 s
+#   every 30.0 s is 4.4x over the duty cycle: ...
+#   exit 1
+```
+
+The same 20 byte payload at SF7 is 56.6 ms, which allows one every 5.7 seconds.
+The range difference between those two settings is the price of the interval.
 
 Work out the airtime before choosing the interval, not after the gateway starts
 dropping frames.

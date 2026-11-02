@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ESP32 Agent Skills — firmware that compiles, then works</title>
-<meta name="description" content="Forty-six agent skills and four checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board. Standard library only, 270 tests, verified on real hardware.">
+<meta name="description" content="Forty-six agent skills and five checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board. Standard library only, 307 tests, verified on real hardware.">
 <meta name="color-scheme" content="dark">
 <meta property="og:title" content="ESP32 Agent Skills">
 <meta property="og:description" content="Agent skills and checkers for ESP32 firmware that compiles and then bricks the board.">
@@ -251,7 +251,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
         <p>
           An agent writes <code>pinMode(6, OUTPUT)</code> and the build is green.
           GPIO6 is wired to the SPI flash — the module stops booting.
-          Forty-six skills and four checkers catch that before the flash.
+          Forty-six skills and five checkers catch that before the flash.
         </p>
         <div class="hero-actions">
           <a class="btn primary" href="#install">Install in 30 seconds</a>
@@ -286,8 +286,8 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
 
     <div class="stats">
       <div class="stat"><b>46</b><span>skills</span></div>
-      <div class="stat"><b>4</b><span>checkers</span></div>
-      <div class="stat"><b>270</b><span>tests</span></div>
+      <div class="stat"><b>5</b><span>checkers</span></div>
+      <div class="stat"><b>307</b><span>tests</span></div>
       <div class="stat"><b>1</b><span>board verified</span></div>
     </div>
   </header>
@@ -415,7 +415,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
   <!-- tools -->
   <section id="tools">
     <span class="eyebrow">Checkers</span>
-    <h2>Four commands, standard library only</h2>
+    <h2>Five commands, standard library only</h2>
     <p class="lede">
       Each one exits non-zero on a real problem, so they drop straight into CI or a
       pre-flash hook. No dependencies, no virtualenv, no network.
@@ -441,6 +441,11 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
         <span class="kicker">panic_decode.py</span>
         <h3>Which addr2line command do I run?</h3>
         <p>Pulls the reason, the core and the frames out of a Guru Meditation dump, in the order the CPU printed them.</p>
+      </article>
+      <article class="card">
+        <span class="kicker">airtime.py</span>
+        <h3>Does this interval fit the duty cycle?</h3>
+        <p>Semtech time on air, including the low data rate optimize bit most hand calculations skip, then the earliest next packet at 1&nbsp;% and the packets per hour it allows.</p>
       </article>
     </div>
 
