@@ -37,3 +37,7 @@ Stagger radio and actuator startup where possible. Detect repeated brownout and 
 
 Never infer a power fix from a log alone; request rail measurements. Distinguish brownout from watchdog, panic and software reset. Include peak and average budgets. Keep protection and safe-state design independent of application firmware.
 
+
+## Field capture
+
+Record rail voltage at the module pins during the event, along with source voltage, current waveform, reset reason and load state.
