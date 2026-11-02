@@ -1,6 +1,6 @@
 """Coverage for the second half of the corpus.
 
-Two jobs. First, the twenty skills added in this round get the same scrutiny the
+Two jobs. First, the twenty-five skills added in the expansion get the same scrutiny the
 first twenty-six got: frontmatter, body shape, a table, no placeholders, and a
 license next to them. That is one test per skill, generated from the directory
 listing so a new skill cannot be added without one.
@@ -129,7 +129,7 @@ for _name in SKILL_NAMES:
 # ---------------------------------------------------------------------------
 
 class SkillCorpusTest(unittest.TestCase):
-    def test_the_corpus_has_forty_six_skills(self):
+    def test_the_corpus_has_seventy_one_skills(self):
         self.assertEqual(len(SKILL_NAMES), 71)
 
     def test_names_are_unique(self):
