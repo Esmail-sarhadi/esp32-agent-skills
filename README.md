@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**Forty-six skills and five checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**Fifty-nine skills and five checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -311,6 +311,12 @@ New industrial and reliability skills in this expansion:
 - `esp32-w5500-ethernet` — SPI Ethernet controller integration and diagnostics.
 - `esp32-ethernet-rmii-phy` — MAC/PHY separation, RMII clock and PHY bring-up.
 - `esp32-can-fd-gateway` — Classical CAN vs CAN-FD architecture and gateway safety.
+- `esp32-i2c-recovery` — bounded bus recovery, stuck-line diagnosis and safe probing.
+- `esp32-power-integrity` — brownout, regulator transients, battery sag and measurement.
+- `esp32-secure-ota-production` — signed updates, rollback and power-fail resilience.
+- `esp32-fault-injection-hil` — HIL fixtures, fault injection and soak-test design.
+- `esp32-serial-field-diagnostics` — UART/RS485 capture, buffer and framing diagnostics.
+- `esp32-industrial-gateway-architecture` — resilient multi-protocol gateway architecture.
 
 See [the expansion roadmap](docs/knowledge-base/expansion-roadmap.md) for the
 multi-release target of 300–500 skills, 2,000–3,000 field cases and a much larger
