@@ -37,3 +37,7 @@ Verify logic-level voltage and transceiver type before connecting external equip
 
 Do not patch the parser until physical waveform and framing are verified. Include bounded buffers and explicit lengths in examples. Never use unsafe string concatenation on raw serial data. Log counters and state transitions without flooding the protocol channel.
 
+
+## Recovery validation
+
+Verify that a malformed frame, UART overflow and remote-node reset each return the parser to a known idle state without rebooting the device.
