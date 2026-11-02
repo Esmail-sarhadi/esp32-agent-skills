@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**Seventy-one skills and five checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**Seventy-one skills and six checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -9,7 +9,7 @@
 
 **[Read this on a page instead of a README →](https://esmail-sarhadi.github.io/esp32-agent-skills/)**
 
-![ESP32 Agent Skills: seventy-one skills and five checkers for ESP32 firmware](docs/assets/hero.jpg)
+![ESP32 Agent Skills: seventy-one skills and six checkers for ESP32 firmware](docs/assets/hero.jpg)
 
 ---
 
@@ -342,7 +342,7 @@ test/example corpus. These are targets, not current counts.
 
 - [ ] ESP32-C6 and ESP32-H2 pin maps
 - [ ] `--board` profiles for common dev boards (DevKitC, WROVER-KIT, M5Stack)
-- [ ] Reusable GitHub Action that runs all five checkers on every PR
+- [ ] Reusable GitHub Action that runs all six checkers on every PR
 - [ ] Compile the examples against the previous Arduino core, not just the current one
 
 ## Contributing
