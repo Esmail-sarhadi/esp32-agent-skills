@@ -3,7 +3,7 @@ name: esp32-industrial-analog-io
 description: Use when connecting 4–20 mA loops, 0–10 V transmitters, industrial analog inputs, analog outputs or protected field wiring to ESP32.
 ---
 
-# Esp32 Industrial Analog Io
+# ESP32 Industrial Analog Io
 
 Industrial analog signals cannot be connected directly to ESP32 GPIO. The design must translate field voltage/current into the ADC input range while controlling fault energy, common-mode voltage, noise and calibration error.
 

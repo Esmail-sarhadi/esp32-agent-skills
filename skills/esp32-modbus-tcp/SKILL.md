@@ -3,7 +3,7 @@ name: esp32-modbus-tcp
 description: Use when an ESP32 implements or debugs Modbus TCP, including MBAP framing, transaction IDs, register maps, gateway behavior or TCP session failures.
 ---
 
-# Esp32 Modbus Tcp
+# ESP32 Modbus Tcp
 
 Modbus TCP removes the serial CRC and RTU silence timing, but it does not remove register-map ambiguity, concurrency or network failure. Keep protocol state per TCP connection and never assume one request per socket.
 

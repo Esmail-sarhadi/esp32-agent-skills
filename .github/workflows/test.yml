@@ -38,6 +38,18 @@ jobs:
       - name: Power budget smoke test
         run: python tools/power_budget.py --battery 3000 --wakes-per-hour 12 --wake-ms 2000
 
+      - name: Modbus RTU frame smoke test
+        run: python tools/modbus_frame.py --build read --slave 1 --start 0 --count 10
+
+      - name: A corrupt CRC must fail
+        run: |
+          if python tools/modbus_frame.py --check "11 03 00 6B 00 03 76 88"; then
+            echo "expected a non-zero exit for a bad CRC"; exit 1
+          fi
+
+      - name: The register map example must pass
+        run: python tools/modbus_map_check.py --file examples/modbus-register-map.csv
+
       - name: LoRa airtime smoke test
         run: python tools/airtime.py --sf 12 --bw 125 --payload 20
 

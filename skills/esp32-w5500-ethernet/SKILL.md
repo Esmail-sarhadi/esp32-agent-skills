@@ -3,7 +3,7 @@ name: esp32-w5500-ethernet
 description: Use when using W5500 SPI Ethernet with ESP32, diagnosing DHCP, socket failures, link loss, SPI timing or Ethernet/Wi-Fi coexistence.
 ---
 
-# Esp32 W5500 Ethernet
+# ESP32 W5500 Ethernet
 
 W5500 is an SPI Ethernet controller with its own hardwired TCP/IP stack and socket resources. It is not the same architecture as an RMII PHY attached to an ESP32 Ethernet MAC. Choose the driver/API path accordingly.
 

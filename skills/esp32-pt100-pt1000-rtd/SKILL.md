@@ -3,7 +3,7 @@ name: esp32-pt100-pt1000-rtd
 description: Use when measuring PT100/PT1000 RTDs with ESP32, MAX31865 or another RTD front end, including lead compensation and calibration.
 ---
 
-# Esp32 Pt100 Pt1000 Rtd
+# ESP32 Pt100 Pt1000 Rtd
 
 An RTD is a precision resistance measurement, not a generic analog sensor. Excitation current, lead resistance, reference resistor accuracy, wiring mode and self-heating determine the result.
 

@@ -3,7 +3,7 @@ name: esp32-rs232-rs422
 description: Use when integrating RS232 or RS422 transceivers, long serial cables, point-to-point links, full-duplex links or industrial serial equipment.
 ---
 
-# Esp32 Rs232 Rs422
+# ESP32 Rs232 Rs422
 
 UART is a logic-level peripheral; RS232 and RS422 are electrical interfaces. A UART pin must never be wired directly to an RS232 voltage or a long differential cable. Select the transceiver and grounding/isolation strategy before writing serial code.
 

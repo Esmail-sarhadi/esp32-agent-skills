@@ -3,7 +3,7 @@ name: esp32-can-fd-gateway
 description: Use when building CAN or CAN-FD gateways with ESP32, including TWAI, external CAN-FD controllers, bus-off recovery and industrial isolation.
 ---
 
-# Esp32 Can Fd Gateway
+# ESP32 Can Fd Gateway
 
 Classic ESP32 TWAI is a Classical CAN controller, not CAN-FD. Some newer SoCs have different peripheral support; check the exact target. CAN-FD requires an FD-capable controller and transceiver path.
 

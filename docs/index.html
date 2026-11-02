@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ESP32 Agent Skills — firmware that compiles, then works</title>
-<meta name="description" content="Forty-six agent skills and five checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board. Standard library only, 307 tests, verified on real hardware.">
+<meta name="description" content="A hundred and one agent skills and seven checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board. Standard library only, 477 tests, verified on real hardware.">
 <meta name="color-scheme" content="dark">
 <meta property="og:title" content="ESP32 Agent Skills">
 <meta property="og:description" content="Agent skills and checkers for ESP32 firmware that compiles and then bricks the board.">
@@ -251,11 +251,11 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
         <p>
           An agent writes <code>pinMode(6, OUTPUT)</code> and the build is green.
           GPIO6 is wired to the SPI flash — the module stops booting.
-          Forty-six skills and five checkers catch that before the flash.
+          A hundred and one skills and seven checkers catch that before the flash.
         </p>
         <div class="hero-actions">
           <a class="btn primary" href="#install">Install in 30 seconds</a>
-          <a class="btn ghost" href="#skills">See the 46 skills</a>
+          <a class="btn ghost" href="#skills">See the 101 skills</a>
         </div>
       </div>
 
@@ -285,9 +285,9 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
     </div>
 
     <div class="stats">
-      <div class="stat"><b>46</b><span>skills</span></div>
-      <div class="stat"><b>5</b><span>checkers</span></div>
-      <div class="stat"><b>307</b><span>tests</span></div>
+      <div class="stat"><b>101</b><span>skills</span></div>
+      <div class="stat"><b>7</b><span>checkers</span></div>
+      <div class="stat"><b>477</b><span>tests</span></div>
       <div class="stat"><b>1</b><span>board verified</span></div>
     </div>
   </header>
@@ -355,7 +355,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
   <!-- skills -->
   <section id="skills">
     <span class="eyebrow">What is inside</span>
-    <h2>Forty-six skills, one per failure domain</h2>
+    <h2>A hundred and one skills, one per failure domain</h2>
     <p class="lede">
       Each skill is a directory with a short <code>SKILL.md</code>, a license, and a
       <code>reference/</code> folder holding the long tables — the layout the official
@@ -409,13 +409,68 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
       <article class="card skill"><span class="name">esp32-battery-and-charging</span><span class="stops">The charger is not a power path, the divider drains the cell, and the transmit peak browns out.</span></article>
       <article class="card skill"><span class="name">esp32-sd-card-and-logging</span><span class="stops">Mount failures, a power cut mid-write, and writes that block the control loop.</span></article>
       <article class="card skill"><span class="name">esp32-emc-and-enclosure</span><span class="stops">Antenna keepout, cables as antennas, and heat in a sealed box.</span></article>
+      <article class="card skill"><span class="name">esp32-enc28j60-ethernet</span><span class="stops">The 8 KB buffer, no auto-negotiation, and why a large transfer stalls while ping works.</span></article>
+      <article class="card skill"><span class="name">esp32-rs485-isolated-transceivers</span><span class="stops">MAX3485 vs ISO3082 vs ADM2587E, termination, fail-safe bias, and what a TVS can actually clamp.</span></article>
+      <article class="card skill"><span class="name">esp32-sx127x-lora</span><span class="stops">Register mode, DIO0 mapping, and the seven settings that must match on both ends.</span></article>
+      <article class="card skill"><span class="name">esp32-nrf24l01</span><span class="stops">The 10 uF capacitor, pipe addresses, 32-byte payloads, and coexistence with Wi-Fi.</span></article>
+      <article class="card skill"><span class="name">esp32-rfm69-subghz</span><span class="stops">W vs HW variants, the sync word, the FIFO threshold, and AES that decrypts to noise.</span></article>
+      <article class="card skill"><span class="name">esp32-ads1115-external-adc</span><span class="stops">PGA ranges, the absolute-input trap, and single-ended vs differential.</span></article>
+      <article class="card skill"><span class="name">esp32-ads1256-precision-adc</span><span class="stops">Reference, the 7.68 MHz clock, DRDY, and why 24 bits delivers 18.</span></article>
+      <article class="card skill"><span class="name">esp32-mcp4725-analog-output</span><span class="stops">A DAC is not an analog output: buffer, gain, protection, and the EEPROM that remembers.</span></article>
+      <article class="card skill"><span class="name">esp32-4-20ma-transmitter</span><span class="stops">The live zero, loop compliance, XTR116-class drivers, and isolation.</span></article>
+      <article class="card skill"><span class="name">esp32-vfd-modbus-control</span><span class="stops">Control words, reference scaling, per-vendor register maps, and a stop that does not depend on Modbus.</span></article>
+      <article class="card skill"><span class="name">esp32-poe-power</span><span class="stops">802.3af/at classes, the signature resistor, and the isolation barrier.</span></article>
+      <article class="card skill"><span class="name">esp32-surge-and-tvs-protection</span><span class="stops">Standoff vs clamping voltage, series impedance, and what a TVS cannot do.</span></article>
+      <article class="card skill"><span class="name">esp32-isolated-digital-input</span><span class="stops">24 V through an opto: resistor, reverse diode, wetting current, debounce.</span></article>
+      <article class="card skill"><span class="name">esp32-din-rail-power</span><span class="stops">The 24 V rail, reverse protection, hold-up capacitance, and the dissipation arithmetic.</span></article>
+      <article class="card skill"><span class="name">esp32-energy-meter-modbus</span><span class="stops">SDM120-class meters, float word order, and range validation in the parser.</span></article>
+      <article class="card skill"><span class="name">esp32-iec-60870-5-104</span><span class="stops">APCI frame types, k/w windows, t1 to t3, and the ASDU fields a master will reject.</span></article>
+      <article class="card skill"><span class="name">esp32-snmp-agent</span><span class="stops">GET and GETNEXT, BER long lengths, v3 engine state, and traps that survive a lost packet.</span></article>
+      <article class="card skill"><span class="name">esp32-sparkplug-b-mqtt</span><span class="stops">Topic namespace, protobuf payloads, aliases, seq and bdSeq.</span></article>
+      <article class="card skill"><span class="name">esp32-canopen-basics</span><span class="stops">Node-id COB-IDs, the pre-operational state, SDO vs PDO, heartbeat.</span></article>
+      <article class="card skill"><span class="name">esp32-modbus-rtu-slave</span><span class="stops">Address range, 3.5 character timing, exception codes, and a map that matches the docs.</span></article>
+      <article class="card skill"><span class="name">esp32-modbus-rtu-tcp-gateway</span><span class="stops">MBAP framing, unit-id mapping, transaction ids, and serialising the half-duplex side.</span></article>
+      <article class="card skill"><span class="name">esp32-wifi-enterprise-eap</span><span class="stops">EAP-TLS vs PEAP, certificate validation, time sync, and the identity fields.</span></article>
+      <article class="card skill"><span class="name">esp32-modbus-security-and-mapping</span><span class="stops">Register addressing, word order, scaling, write access and vendor map contracts.</span></article>
+      <article class="card skill"><span class="name">esp32-opc-ua-gateway</span><span class="stops">OPC UA information models, certificates, quality and edge gateway boundaries.</span></article>
+      <article class="card skill"><span class="name">esp32-ethercat-gateway-boundary</span><span class="stops">EtherCAT capability boundaries and safe northbound gateway architecture.</span></article>
+      <article class="card skill"><span class="name">esp32-cc1101-subghz</span><span class="stops">CC1101 modem profiles, FIFO/IRQ handling and sub-GHz regulatory checks.</span></article>
+      <article class="card skill"><span class="name">esp32-sx126x-lora</span><span class="stops">SX126x BUSY/DIO1 sequencing, RF switch and LoRa airtime.</span></article>
+      <article class="card skill"><span class="name">esp32-load-cells-hx711</span><span class="stops">Load-cell mechanics, bridge wiring, calibration and drift.</span></article>
+      <article class="card skill"><span class="name">esp32-thermocouple-max31855</span><span class="stops">Thermocouple wiring, cold-junction compensation and fault decoding.</span></article>
+      <article class="card skill"><span class="name">esp32-voltage-current-monitoring</span><span class="stops">Shunt selection, INA219/INA226 calibration and transient sampling.</span></article>
+      <article class="card skill"><span class="name">esp32-dma-cache-psram</span><span class="stops">DMA memory capabilities, cache ownership and PSRAM constraints.</span></article>
+      <article class="card skill"><span class="name">esp32-heap-forensics</span><span class="stops">Heap leak vs retention, fragmentation, tracing and capability pools.</span></article>
+      <article class="card skill"><span class="name">esp32-wifi-roaming</span><span class="stops">Multi-AP handoff, hysteresis, reconnect state machines and RF validation.</span></article>
+      <article class="card skill"><span class="name">esp32-max31865-rtd</span><span class="stops">RTD wiring topology, reference resistor, linearization and MAX31865 faults.</span></article>
+      <article class="card skill"><span class="name">esp32-rmt-waveform-io</span><span class="stops">Hardware-timed pulse generation/capture, symbol buffers and RMT API generations.</span></article>
+      <article class="card skill"><span class="name">esp32-mcpwm-power-stage</span><span class="stops">Complementary PWM, dead time, hardware fault shutdown and motor power-stage safety.</span></article>
+      <article class="card skill"><span class="name">esp32-pcnt-encoder-feedback</span><span class="stops">Pulse counting, quadrature direction, glitch filtering and counter overflow.</span></article>
+      <article class="card skill"><span class="name">esp32-sdmmc-card-lifecycle</span><span class="stops">SDMMC/SPI selection, hot removal, power-loss logging and bounded storage latency.</span></article>
+      <article class="card skill"><span class="name">esp32-usb-otg-serial-jtag</span><span class="stops">SoC-specific USB host/device/OTG and USB-Serial-JTAG capability boundaries.</span></article>
+      <article class="card skill"><span class="name">esp32-lwip-network-diagnostics</span><span class="stops">DHCP, DNS, TCP stream framing, socket lifecycle and reconnect forensics.</span></article>
+      <article class="card skill"><span class="name">esp32-industrial-safety-interlocks</span><span class="stops">Safe output states, interlocks, E-stop boundaries and restart inhibition.</span></article>
+      <article class="card skill"><span class="name">esp32-thermal-enclosure-derating</span><span class="stops">Enclosure thermal budgets, hotspot measurements and temperature derating.</span></article>
+      <article class="card skill"><span class="name">esp32-w5500-ethernet</span><span class="stops">SPI timing, socket exhaustion, link loss, and coexistence with Wi-Fi.</span></article>
+      <article class="card skill"><span class="name">esp32-ethernet-rmii-phy</span><span class="stops">The 50 MHz clock on a strapping pin, PHY address straps, and link vs IP-layer diagnostics.</span></article>
+      <article class="card skill"><span class="name">esp32-modbus-tcp</span><span class="stops">MBAP framing, transaction ids, and the session failures that look like wiring.</span></article>
+      <article class="card skill"><span class="name">esp32-can-fd-gateway</span><span class="stops">TWAI vs an external CAN-FD controller, bus-off recovery, and isolation on a gateway.</span></article>
+      <article class="card skill"><span class="name">esp32-rs232-rs422</span><span class="stops">MAX3232 charge pumps, full-duplex wiring, and a cable length that actually works.</span></article>
+      <article class="card skill"><span class="name">esp32-industrial-analog-io</span><span class="stops">4-20 mA shunts, 0-10 V dividers, and protection against a miswired field wire.</span></article>
+      <article class="card skill"><span class="name">esp32-pt100-pt1000-rtd</span><span class="stops">Lead resistance, MAX31865 wiring, and calibration that survives a cable change.</span></article>
+      <article class="card skill"><span class="name">esp32-power-integrity</span><span class="stops">Brownout at transmit, relay inrush, regulator heating, and the capacitor that fixes it.</span></article>
+      <article class="card skill"><span class="name">esp32-industrial-gateway-architecture</span><span class="stops">Which protocol terminates where, and what a gateway must not pretend to be.</span></article>
+      <article class="card skill"><span class="name">esp32-secure-ota-production</span><span class="stops">Signed images, anti-rollback, and a fleet rollout that can be stopped.</span></article>
+      <article class="card skill"><span class="name">esp32-serial-field-diagnostics</span><span class="stops">Framing errors, FIFO overruns, boot-log interference and RS485 timeouts.</span></article>
+      <article class="card skill"><span class="name">esp32-i2c-recovery</span><span class="stops">SDA stuck low, clock-pulse recovery, and a peripheral that powers off on its own.</span></article>
+      <article class="card skill"><span class="name">esp32-fault-injection-hil</span><span class="stops">Fault injection, soak tests, and a rig that fails a device for the right reason.</span></article>
     </div>
   </section>
 
   <!-- tools -->
   <section id="tools">
     <span class="eyebrow">Checkers</span>
-    <h2>Five commands, standard library only</h2>
+    <h2>Seven commands, standard library only</h2>
     <p class="lede">
       Each one exits non-zero on a real problem, so they drop straight into CI or a
       pre-flash hook. No dependencies, no virtualenv, no network.

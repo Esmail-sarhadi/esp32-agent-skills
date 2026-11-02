@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**Seventy-nine skills and six checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**A hundred and one skills and seven checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -9,7 +9,7 @@
 
 **[Read this on a page instead of a README →](https://esmail-sarhadi.github.io/esp32-agent-skills/)**
 
-![ESP32 Agent Skills: seventy-nine skills and six checkers for ESP32 firmware](docs/assets/hero.jpg)
+![Agent Skill ESP32: build, connect, automate](docs/assets/banner.jpg)
 
 ---
 
@@ -199,6 +199,41 @@ python tools/pincheck.py --soc esp32 --assign "$(cat pinmap.txt)"
 | `esp32-battery-and-charging` | The charger is not a power path, the divider drains the cell, and the transmit peak browns out. |
 | `esp32-sd-card-and-logging` | Mount failures, a power cut mid-write, and writes that block the control loop. |
 | `esp32-emc-and-enclosure` | Antenna keepout, cables as antennas, and heat in a sealed box. |
+| `esp32-w5500-ethernet` | SPI timing, socket exhaustion, link loss, and coexistence with Wi-Fi. |
+| `esp32-ethernet-rmii-phy` | The 50 MHz clock on a strapping pin, PHY address straps, and link vs IP-layer diagnostics. |
+| `esp32-modbus-tcp` | MBAP framing, transaction ids, and the session failures that look like wiring. |
+| `esp32-can-fd-gateway` | TWAI vs an external CAN-FD controller, bus-off recovery, and isolation on a gateway. |
+| `esp32-rs232-rs422` | MAX3232 charge pumps, full-duplex wiring, and a cable length that actually works. |
+| `esp32-industrial-analog-io` | 4-20 mA shunts, 0-10 V dividers, and protection against a miswired field wire. |
+| `esp32-pt100-pt1000-rtd` | Lead resistance, MAX31865 wiring, and calibration that survives a cable change. |
+| `esp32-power-integrity` | Brownout at transmit, relay inrush, regulator heating, and the capacitor that fixes it. |
+| `esp32-industrial-gateway-architecture` | Which protocol terminates where, and what a gateway must not pretend to be. |
+| `esp32-secure-ota-production` | Signed images, anti-rollback, and a fleet rollout that can be stopped. |
+| `esp32-serial-field-diagnostics` | Framing errors, FIFO overruns, boot-log interference and RS485 timeouts. |
+| `esp32-i2c-recovery` | SDA stuck low, clock-pulse recovery, and a peripheral that powers off on its own. |
+| `esp32-fault-injection-hil` | Fault injection, soak tests, and a rig that fails a device for the right reason. |
+| `esp32-enc28j60-ethernet` | The 8 KB buffer, no auto-negotiation, and why a large transfer stalls while ping works. |
+| `esp32-rs485-isolated-transceivers` | MAX3485 vs ISO3082 vs ADM2587E, termination, fail-safe bias, and what a TVS can actually clamp. |
+| `esp32-sx127x-lora` | Register mode, DIO0 mapping, and the seven settings that must match on both ends. |
+| `esp32-nrf24l01` | The 10 uF capacitor, pipe addresses, 32-byte payloads, and coexistence with Wi-Fi. |
+| `esp32-rfm69-subghz` | W vs HW variants, the sync word, the FIFO threshold, and AES that decrypts to noise. |
+| `esp32-ads1115-external-adc` | PGA ranges, the absolute-input trap, and single-ended vs differential. |
+| `esp32-ads1256-precision-adc` | Reference, the 7.68 MHz clock, DRDY, and why 24 bits delivers 18. |
+| `esp32-mcp4725-analog-output` | A DAC is not an analog output: buffer, gain, protection, and the EEPROM that remembers. |
+| `esp32-4-20ma-transmitter` | The live zero, loop compliance, XTR116-class drivers, and isolation. |
+| `esp32-vfd-modbus-control` | Control words, reference scaling, per-vendor register maps, and a stop that does not depend on Modbus. |
+| `esp32-poe-power` | 802.3af/at classes, the signature resistor, and the isolation barrier. |
+| `esp32-surge-and-tvs-protection` | Standoff vs clamping voltage, series impedance, and what a TVS cannot do. |
+| `esp32-isolated-digital-input` | 24 V through an opto: resistor, reverse diode, wetting current, debounce. |
+| `esp32-din-rail-power` | The 24 V rail, reverse protection, hold-up capacitance, and the dissipation arithmetic. |
+| `esp32-energy-meter-modbus` | SDM120-class meters, float word order, and range validation in the parser. |
+| `esp32-iec-60870-5-104` | APCI frame types, k/w windows, t1 to t3, and the ASDU fields a master will reject. |
+| `esp32-snmp-agent` | GET and GETNEXT, BER long lengths, v3 engine state, and traps that survive a lost packet. |
+| `esp32-sparkplug-b-mqtt` | Topic namespace, protobuf payloads, aliases, seq and bdSeq. |
+| `esp32-canopen-basics` | Node-id COB-IDs, the pre-operational state, SDO vs PDO, heartbeat. |
+| `esp32-modbus-rtu-slave` | Address range, 3.5 character timing, exception codes, and a map that matches the docs. |
+| `esp32-modbus-rtu-tcp-gateway` | MBAP framing, unit-id mapping, transaction ids, and serialising the half-duplex side. |
+| `esp32-wifi-enterprise-eap` | EAP-TLS vs PEAP, certificate validation, time sync, and the identity fields. |
 
 | `esp32-modbus-security-and-mapping` | Register addressing, word order, scaling, write access and vendor map contracts. |
 | `esp32-opc-ua-gateway` | OPC UA information models, certificates, quality and edge gateway boundaries. |
@@ -242,7 +277,7 @@ The pin table is generated from `data/esp32-pins.json` by
 
 ### Tools
 
-All six use the standard library only. All six exit non-zero on an error, so
+All seven use the standard library only. All seven exit non-zero on an error, so
 they drop straight into CI or a pre-flash hook.
 
 | Tool | Answers |
@@ -252,6 +287,8 @@ they drop straight into CI or a pre-flash hook.
 | `tools/power_budget.py` | How long does this duty cycle actually last on this battery? |
 | `tools/panic_decode.py` | Which `addr2line` command turns this crash dump into file:line? |
 | `tools/airtime.py` | Does this LoRa payload fit the duty cycle at this spreading factor? |
+| `tools/modbus_map_check.py` | Does this register map overlap itself or lie about its types? |
+| `tools/modbus_frame.py` | Is this RTU frame valid, and does the 3.5 character gap fit your timer? |
 | `tools/modbus_map_check.py` | Is this Modbus register map valid, non-overlapping and fully described? |
 
 ### Data and examples
@@ -265,7 +302,7 @@ they drop straight into CI or a pre-flash hook.
 | `examples/panic-log.txt` | A real `LoadProhibited` dump with a four frame backtrace. |
 | `examples/modbus-register-map.csv` | Valid example register map with explicit offsets, types and scaling. |
 | `examples/modbus-register-map-broken.csv` | Deliberately invalid map covering overlap, zero scale and coil type errors. |
-| `tests/` | 350 unit tests: the six tools, the pin and partition databases, and one shape test per skill. |
+| `tests/` | 477 unit tests: the six tools, the pin and partition databases, and one shape test per skill. |
 
 ## Verified on hardware
 
@@ -350,7 +387,7 @@ test/example corpus. These are targets, not current counts.
 
 - [ ] ESP32-C6 and ESP32-H2 pin maps
 - [ ] `--board` profiles for common dev boards (DevKitC, WROVER-KIT, M5Stack)
-- [ ] Reusable GitHub Action that runs all six checkers on every PR
+- [ ] Reusable GitHub Action that runs all seven checkers on every PR
 - [ ] Compile the examples against the previous Arduino core, not just the current one
 
 ## Contributing
