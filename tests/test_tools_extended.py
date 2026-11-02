@@ -1,4 +1,4 @@
-"""Unit coverage for the four checkers and the repository invariants.
+"""Unit coverage for the checker tools and repository invariants.
 
 The existing test files drive the tools through subprocess, which proves the CLI
 contract but leaves the pure functions untested. Everything here imports the modules
@@ -656,3 +656,112 @@ class ReferenceIntegrityTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ---------------------------------------------------------------------------
+# modbus_map_check: register map validation
+# ---------------------------------------------------------------------------
+
+import modbus_map_check  # noqa: E402
+
+
+class ModbusMapCheckTest(unittest.TestCase):
+    def test_valid_example_has_no_errors(self):
+        path = os.path.join(ROOT, "examples", "modbus-register-map.csv")
+        rows = modbus_map_check.parse_map(path)
+        findings, errors = modbus_map_check.check(rows)
+        self.assertEqual(errors, 0)
+        self.assertEqual(len(rows), 4)
+
+    def test_broken_example_detects_overlap_scale_and_coil_type(self):
+        path = os.path.join(ROOT, "examples", "modbus-register-map-broken.csv")
+        rows = modbus_map_check.parse_map(path)
+        findings, errors = modbus_map_check.check(rows)
+        self.assertGreaterEqual(errors, 3)
+        messages = " ".join(item["message"] for item in findings)
+        self.assertIn("overlaps", messages)
+        self.assertIn("scale", messages)
+        self.assertIn("coil/discrete", messages)
+
+    def test_register_cannot_cross_address_space(self):
+        rows = [{
+            "name": "last", "table": "holding", "address": "65535",
+            "type": "U32", "access": "R", "scale": "1",
+            "unit": "1", "description": "boundary", "line": 2,
+        }]
+        findings, errors = modbus_map_check.check(rows)
+        self.assertGreater(errors, 0)
+        self.assertIn("outside", " ".join(item["message"] for item in findings))
+
+    def test_boolean_register_table_warns_about_vendor_semantics(self):
+        rows = [{
+            "name": "flag", "table": "holding", "address": "3",
+            "type": "BOOL", "access": "R", "scale": "1",
+            "unit": "1", "description": "bit flag", "line": 2,
+        }]
+        findings, errors = modbus_map_check.check(rows)
+        self.assertEqual(errors, 0)
+        self.assertTrue(any(item["severity"] == modbus_map_check.WARN for item in findings))
+
+    def test_missing_columns_rejected(self):
+        with tempfile.NamedTemporaryFile("w", encoding="utf-8", newline="", delete=False) as handle:
+            handle.write("name,table,address\\n")
+            path = handle.name
+        try:
+            with self.assertRaises(ValueError):
+                modbus_map_check.parse_map(path)
+        finally:
+            os.unlink(path)
+
+    def test_duplicate_names_are_rejected_case_insensitively(self):
+        rows = [
+            {"name": "x", "table": "holding", "address": "1", "type": "U16",
+             "access": "R", "scale": "1", "unit": "1", "description": "one", "line": 2},
+            {"name": "x", "table": "holding", "address": "2", "type": "U16",
+             "access": "R", "scale": "1", "unit": "1", "description": "two", "line": 3},
+        ]
+        findings, errors = modbus_map_check.check(rows)
+        self.assertEqual(errors, 1)
+        self.assertIn("duplicate point name", " ".join(item["message"] for item in findings))
+
+
+    def test_empty_map_is_rejected(self):
+        with tempfile.NamedTemporaryFile("w", encoding="utf-8", newline="", delete=False) as handle:
+            handle.write(",".join(modbus_map_check.REQUIRED) + "\n")
+            path = handle.name
+        try:
+            with self.assertRaisesRegex(ValueError, "no data rows"):
+                modbus_map_check.parse_map(path)
+        finally:
+            os.unlink(path)
+
+    def test_decimal_address_is_parsed_as_decimal_offset(self):
+        rows = [{
+            "name": "bad", "table": "holding", "address": "40001",
+            "type": "U16", "access": "R", "scale": "1",
+            "unit": "1", "description": "decimal offset accepted", "line": 2,
+        }]
+        findings, errors = modbus_map_check.check(rows)
+        self.assertEqual(errors, 0)
+        self.assertEqual(findings, [])
+
+    def test_non_finite_scale_is_rejected(self):
+        rows = [{
+            "name": "bad", "table": "holding", "address": "1",
+            "type": "U16", "access": "R", "scale": "nan",
+            "unit": "1", "description": "bad scale", "line": 2,
+        }]
+        findings, errors = modbus_map_check.check(rows)
+        self.assertEqual(errors, 1)
+        self.assertIn("finite non-zero", " ".join(item["message"] for item in findings))
+
+
+    def test_non_numeric_address_is_rejected(self):
+        rows = [{
+            "name": "bad", "table": "holding", "address": "offset-1",
+            "type": "U16", "access": "R", "scale": "1",
+            "unit": "1", "description": "invalid address", "line": 2,
+        }]
+        findings, errors = modbus_map_check.check(rows)
+        self.assertEqual(errors, 1)
+        self.assertIn("address must be", " ".join(item["message"] for item in findings))

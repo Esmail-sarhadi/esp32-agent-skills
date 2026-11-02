@@ -50,6 +50,15 @@ jobs:
       - name: Panic decode smoke test
         run: python tools/panic_decode.py --file examples/panic-log.txt
 
+      - name: Modbus register map must pass
+        run: python tools/modbus_map_check.py --file examples/modbus-register-map.csv
+
+      - name: Broken Modbus register map must fail
+        run: |
+          if python tools/modbus_map_check.py --file examples/modbus-register-map-broken.csv; then
+            echo "expected a non-zero exit for the broken Modbus map"; exit 1
+          fi
+
   compile:
     # The skills recommend APIs. If one of those calls stops compiling, the
     # advice is wrong and this job says so before a reader finds out.

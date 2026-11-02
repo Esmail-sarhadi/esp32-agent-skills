@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**Forty-six skills and five checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**Seventy-nine skills and six checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -9,7 +9,7 @@
 
 **[Read this on a page instead of a README →](https://esmail-sarhadi.github.io/esp32-agent-skills/)**
 
-![ESP32 Agent Skills: forty-six skills and five checkers for ESP32 firmware](docs/assets/hero.jpg)
+![ESP32 Agent Skills: seventy-nine skills and six checkers for ESP32 firmware](docs/assets/hero.jpg)
 
 ---
 
@@ -200,6 +200,27 @@ python tools/pincheck.py --soc esp32 --assign "$(cat pinmap.txt)"
 | `esp32-sd-card-and-logging` | Mount failures, a power cut mid-write, and writes that block the control loop. |
 | `esp32-emc-and-enclosure` | Antenna keepout, cables as antennas, and heat in a sealed box. |
 
+| `esp32-modbus-security-and-mapping` | Register addressing, word order, scaling, write access and vendor map contracts. |
+| `esp32-opc-ua-gateway` | OPC UA information models, certificates, quality and edge gateway boundaries. |
+| `esp32-ethercat-gateway-boundary` | EtherCAT capability boundaries and safe northbound gateway architecture. |
+| `esp32-cc1101-subghz` | CC1101 modem profiles, FIFO/IRQ handling and sub-GHz regulatory checks. |
+| `esp32-sx126x-lora` | SX126x BUSY/DIO1 sequencing, RF switch and LoRa airtime. |
+| `esp32-load-cells-hx711` | Load-cell mechanics, bridge wiring, calibration and drift. |
+| `esp32-thermocouple-max31855` | Thermocouple wiring, cold-junction compensation and fault decoding. |
+| `esp32-voltage-current-monitoring` | Shunt selection, INA219/INA226 calibration and transient sampling. |
+| `esp32-dma-cache-psram` | DMA memory capabilities, cache ownership and PSRAM constraints. |
+| `esp32-heap-forensics` | Heap leak vs retention, fragmentation, tracing and capability pools. |
+| `esp32-wifi-roaming` | Multi-AP handoff, hysteresis, reconnect state machines and RF validation. |
+| `esp32-max31865-rtd` | RTD wiring topology, reference resistor, linearization and MAX31865 faults. |
+| `esp32-rmt-waveform-io` | Hardware-timed pulse generation/capture, symbol buffers and RMT API generations. |
+| `esp32-mcpwm-power-stage` | Complementary PWM, dead time, hardware fault shutdown and motor power-stage safety. |
+| `esp32-pcnt-encoder-feedback` | Pulse counting, quadrature direction, glitch filtering and counter overflow. |
+| `esp32-sdmmc-card-lifecycle` | SDMMC/SPI selection, hot removal, power-loss logging and bounded storage latency. |
+| `esp32-usb-otg-serial-jtag` | SoC-specific USB host/device/OTG and USB-Serial-JTAG capability boundaries. |
+| `esp32-lwip-network-diagnostics` | DHCP, DNS, TCP stream framing, socket lifecycle and reconnect forensics. |
+| `esp32-industrial-safety-interlocks` | Safe output states, interlocks, E-stop boundaries and restart inhibition. |
+| `esp32-thermal-enclosure-derating` | Enclosure thermal budgets, hotspot measurements and temperature derating. |
+
 ### How a skill is laid out
 
 Each skill is a directory, following the layout used by the official Anthropic
@@ -221,7 +242,7 @@ The pin table is generated from `data/esp32-pins.json` by
 
 ### Tools
 
-All five use the standard library only. All five exit non-zero on an error, so
+All six use the standard library only. All six exit non-zero on an error, so
 they drop straight into CI or a pre-flash hook.
 
 | Tool | Answers |
@@ -231,6 +252,7 @@ they drop straight into CI or a pre-flash hook.
 | `tools/power_budget.py` | How long does this duty cycle actually last on this battery? |
 | `tools/panic_decode.py` | Which `addr2line` command turns this crash dump into file:line? |
 | `tools/airtime.py` | Does this LoRa payload fit the duty cycle at this spreading factor? |
+| `tools/modbus_map_check.py` | Is this Modbus register map valid, non-overlapping and fully described? |
 
 ### Data and examples
 
@@ -241,7 +263,9 @@ they drop straight into CI or a pre-flash hook.
 | `examples/partitions-ota-4mb.csv` | A correct 4 MB OTA layout. |
 | `examples/partitions-broken.csv` | The same layout with misalignment, overlap and overflow. |
 | `examples/panic-log.txt` | A real `LoadProhibited` dump with a four frame backtrace. |
-| `tests/` | 307 unit tests: the five tools, the pin and partition databases, and one shape test per skill. |
+| `examples/modbus-register-map.csv` | Valid example register map with explicit offsets, types and scaling. |
+| `examples/modbus-register-map-broken.csv` | Deliberately invalid map covering overlap, zero scale and coil type errors. |
+| `tests/` | 350 unit tests: the six tools, the pin and partition databases, and one shape test per skill. |
 
 ## Verified on hardware
 
@@ -295,11 +319,38 @@ board and a checker that cries wolf gets switched off.
 If a constraint is wrong for your module, open an issue with the datasheet page
 number and it gets fixed. That is the only way a database like this stays useful.
 
+## Expanded engineering knowledge base
+
+The repository now also maintains an evidence-oriented knowledge system in
+[docs/knowledge-base/](docs/knowledge-base/README.md). It separates task skills,
+field failures, protocol dossiers, test patterns and source confidence. The
+initial casebook records both confirmed patterns and unresolved reports without
+presenting open issues as solved.
+
+New industrial and reliability skills in this expansion:
+- `esp32-modbus-tcp` — MBAP framing, TCP stream parsing and RTU gateway behavior.
+- `esp32-rs232-rs422` — serial physical-layer selection, wiring and protection.
+- `esp32-industrial-analog-io` — 4–20 mA and 0–10 V analog front ends.
+- `esp32-pt100-pt1000-rtd` — RTD wiring, excitation and calibration.
+- `esp32-w5500-ethernet` — SPI Ethernet controller integration and diagnostics.
+- `esp32-ethernet-rmii-phy` — MAC/PHY separation, RMII clock and PHY bring-up.
+- `esp32-can-fd-gateway` — Classical CAN vs CAN-FD architecture and gateway safety.
+- `esp32-i2c-recovery` — bounded bus recovery, stuck-line diagnosis and safe probing.
+- `esp32-power-integrity` — brownout, regulator transients, battery sag and measurement.
+- `esp32-secure-ota-production` — signed updates, rollback and power-fail resilience.
+- `esp32-fault-injection-hil` — HIL fixtures, fault injection and soak-test design.
+- `esp32-serial-field-diagnostics` — UART/RS485 capture, buffer and framing diagnostics.
+- `esp32-industrial-gateway-architecture` — resilient multi-protocol gateway architecture.
+
+See [the expansion roadmap](docs/knowledge-base/expansion-roadmap.md) for the
+multi-release target of 300–500 skills, 2,000–3,000 field cases and a much larger
+test/example corpus. These are targets, not current counts.
+
 ## Roadmap
 
 - [ ] ESP32-C6 and ESP32-H2 pin maps
 - [ ] `--board` profiles for common dev boards (DevKitC, WROVER-KIT, M5Stack)
-- [ ] Reusable GitHub Action that runs all five checkers on every PR
+- [ ] Reusable GitHub Action that runs all six checkers on every PR
 - [ ] Compile the examples against the previous Arduino core, not just the current one
 
 ## Contributing
