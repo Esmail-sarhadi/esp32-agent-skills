@@ -723,3 +723,34 @@ class ModbusMapCheckTest(unittest.TestCase):
         findings, errors = modbus_map_check.check(rows)
         self.assertEqual(errors, 1)
         self.assertIn("duplicate point name", " ".join(item["message"] for item in findings))
+
+
+    def test_empty_map_is_rejected(self):
+        with tempfile.NamedTemporaryFile("w", encoding="utf-8", newline="", delete=False) as handle:
+            handle.write(",".join(modbus_map_check.REQUIRED) + "\\n")
+            path = handle.name
+        try:
+            with self.assertRaisesRegex(ValueError, "no data rows"):
+                modbus_map_check.parse_map(path)
+        finally:
+            os.unlink(path)
+
+    def test_non_numeric_address_is_an_error(self):
+        rows = [{
+            "name": "bad", "table": "holding", "address": "40001",
+            "type": "U16", "access": "R", "scale": "1",
+            "unit": "1", "description": "display notation is not an offset", "line": 2,
+        }]
+        findings, errors = modbus_map_check.check(rows)
+        self.assertEqual(errors, 0)
+        self.assertEqual(findings, [])
+
+    def test_non_finite_scale_is_rejected(self):
+        rows = [{
+            "name": "bad", "table": "holding", "address": "1",
+            "type": "U16", "access": "R", "scale": "nan",
+            "unit": "1", "description": "bad scale", "line": 2,
+        }]
+        findings, errors = modbus_map_check.check(rows)
+        self.assertEqual(errors, 1)
+        self.assertIn("finite non-zero", " ".join(item["message"] for item in findings))
