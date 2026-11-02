@@ -33,3 +33,10 @@ Determine whether SCL or SDA is held low before attempting recovery. Prefer the 
 
 Do not hide a stuck bus with infinite retry loops. State the I2C driver generation and exact recovery API. Do not pulse SCL blindly when another master may own the bus. Record address, bus speed, pull-up value and measured rise time. Include fault flags in application telemetry.
 
+
+## Field notes
+
+- Capture SDA and SCL at the device connector during the failure, not only at the MCU pins.
+- Record whether the peripheral shares reset and power sequencing with the ESP32.
+- A bus recovery that restores logic levels does not prove the peripheral state machine is healthy; reinitialize and verify its identity/configuration registers.
+- Keep a counter for recovery attempts and escalate repeated failures to a visible degraded state.
