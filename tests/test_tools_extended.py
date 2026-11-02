@@ -713,7 +713,7 @@ class ModbusMapCheckTest(unittest.TestCase):
         finally:
             os.unlink(path)
 
-    def test_duplicate_names_are_not_silently_accepted_as_distinct_points(self):
+    def test_duplicate_names_are_rejected_case_insensitively(self):
         rows = [
             {"name": "x", "table": "holding", "address": "1", "type": "U16",
              "access": "R", "scale": "1", "unit": "1", "description": "one", "line": 2},
@@ -721,5 +721,5 @@ class ModbusMapCheckTest(unittest.TestCase):
              "access": "R", "scale": "1", "unit": "1", "description": "two", "line": 3},
         ]
         findings, errors = modbus_map_check.check(rows)
-        self.assertEqual(errors, 0)
-        self.assertEqual(len(findings), 0)
+        self.assertEqual(errors, 1)
+        self.assertIn("duplicate point name", " ".join(item["message"] for item in findings))
