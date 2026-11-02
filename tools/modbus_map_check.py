@@ -48,6 +48,7 @@ def check(rows: List[dict]) -> Tuple[List[dict], int]:
     findings: List[dict] = []
     errors = 0
     occupied: Dict[Tuple[str, int], dict] = {}
+    seen_names: Dict[str, dict] = {}
 
     def add(severity: str, row: dict, message: str) -> None:
         nonlocal errors
@@ -58,11 +59,18 @@ def check(rows: List[dict]) -> Tuple[List[dict], int]:
 
     for row in rows:
         name = row["name"]
+        normalized_name = name.casefold()
+        if normalized_name:
+            if normalized_name in seen_names:
+                add(ERROR, row, "duplicate point name also used on line %d" % seen_names[normalized_name]["line"])
+            else:
+                seen_names[normalized_name] = row
         table = row["table"].lower()
         dtype = row["type"].upper()
         access = row["access"].lower()
         try:
-            address = int(row["address"], 0)
+            address_text = row["address"].strip()
+            address = int(address_text, 16) if address_text.lower().startswith("0x") else int(address_text, 10)
         except ValueError:
             add(ERROR, row, "address must be a decimal or 0x-prefixed zero-based offset")
             continue
