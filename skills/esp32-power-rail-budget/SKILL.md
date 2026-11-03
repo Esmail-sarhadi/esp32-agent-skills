@@ -1,6 +1,6 @@
 ---
 name: esp32-power-rail-budget
-description: Use when reviewing or implementing esp32 power rail budget on an ESP32 target.
+description: Use when reviewing or implementing esp32 power rail budget on an ESP32 target., including target-specific constraints and repeatable validation steps.
 license: MIT
 ---
 
