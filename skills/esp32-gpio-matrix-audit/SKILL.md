@@ -1,6 +1,6 @@
 ---
 name: esp32-gpio-matrix-audit
-description: Use when reviewing or implementing GPIO matrix pin capability, signal routing, and peripheral conflict analysis on an ESP32 target.
+description: Use when reviewing or implementing GPIO matrix pin capability, signal routing, and peripheral conflict analysis on an ESP32 target., including target-specific constraints and repeatable validation steps.
 license: MIT
 ---
 
