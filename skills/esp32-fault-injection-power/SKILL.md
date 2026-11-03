@@ -1,6 +1,6 @@
 ---
 name: esp32-fault-injection-power
-description: Use when designing controlled power-interruption validation for ESP32 devices.
+description: Use when designing controlled power-interruption validation and recovery tests for ESP32 firmware and hardware.
 license: MIT
 ---
 
@@ -27,6 +27,8 @@ Design safe, repeatable power-interruption experiments for ESP32 products. This 
 
 ## Domain checklist
 - Verify brownout/reset behavior and ensure brownout detection is not disabled.
+- Never invent GPIO capabilities or claim unsupported board-level behavior.
+- Never disable brownout detection to conceal a power integrity fault.
 - Check atomicity and recovery of persistent writes and OTA state.
 - Verify outputs return to a defined safe state after restart.
 - Check repeated resets cannot corrupt configuration or create boot loops.
