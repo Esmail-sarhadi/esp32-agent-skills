@@ -1,6 +1,6 @@
 ---
 name: esp32-touch-sensor-drift
-description: Use when reviewing or implementing esp32 touch sensor drift on an ESP32 target.
+description: Use when reviewing or implementing ESP32 touch sensor drift, baseline wander, or moisture-induced reading instability.
 license: MIT
 ---
 

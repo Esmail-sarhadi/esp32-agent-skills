@@ -6,7 +6,7 @@ file says what to do with it.
 
 ## What this repository is
 
-101 skills and 10 checkers for ESP32-family firmware. A skill is a decision
+201 skills and 10 checkers for ESP32-family firmware. A skill is a decision
 document: which pin is forbidden, which partition layout bricks the board,
 which number in the datasheet decides the design. A checker is the executable
 half of the same fact, so the claim can be re-run instead of remembered.

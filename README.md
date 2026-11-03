@@ -445,7 +445,7 @@ they drop straight into CI or a pre-flash hook.
 | `examples/panic-log.txt` | A real `LoadProhibited` dump with a four frame backtrace. |
 | `examples/modbus-register-map.csv` | Valid example register map with explicit offsets, types and scaling. |
 | `examples/modbus-register-map-broken.csv` | Deliberately invalid map covering overlap, zero scale and coil type errors. |
-| `tests/` | 559 unit tests: the ten tools, the pin and partition databases, one shape test per skill, and the packaging layer. |
+| `tests/` | 1066 unit tests: the fourteen tools, the pin and partition databases, one shape test per skill, and the packaging layer. |
 
 ## Verified on hardware
 
@@ -580,7 +580,7 @@ exactly the thing PyInstaller leaves out.
 ![Roadmap: 300 to 500 skills, 2,000 to 3,000 field cases, 1,500 to 2,500 tests](docs/assets/roadmap.jpg)
 
 The numbers in that image are **targets, not counts**. Today the repository has
-101 skills, 477 tests, 160 field notes and ten checkers; every figure in the
+201 skills, 1066 tests, 160 field notes and ten checkers; every figure in the
 README is read from the repository itself.
 
 ## License

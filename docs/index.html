@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ESP32 Agent Skills — firmware that compiles, then works</title>
-<meta name="description" content="A hundred and one agent skills and ten checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board. Standard library only, 559 tests, installable as a Claude Code plugin.">
+<meta name="description" content="Two hundred and one agent skills and ten checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board. Standard library only, 1066 tests, installable as a Claude Code plugin.">
 <meta name="color-scheme" content="dark">
 <meta property="og:title" content="ESP32 Agent Skills">
 <meta property="og:description" content="Agent skills and checkers for ESP32 firmware that compiles and then bricks the board.">
@@ -251,11 +251,11 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
         <p>
           An agent writes <code>pinMode(6, OUTPUT)</code> and the build is green.
           GPIO6 is wired to the SPI flash — the module stops booting.
-          A hundred and one skills and ten checkers catch that before the flash.
+          Two hundred and one skills and ten checkers catch that before the flash.
         </p>
         <div class="hero-actions">
           <a class="btn primary" href="#install">Install in 30 seconds</a>
-          <a class="btn ghost" href="#skills">See the 101 skills</a>
+          <a class="btn ghost" href="#skills">See the 201 skills</a>
         </div>
       </div>
 
@@ -285,9 +285,9 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
     </div>
 
     <div class="stats">
-      <div class="stat"><b>101</b><span>skills</span></div>
+      <div class="stat"><b>201</b><span>skills</span></div>
       <div class="stat"><b>10</b><span>checkers</span></div>
-      <div class="stat"><b>559</b><span>tests</span></div>
+      <div class="stat"><b>1066</b><span>tests</span></div>
       <div class="stat"><b>1</b><span>board verified</span></div>
     </div>
   </header>
@@ -355,7 +355,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 60px;margin-top:20px
   <!-- skills -->
   <section id="skills">
     <span class="eyebrow">What is inside</span>
-    <h2>A hundred and one skills, one per failure domain</h2>
+    <h2>Two hundred and one skills, one per failure domain</h2>
     <p class="lede">
       Each skill is a directory with a short <code>SKILL.md</code>, a license, and a
       <code>reference/</code> folder holding the long tables — the layout the official
