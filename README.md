@@ -111,6 +111,216 @@ See [harnesses/README.md](harnesses/README.md) for supported locations and capab
 | `tools/mqtt_topic_check.py` | Validate MQTT topic filters and naming |
 | `tools/flash_layout.py` | Detect overlapping firmware or flash regions |
 | `tools/i2c_address_check.py` | Detect duplicate or reserved I²C addresses |
+| `tools/esp32_skills_cli.py` | One entry point for every checker in the repository |
+| `tools/render_pin_table.py` | Render `data/esp32-pins.json` into a human-readable reference table |
+| `tools/gen_manifest.py` | Generate `agent.yaml` and plugin manifests from the skills directory |
+| `tools/validate_skills.py` | Validate every `SKILL.md` against `schemas/skill.schema.json` |
+
+## Skills catalog
+
+| Skill | Covers |
+|---|---|
+| `esp32-4-20ma-transmitter` | An ESP32 must drive a 4-20 mA current loop - as a transmitter into a PLC, a valve command, or a two-wire loop. Covers XTR116-class parts, loop power, isolation and the live-zero rule. |
+| `esp32-actuators-and-relays` | An ESP32 drives a relay, solenoid, servo or motor - the coil browns out the board, the relay clicks but the contact does nothing, the servo jitters, or the LED glows when it should be off. Covers drive circuits, flyback, inrush and isolation. |
+| `esp32-adc-and-sensors` | Reading an analog sensor on an ESP32 - the reading is noisy, saturates, drifts, or returns nonsense once Wi-Fi connects. Covers ADC1 vs ADC2, attenuation, calibration, source impedance and averaging. |
+| `esp32-adc-calibration-linearity` | Reviewing or implementing esp32 adc calibration linearity on an ESP32 target. |
+| `esp32-addressable-leds` | Driving WS2812, SK6812 or APA102 strips from an ESP32 - power sizing, the 3.3 V data problem, colour order, refresh budget and why a strip flickers once Wi-Fi is on. |
+| `esp32-ads1115-external-adc` | The ESP32's own ADC is not good enough - 12 bits of noise, ADC2 dead under Wi-Fi, or a sensor 5 m away. Covers ADS1115 wiring, PGA, single-ended vs differential and the input range trap. |
+| `esp32-ads1256-precision-adc` | A measurement needs more than 16 bits - strain, load cells, precision current shunts or thermocouples - and an ADS1256 is on SPI. Covers the reference, the crystal, the DRDY line and the noise budget. |
+| `esp32-anti-rollback-policy` | Reviewing or implementing esp32 anti rollback policy on an ESP32 target. |
+| `esp32-audio-buffer-underrun` | Reviewing or implementing esp32 audio buffer underrun on an ESP32 target. |
+| `esp32-audio-i2s` | ESP32 plays or records audio - clicks and pops, wrong pitch, buffer underruns, a microphone that returns silence, or a codec that will not lock. Covers I2S clocking, DMA buffers and master/slave roles. |
+| `esp32-batch-provisioning` | More than a handful of ESP32s need Wi-Fi credentials - each unit is typed in by hand, provisioning fails on Android but works on iOS, the QR payload is rejected, or a batch needs the same settings. Covers SoftAP, BLE and QR provisioning plus batch flashing. |
+| `esp32-battery-and-charging` | A battery-powered ESP32 dies early, the fuel gauge lies, the charger never finishes, or the board resets at low battery. Covers chargers, protection, measurement and the load-sharing problem. |
+| `esp32-battery-state-estimation` | Reviewing or implementing esp32 battery state estimation on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-ble-gatt` | Building or debugging a BLE peripheral on ESP32 - the phone cannot see the device, notifications stop after a reconnect, throughput is a tenth of what was expected, or pairing works once and never again. Covers GATT design, MTU, connection parameters and bonding. |
+| `esp32-ble-gatt-contract-review` | Reviewing or implementing esp32 ble gatt contract review on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-ble-gatt-regression` | Reviewing or implementing esp32 ble gatt regression on an ESP32 target. |
+| `esp32-ble-pairing-security` | Reviewing or implementing esp32 ble pairing security on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-ble-throughput-latency` | Reviewing or implementing esp32 ble throughput latency on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-board-capability-matrix` | Reviewing or implementing esp32 board capability matrix on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-brownout-root-cause` | Reviewing or implementing esp32 brownout root cause on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-build-and-sdkconfig` | The build itself is the problem - settings do not take effect, PlatformIO and IDF disagree, a flag is silently overridden, the binary is too big, or the same source builds differently on two machines. Covers sdkconfig, build flags and partition choice. |
+| `esp32-camera-framebuffer-budget` | Reviewing or implementing esp32 camera framebuffer budget on an ESP32 target. |
+| `esp32-camera-pipeline` | An ESP32 camera does not initialise, reboots when the flash fires, produces green or torn frames, or streams too slowly. Covers OV2640 limits, PSRAM framebuffers and the power budget that the camera hides. |
+| `esp32-can-fd-gateway` | Building CAN or CAN-FD gateways with ESP32, including TWAI, external CAN-FD controllers, bus-off recovery and industrial isolation. |
+| `esp32-can-twai` | An ESP32 joins a CAN bus - no frames arrive, the bus goes off after a while, the bitrate will not match, or the transceiver is missing. Covers TWAI setup, termination, bitrate and bus-off recovery. |
+| `esp32-can-twai-bus-off-recovery` | Reviewing or implementing esp32 can twai bus off recovery on an ESP32 target. |
+| `esp32-canopen-basics` | An ESP32 joins a CANopen network - drives, IO modules or sensors - and the node stays in pre-operational, PDOs never arrive, or SDO reads time out. Covers NMT, node IDs, COB-IDs and heartbeat. |
+| `esp32-canopen-node-commissioning` | Reviewing or implementing esp32 canopen node commissioning on an ESP32 target. |
+| `esp32-canopen-safety-boundary` | Reviewing or implementing esp32 canopen safety boundary on an ESP32 target. |
+| `esp32-cc1101-subghz` | Integrating CC1101 sub-GHz radios, diagnosing packet loss, selecting RF settings or building a low-power point-to-point link. |
+| `esp32-charger-powerpath-review` | Reviewing or implementing esp32 charger powerpath review on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-configuration-transactionality` | Reviewing or implementing esp32 configuration transactionality on an ESP32 target. |
+| `esp32-dac-output-accuracy` | Reviewing or implementing esp32 dac output accuracy on an ESP32 target. |
+| `esp32-debugging` | An ESP32 crashes, reboots, or prints a Guru Meditation dump - decoding the backtrace, enabling the exception decoder, reading a core dump, and telling a panic from a watchdog from a brownout. |
+| `esp32-deep-sleep-current-audit` | Reviewing or implementing esp32 deep sleep current audit on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-dependency-vulnerability-triage` | Reviewing or implementing esp32 dependency vulnerability triage on an ESP32 target. |
+| `esp32-device-identity-provisioning` | Reviewing or implementing esp32 device identity provisioning on an ESP32 target. |
+| `esp32-din-rail-power` | An ESP32 board lives in a control cabinet - 24 V DC rail, wide input, isolated output, hold-up through a contactor drop. Covers buck selection, inrush, reverse protection and the 24 V to 3.3 V budget. |
+| `esp32-display-tearing-sync` | Reviewing or implementing esp32 display tearing sync on an ESP32 target. |
+| `esp32-dma-buffer-placement` | Reviewing or implementing esp32 dma buffer placement on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-dma-cache-psram` | Debugging DMA failures, PSRAM buffers, cache coherency, alignment, camera, SPI, I2S or peripheral transfer corruption. |
+| `esp32-dns-failure-diagnostics` | Reviewing or implementing esp32 dns failure diagnostics on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-emc-and-enclosure` | A working board fails once it is in its box - range collapses, the sensor drifts, the device resets when a motor runs nearby, or it dies of heat. Covers antenna keepout, grounding, cable routing and thermal limits. |
+| `esp32-enc28j60-ethernet` | An ESP32 uses an ENC28J60 for wired Ethernet - no link, DHCP that never completes, a connection that dies under load, or 2 Mbit/s where 100 was expected. Covers its 8 KB buffer, missing auto-negotiation and SPI limits. |
+| `esp32-encoder-pcnt-validation` | Reviewing or implementing esp32 encoder pcnt validation on an ESP32 target. |
+| `esp32-energy-meter-modbus` | An ESP32 reads a Modbus energy meter - SDM120, SDM630, Eastron or similar - and the values are nonsense, swapped, or scaled by 1000. Covers float word order, register tables and polling rates. |
+| `esp32-esp-now` | ESP32s talk to each other without a router - peers never receive, messages stop after a channel change, the payload is truncated, or the range is far shorter than the datasheet. Covers pairing, channels, encryption and long range mode. |
+| `esp32-esp-now-reliability` | Reviewing or implementing esp32 esp now reliability on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-ethercat-gateway-boundary` | Evaluating EtherCAT integration, an ESP32 gateway boundary or translating industrial real-time fieldbus data. |
+| `esp32-ethernet` | An ESP32 gets a wired connection - the link never comes up, RMII pins conflict with the boot strap, the PHY address is wrong, or the cable works on a laptop and not on the board. Covers LAN8720, W5500 and the clock. |
+| `esp32-ethernet-link-recovery` | Reviewing or implementing esp32 ethernet link recovery on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-ethernet-rmii-clock-review` | Reviewing or implementing esp32 ethernet rmii clock review on an ESP32 target. |
+| `esp32-ethernet-rmii-phy` | Connecting an ESP32 Ethernet MAC to an external RMII PHY such as LAN8720 or IP101 and debugging clock, straps or link negotiation. |
+| `esp32-factory-test-and-calibration` | Units are built in more than one - the test rig has to pass or fail a board in seconds, calibration values must survive flashing, or a returned unit cannot be identified. Covers the test firmware, the jig and per-unit data. |
+| `esp32-fail-safe-output-state` | Reviewing or implementing esp32 fail safe output state on an ESP32 target. |
+| `esp32-fault-injection-hil` | Creating hardware-in-the-loop tests, fault injection, soak tests or regression rigs for ESP32 industrial devices. |
+| `esp32-fault-injection-network` | Reviewing or implementing esp32 fault injection network on an ESP32 target. |
+| `esp32-fault-injection-power` | Designing controlled power-interruption validation and recovery tests for ESP32 firmware and hardware. |
+| `esp32-field-gotchas` | An ESP32 misbehaves in a way the code does not explain - reboots, brownouts, dead I2C, garbled UART, a sketch that will not flash, a crash with no line number. One hundred and sixty failures collected from Stack Overflow, each with the cause and the fix. |
+| `esp32-firmware-provenance-attestation` | Reviewing or implementing esp32 firmware provenance attestation on an ESP32 target. |
+| `esp32-firmware-sbom-generation` | Reviewing or implementing esp32 firmware sbom generation on an ESP32 target. |
+| `esp32-flash-encryption-production` | Reviewing or implementing esp32 flash encryption production on an ESP32 target. |
+| `esp32-flash-psram-capacity` | Reviewing or implementing esp32 flash psram capacity on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-freertos` | Adding tasks, timers or interrupts to an ESP32 sketch, when the device resets with a watchdog or stack overflow, or when two tasks fight over a shared variable. |
+| `esp32-gaming-rgb` | Making an ESP32 LED strip appear inside a gaming lighting app such as OpenRGB or SignalRGB, or when the lighting lags behind the screen or the music. |
+| `esp32-gpio-matrix-audit` | Reviewing or implementing GPIO matrix pin capability, signal routing, and peripheral conflict analysis on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-gps-and-nmea` | An ESP32 reads a GPS module - no sentences arrive, the fix never comes, the time is right but the position is not, or the first fix takes ten minutes. Covers UART settings, NMEA parsing, PPS and cold starts. |
+| `esp32-hardware-bringup` | Powering a new ESP32 board for the first time, or when a board that used to work stops booting - before changing any firmware. Covers current draw, rails, strapping levels and the order that separates a hardware fault from a software one. |
+| `esp32-heap-forensics` | Investigating heap leaks, fragmentation, allocation failures, TLS memory spikes, reconnect loops or long-uptime instability. |
+| `esp32-heap-fragmentation-forensics` | Reviewing or implementing esp32 heap fragmentation forensics on an ESP32 target. |
+| `esp32-http-client-resilience` | Reviewing or implementing esp32 http client resilience on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-http-server` | An ESP32 serves HTTP or WebSocket - a handler never fires, large responses truncate, the server stops answering under load, or an upload kills the connection. Covers esp_http_server configuration and handler design. |
+| `esp32-i2c-bus` | Adding I2C devices to an ESP32, when a sensor is not detected, or when the bus works alone and fails with a second device. Covers pull-ups, address conflicts, clock stretching and stuck-bus recovery. |
+| `esp32-i2c-device-discovery` | Reviewing or implementing esp32 i2c device discovery on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-i2c-electrical-budget` | Reviewing or implementing esp32 i2c electrical budget on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-i2c-multi-master-review` | Reviewing or implementing esp32 i2c multi master review on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-i2c-recovery` | An I2C bus hangs, SDA/SCL is stuck, a peripheral powers off independently, or device initialization must recover safely. |
+| `esp32-i2s-audio-clock-budget` | Reviewing or implementing esp32 i2s audio clock budget on an ESP32 target. |
+| `esp32-iec-60870-5-104` | An ESP32 talks to a SCADA master over IEC 60870-5-104 - the connection starts and drops, general interrogation never finishes, or the master reports sequence errors. Covers APCI framing, k/w windows and ASDU types. |
+| `esp32-imu-calibration-frame` | Reviewing or implementing esp32 imu calibration frame on an ESP32 target. |
+| `esp32-industrial-analog-io` | Connecting 4–20 mA loops, 0–10 V transmitters, industrial analog inputs, analog outputs or protected field wiring to ESP32. |
+| `esp32-industrial-gateway-architecture` | Designing an ESP32 industrial gateway between Modbus, CAN, Ethernet, Wi-Fi, LoRa, MQTT or cloud services. |
+| `esp32-industrial-safety-interlocks` | ESP32 firmware controls relays, contactors, pumps, heaters, valves or machinery where an unsafe output state could damage equipment or injure people; especially when designing interlocks, E-stop behavior or restart policy. |
+| `esp32-industrial-watchdog-policy` | Reviewing or implementing esp32 industrial watchdog policy on an ESP32 target. |
+| `esp32-iram-dram-budget` | Reviewing or implementing esp32 iram dram budget on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-isolated-digital-input` | An ESP32 reads 24 V industrial signals - a PLC output, a proximity sensor, a dry contact - and the input must survive reverse polarity and ground differences. Covers opto input design, thresholds and debounce. |
+| `esp32-jpeg-streaming-backpressure` | Reviewing or implementing esp32 jpeg streaming backpressure on an ESP32 target. |
+| `esp32-json-and-payloads` | JSON on the ESP32 is truncated, crashes, or leaks - the document is empty, the parse fails on a valid payload, floats lose precision, or the heap shrinks with every request. Covers ArduinoJson capacity, streaming and cJSON ownership. |
+| `esp32-light-sleep-wakeup-design` | Reviewing or implementing esp32 light sleep wakeup design on an ESP32 target. |
+| `esp32-littlefs-wear-budget` | Reviewing or implementing esp32 littlefs wear budget on an ESP32 target. |
+| `esp32-load-cell-noise-budget` | Reviewing or implementing esp32 load cell noise budget on an ESP32 target. |
+| `esp32-load-cells-hx711` | Reading load cells with HX711, diagnosing unstable weight, drift, saturation or calibration errors. |
+| `esp32-lora-and-lorawan` | An ESP32 drives a LoRa radio - the module never answers on SPI, DIO0 never fires, the join request is never accepted, or the gateway hears nothing. Covers SX127x wiring, airtime and duty cycle, and join failures. |
+| `esp32-lora-link-budget` | Reviewing or implementing esp32 lora link budget on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-lorawan-device-lifecycle` | Reviewing or implementing esp32 lorawan device lifecycle on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-lvgl-and-displays` | An ESP32 drives a display - the panel stays white, the image tears, refresh is too slow, colours are swapped, or LVGL runs out of memory. Covers SPI and RGB panels, DMA buffers, PSRAM and the flush callback. |
+| `esp32-lvgl-rendering-budget` | Reviewing or implementing esp32 lvgl rendering budget on an ESP32 target. |
+| `esp32-lwip-network-diagnostics` | An ESP32 connects to Wi-Fi or Ethernet but DNS, DHCP, TCP sockets or long-running network sessions fail; especially when reconnects leak resources or packet loss appears only under load. |
+| `esp32-max31865-rtd` | Integrating PT100/PT1000 RTDs with MAX31865 or diagnosing RTD wiring, lead compensation and temperature errors. |
+| `esp32-mcp4725-analog-output` | An ESP32 must output an analog voltage - 0 to 10 V command, valve position, 4-20 mA loop driver or a setpoint - with an MCP4725 or a similar I2C DAC. Covers reference, buffering and the load it cannot drive. |
+| `esp32-mcpwm-power-stage` | Driving a motor, inverter, half bridge, complementary PWM output or other power stage with ESP32 MCPWM; especially when dead time, synchronization, fault braking or safe startup matters. |
+| `esp32-memory-and-heap` | An ESP32 runs out of memory, fragments over days, cannot allocate a DMA buffer, or a task crashes with a stack overflow. Covers internal RAM versus PSRAM, heap capabilities, stack sizing and what DMA can actually reach. |
+| `esp32-modbus-conformance-testing` | Reviewing or implementing esp32 modbus conformance testing on an ESP32 target. |
+| `esp32-modbus-register-contract` | Reviewing or implementing esp32 modbus register contract on an ESP32 target. |
+| `esp32-modbus-rs485` | An ESP32 talks Modbus RTU over RS485 - wiring a MAX485, timing the DE pin, computing the CRC, or debugging a slave that never answers. |
+| `esp32-modbus-rtu-slave` | The ESP32 must be a Modbus RTU slave for a PLC or SCADA master - the master times out, gets exception 02 or 04, or reads stale values. Covers address range, response timing, exception codes and register mapping. |
+| `esp32-modbus-rtu-tcp-gateway` | An ESP32 bridges Modbus RTU on RS485 to Modbus TCP on Ethernet or Wi-Fi - the SCADA reads time out, unit ids do not map, or two clients collide. Covers MBAP framing, transaction ids and serialisation. |
+| `esp32-modbus-rtu-timing` | Reviewing or implementing esp32 modbus rtu timing on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-modbus-security-and-mapping` | Implementing Modbus RTU/TCP register maps, scaling, access control, exception handling or multi-vendor interoperability. |
+| `esp32-modbus-tcp` | An ESP32 implements or debugs Modbus TCP, including MBAP framing, transaction IDs, register maps, gateway behavior or TCP session failures. |
+| `esp32-modbus-tcp-hardening` | Reviewing or implementing esp32 modbus tcp hardening on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-motor-control-mcpwm-review` | Reviewing or implementing esp32 motor control mcpwm review on an ESP32 target. |
+| `esp32-mqtt-and-cloud` | An ESP32 publishes to MQTT, talks to a cloud endpoint, or drops messages. Covers the 256 byte buffer that silently truncates payloads, keepalive and last will, TLS memory, and why QoS 0 loses data. |
+| `esp32-mqtt-conformance-testing` | Reviewing or implementing esp32 mqtt conformance testing on an ESP32 target. |
+| `esp32-mqtt-payload-schema` | Reviewing or implementing esp32 mqtt payload schema on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-mqtt-session-recovery` | Reviewing or implementing esp32 mqtt session recovery on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-mqtt-topic-acl-design` | Reviewing or implementing esp32 mqtt topic acl design on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-multicore-and-ipc` | Code behaves differently depending on which core it runs on - a task starves the Wi-Fi stack, a shared variable corrupts, a queue overflows, or a task never runs at all. Covers affinity, priorities, spinlocks and ISR dispatch. |
+| `esp32-nrf24l01` | An nRF24L01 or nRF24L01+ does not respond - the status register reads 0x00, packets never arrive, the link works at 1 m and dies at 10, or the PA/LNA module browns out the board. Covers decoupling, pipes and auto-ack. |
+| `esp32-ntp-time-bootstrap` | Reviewing or implementing esp32 ntp time bootstrap on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-nvs-and-config` | Settings do not survive a reboot - the key is missing after an OTA, a write fails with no space, credentials vanish, or a config change needs migrating. Covers NVS namespaces, wear, encryption and versioning. |
+| `esp32-nvs-schema-migration` | Reviewing or implementing esp32 nvs schema migration on an ESP32 target. |
+| `esp32-opc-ua-gateway` | Connecting ESP32 telemetry to OPC UA systems through an industrial gateway, edge computer or protocol bridge. |
+| `esp32-opcua-gateway-boundary` | Reviewing or implementing esp32 opcua gateway boundary on an ESP32 target. |
+| `esp32-ota-image-compatibility` | Reviewing or implementing esp32 ota image compatibility on an ESP32 target. |
+| `esp32-ota-power-loss-matrix` | Reviewing or implementing esp32 ota power loss matrix on an ESP32 target. |
+| `esp32-ota-server` | Firmware updates are served to devices - an update downloads and does not boot, a bad release bricks a batch, devices update in a loop, or the rollback never happens. Covers versioning, staged rollout and the server side. |
+| `esp32-partition-ota-budget` | Reviewing or implementing esp32 partition ota budget on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-partitions-and-ota` | Enabling OTA, when the build says "Sketch too big", or when a device boot-loops after a partition change. Covers the table layout, the 64 KB alignment rule and what an OTA rollback actually needs. |
+| `esp32-pcnt-encoder-feedback` | Counting pulses, measuring frequency or decoding incremental encoder feedback with ESP32 PCNT; especially when counts drift, glitches appear or counters overflow during long runs. |
+| `esp32-peripheral-matrix-planner` | Reviewing or implementing esp32 peripheral matrix planner on an ESP32 target. |
+| `esp32-pin-safety` | Choosing, reviewing or debugging ESP32 GPIO assignments in firmware. Catches the four failure modes that compile cleanly and then kill the board — flash pins, input-only pins, strapping pins, ADC2 with Wi-Fi — before anything is flashed. |
+| `esp32-pinmux-conflict-analysis` | Reviewing or implementing esp32 pinmux conflict analysis on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-poe-power` | An ESP32 board is powered over Ethernet - no power at all, a PD that never negotiates, resets under load, or a design that must survive a PoE switch. Covers 802.3af/at classes, PD controllers and the isolation barrier. |
+| `esp32-power-and-boot` | An ESP32 board resets randomly, browns out, fails to boot, or drains a battery in days. Covers the power budget, the boot strap states and deep-sleep leakage, and says what to measure before changing code. |
+| `esp32-power-integrity` | Diagnosing ESP32 brownouts, radio transmit resets, battery sag, relay inrush, regulator heating or intermittent boot failures. |
+| `esp32-power-rail-budget` | Reviewing or implementing esp32 power rail budget on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-pressure-sensor-compensation` | Reviewing or implementing esp32 pressure sensor compensation on an ESP32 target. |
+| `esp32-protocol-parser-fuzzing` | Reviewing or implementing esp32 protocol parser fuzzing on an ESP32 target. |
+| `esp32-psram-performance-tradeoffs` | Reviewing or implementing esp32 psram performance tradeoffs on an ESP32 target. |
+| `esp32-pt100-pt1000-rtd` | Measuring PT100/PT1000 RTDs with ESP32, MAX31865 or another RTD front end, including lead compensation and calibration. |
+| `esp32-pwm-and-timing` | Driving an LED, a motor, a servo or a buzzer with PWM on ESP32 - the frequency is wrong, the resolution collapses, the servo jitters, or the duty value does nothing. Covers LEDC's frequency/resolution trade-off. |
+| `esp32-relay-inductive-load-review` | Reviewing or implementing esp32 relay inductive load review on an ESP32 target. |
+| `esp32-reproducible-firmware-build` | Reviewing or implementing esp32 reproducible firmware build on an ESP32 target. |
+| `esp32-rfm69-subghz` | An ESP32 uses an RFM69 for sub-GHz links - no packets, CRC errors at range, AES-128 that produces garbage, or a module that transmits hot. Covers the FIFO, the sync word and the 433/868/915 variants. |
+| `esp32-rmt-waveform-io` | Implementing precise pulse generation, capture, IR, one-wire-style timing or custom waveform protocols on ESP32 with RMT; especially when symbols truncate, RX times out or Arduino and ESP-IDF examples use incompatible drivers. |
+| `esp32-rs232-rs422` | Integrating RS232 or RS422 transceivers, long serial cables, point-to-point links, full-duplex links or industrial serial equipment. |
+| `esp32-rs485-direction-timing` | Reviewing or implementing esp32 rs485 direction timing on an ESP32 target. |
+| `esp32-rs485-isolated-transceivers` | An RS485 port must survive a real installation - ground potential between buildings, a 24 V miswire, a drive that destroys transceivers, or a bus that works on the bench and fails on site. Covers ADM2587E, ISO3082, MAX3485 and protection. |
+| `esp32-rs485-termination-bias` | Reviewing or implementing esp32 rs485 termination bias on an ESP32 target. |
+| `esp32-rtc-drift-calibration` | Reviewing or implementing esp32 rtc drift calibration on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-rtd-lead-compensation` | Reviewing or implementing esp32 rtd lead compensation on an ESP32 target. |
+| `esp32-sd-card-and-logging` | An ESP32 logs to an SD card - the mount fails, the card works on a PC and not on the board, files are corrupt after a power cut, or writes block the rest of the firmware. Covers SPI vs SDMMC, wear and crash-safe logging. |
+| `esp32-sd-card-filesystem-integrity` | Reviewing or implementing esp32 sd card filesystem integrity on an ESP32 target. |
+| `esp32-sdmmc-card-lifecycle` | Integrating removable SD cards over SDMMC or SPI on ESP32; especially when mount is unreliable, cards corrupt after power loss, hot removal crashes the firmware or logging blocks real-time work. |
+| `esp32-secret-leakage-audit` | Reviewing or implementing esp32 secret leakage audit on an ESP32 target. |
+| `esp32-secure-boot-key-lifecycle` | Reviewing or implementing esp32 secure boot key lifecycle on an ESP32 target. |
+| `esp32-secure-debug-port-policy` | Reviewing or implementing esp32 secure debug port policy on an ESP32 target. |
+| `esp32-secure-ota-production` | Designing production OTA, signed firmware delivery, rollback, anti-rollback, secure boot, flash encryption or fleet rollout. |
+| `esp32-security-and-provisioning` | An ESP32 product needs secure boot, flash encryption, per-device keys or a factory reset that actually erases secrets. Covers eFuse, the irreversible steps, and the order they must happen in. |
+| `esp32-sensor-fusion-timestamping` | Reviewing or implementing esp32 sensor fusion timestamping on an ESP32 target. |
+| `esp32-serial-field-diagnostics` | Diagnosing UART framing errors, RS485 timeouts, serial corruption, boot-log interference, FIFO overruns or intermittent field communication. |
+| `esp32-snmp-agent` | An ESP32 must be monitored by a network management system - Zabbix, PRTG, LibreNMS - over SNMP v2c or v3. Covers the OID tree, community strings, BER encoding and why the standard agent does not fit. |
+| `esp32-sparkplug-b-mqtt` | An ESP32 publishes to an industrial MQTT broker that expects Sparkplug B - Ignition, HiveMQ, or a plant historian - and the topic namespace, birth messages or sequence numbers are wrong. |
+| `esp32-spi-and-devices` | An ESP32 talks to SPI peripherals - the second device on the bus fails, the bus is initialised twice, transfers are slow or corrupted, or the clock rate is a guess. Covers bus versus device, DMA and chip select. |
+| `esp32-spi-signal-integrity` | Reviewing or implementing esp32 spi signal integrity on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-storage-and-filesystem` | Choosing or debugging storage on ESP32 - the filesystem will not mount after a power cut, the partition is smaller than the chip, config is lost on reset, or the flash wears out. Covers LittleFS, FAT, SPIFFS and NVS. |
+| `esp32-subghz-regulatory-check` | Reviewing or implementing esp32 subghz regulatory check on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-surge-and-tvs-protection` | Field wiring can deliver a surge - long cables, outdoor sensors, inductive loads, 24 V miswired into a 3.3 V input. Covers TVS selection, clamping voltage, series impedance and what a TVS cannot do. |
+| `esp32-sx126x-lora` | Integrating SX1261/SX1262 radios, diagnosing BUSY/DIO1 issues, configuring RF paths or migrating from SX127x. |
+| `esp32-sx127x-lora` | An ESP32 drives an SX1276 or SX1278 - the chip answers on SPI but never transmits, DIO0 never fires, packets arrive corrupted, or the range is a tenth of what the link budget says. Covers register mode, DIO mapping and RF layout. |
+| `esp32-task-stack-budget` | Reviewing or implementing esp32 task stack budget on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-testing-and-ci` | Setting up tests or CI for ESP32 firmware - nothing can be tested without hardware, the binary no longer fits, or a change breaks a target nobody built. Covers host tests, on-target tests and the checks that catch size regressions. |
+| `esp32-thermal-derating-review` | Reviewing or implementing esp32 thermal derating review on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-thermal-enclosure-derating` | Deploying ESP32 electronics in sealed, hot, cold or outdoor enclosures; especially when Wi-Fi resets, sensor drift or component failures correlate with temperature and solar load. |
+| `esp32-thermocouple-cold-junction` | Reviewing or implementing esp32 thermocouple cold junction on an ESP32 target. |
+| `esp32-thermocouple-max31855` | Integrating K-type thermocouples with MAX31855 or diagnosing open sensor, cold-junction error and noisy temperature readings. |
+| `esp32-threat-model-device-lifecycle` | Reviewing or implementing esp32 threat model device lifecycle on an ESP32 target. |
+| `esp32-time-and-rtc` | ESP32 time is wrong, certificates fail to validate, schedules fire at the wrong hour, or the clock drifts across deep sleep. Covers SNTP, time zones, the RTC across sleep, and why time must be checked before it is trusted. |
+| `esp32-tls-and-certificates` | HTTPS on the ESP32 fails - the handshake times out, memory runs out, the certificate is rejected, or it works with the time unset and fails after. Covers mbedTLS memory, cert bundles, SNI and clock dependency. |
+| `esp32-tls-trust-anchor-rotation` | Reviewing or implementing esp32 tls trust anchor rotation on an ESP32 target. |
+| `esp32-touch-and-input` | Capacitive touch or buttons misbehave - touch triggers by itself, works dry and fails when wet, a button bounces, or the pin reads pressed at boot. Covers touch sensing, calibration, debounce and the GPIO matrix. |
+| `esp32-touch-sensor-drift` | Reviewing or implementing ESP32 touch sensor drift, baseline wander, or moisture-induced reading instability. |
+| `esp32-uart-and-serial` | Serial communication misbehaves - logs interleave with protocol bytes, a half-duplex bus echoes, the FIFO overflows at high baud, or the board will not boot with something on UART0. Covers pin choice, flow control, RS485 direction and log flooding. |
+| `esp32-uart-framing-hardening` | Reviewing or implementing esp32 uart framing hardening on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-usb-otg-role-review` | Reviewing or implementing esp32 usb otg role review on an ESP32 target. |
+| `esp32-usb-otg-serial-jtag` | Selecting or debugging native USB device, USB host, USB-Serial-JTAG or OTG functionality on ESP32-family chips; especially when a design assumes every ESP32 has the same USB controller or boot/debug path. |
+| `esp32-usb-serial-jtag-debug` | Reviewing or implementing esp32 usb serial jtag debug on an ESP32 target. |
+| `esp32-vfd-modbus-control` | An ESP32 controls a variable frequency drive over RS485 - the drive ignores commands, runs at the wrong speed, faults on start, or the register map does not match the manual. Covers control words, scaling and safe states. |
+| `esp32-voltage-current-monitoring` | Measuring supply voltage, current or power with INA219, INA226 or similar monitor ICs. |
+| `esp32-w5500-ethernet` | Using W5500 SPI Ethernet with ESP32, diagnosing DHCP, socket failures, link loss, SPI timing or Ethernet/Wi-Fi coexistence. |
+| `esp32-watchdogs-and-timers` | The board resets by itself, a long operation trips the task watchdog, a timer callback crashes, or the reset reason says watchdog but the code looks fine. Covers TWDT, the interrupt watchdog, esp_timer and what is safe inside a callback. |
+| `esp32-wifi-coexistence-analysis` | Reviewing or implementing esp32 wifi coexistence analysis on an ESP32 target. |
+| `esp32-wifi-enterprise-eap` | An ESP32 must join a WPA2-Enterprise network - corporate, campus or plant Wi-Fi - with EAP-TLS or PEAP. Covers certificates, time sync, identity fields and the failures that look like bad passwords. |
+| `esp32-wifi-enterprise-eap-review` | Reviewing or implementing esp32 wifi enterprise eap review on an ESP32 target. |
+| `esp32-wifi-event-state-machine` | Reviewing or implementing esp32 wifi event state machine on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-wifi-provisioning-ux` | Reviewing or implementing esp32 wifi provisioning ux on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-wifi-reliability` | An ESP32 drops off Wi-Fi, reconnects in a loop, is slow to respond, or works on the bench and fails in the field. Covers reconnect storms, power save, AP+STA, and what the RSSI actually tells you. |
+| `esp32-wifi-roaming` | Designing Wi-Fi roaming, multi-AP failover, reconnect policy, RSSI thresholds or field deployments across access points. |
+| `esp32-wifi-roaming-policy` | Reviewing or implementing esp32 wifi roaming policy on an ESP32 target., including target-specific constraints and repeatable validation steps. |
+| `esp32-wifi-throughput-diagnostics` | Reviewing or implementing esp32 wifi throughput diagnostics on an ESP32 target. |
 
 ## Repository structure
 
