@@ -1,6 +1,6 @@
 ---
 name: esp32-battery-state-estimation
-description: Use when reviewing or implementing esp32 battery state estimation on an ESP32 target.
+description: Use when reviewing or implementing esp32 battery state estimation on an ESP32 target., including target-specific constraints and repeatable validation steps.
 license: MIT
 ---
 
