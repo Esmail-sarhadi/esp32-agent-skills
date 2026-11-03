@@ -1,6 +1,6 @@
 ---
 name: esp32-flash-psram-capacity
-description: Use when reviewing or implementing esp32 flash psram capacity on an ESP32 target.
+description: Use when reviewing or implementing esp32 flash psram capacity on an ESP32 target., including target-specific constraints and repeatable validation steps.
 license: MIT
 ---
 
