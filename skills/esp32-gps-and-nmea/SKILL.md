@@ -1,6 +1,7 @@
 ---
 name: esp32-gps-and-nmea
 description: Use when an ESP32 reads a GPS module - no sentences arrive, the fix never comes, the time is right but the position is not, or the first fix takes ten minutes. Covers UART settings, NMEA parsing, PPS and cold starts.
+license: MIT
 ---
 
 # GPS on ESP32

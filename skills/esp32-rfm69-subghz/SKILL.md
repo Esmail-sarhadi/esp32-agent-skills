@@ -1,6 +1,7 @@
 ---
 name: esp32-rfm69-subghz
 description: Use when an ESP32 uses an RFM69 for sub-GHz links - no packets, CRC errors at range, AES-128 that produces garbage, or a module that transmits hot. Covers the FIFO, the sync word and the 433/868/915 variants.
+license: MIT
 ---
 
 # RFM69 on ESP32

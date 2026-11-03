@@ -1,6 +1,7 @@
 ---
 name: esp32-ads1256-precision-adc
 description: Use when a measurement needs more than 16 bits - strain, load cells, precision current shunts or thermocouples - and an ADS1256 is on SPI. Covers the reference, the crystal, the DRDY line and the noise budget.
+license: MIT
 ---
 
 # ADS1256 on ESP32

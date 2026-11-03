@@ -1,6 +1,7 @@
 ---
 name: esp32-hardware-bringup
 description: Use when powering a new ESP32 board for the first time, or when a board that used to work stops booting - before changing any firmware. Covers current draw, rails, strapping levels and the order that separates a hardware fault from a software one.
+license: MIT
 ---
 
 # Hardware bring-up

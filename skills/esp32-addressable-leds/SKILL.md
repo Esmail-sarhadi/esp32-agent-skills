@@ -1,6 +1,7 @@
 ---
 name: esp32-addressable-leds
 description: Use when driving WS2812, SK6812 or APA102 strips from an ESP32 - power sizing, the 3.3 V data problem, colour order, refresh budget and why a strip flickers once Wi-Fi is on.
+license: MIT
 ---
 
 # Addressable LEDs on ESP32

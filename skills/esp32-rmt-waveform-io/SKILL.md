@@ -1,6 +1,7 @@
 ---
 name: esp32-rmt-waveform-io
 description: Use when implementing precise pulse generation, capture, IR, one-wire-style timing or custom waveform protocols on ESP32 with RMT; especially when symbols truncate, RX times out or Arduino and ESP-IDF examples use incompatible drivers.
+license: MIT
 ---
 
 # RMT waveform input and output

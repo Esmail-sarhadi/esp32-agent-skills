@@ -1,6 +1,7 @@
 ---
 name: esp32-lwip-network-diagnostics
 description: Use when an ESP32 connects to Wi-Fi or Ethernet but DNS, DHCP, TCP sockets or long-running network sessions fail; especially when reconnects leak resources or packet loss appears only under load.
+license: MIT
 ---
 
 # lwIP and network lifecycle diagnostics

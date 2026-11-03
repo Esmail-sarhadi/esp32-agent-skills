@@ -1,6 +1,7 @@
 ---
 name: esp32-heap-forensics
 description: Use when investigating heap leaks, fragmentation, allocation failures, TLS memory spikes, reconnect loops or long-uptime instability.
+license: MIT
 ---
 
 # Heap Forensics

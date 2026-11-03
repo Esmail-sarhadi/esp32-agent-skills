@@ -1,6 +1,7 @@
 ---
 name: esp32-ethernet-rmii-phy
 description: Use when connecting an ESP32 Ethernet MAC to an external RMII PHY such as LAN8720 or IP101 and debugging clock, straps or link negotiation.
+license: MIT
 ---
 
 # ESP32 Ethernet Rmii Phy

@@ -1,6 +1,7 @@
 ---
 name: esp32-max31865-rtd
 description: Use when integrating PT100/PT1000 RTDs with MAX31865 or diagnosing RTD wiring, lead compensation and temperature errors.
+license: MIT
 ---
 
 # MAX31865 RTD Interface

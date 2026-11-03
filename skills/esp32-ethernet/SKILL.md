@@ -1,6 +1,7 @@
 ---
 name: esp32-ethernet
 description: Use when an ESP32 gets a wired connection - the link never comes up, RMII pins conflict with the boot strap, the PHY address is wrong, or the cable works on a laptop and not on the board. Covers LAN8720, W5500 and the clock.
+license: MIT
 ---
 
 # Ethernet on ESP32

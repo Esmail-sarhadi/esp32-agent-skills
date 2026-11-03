@@ -1,6 +1,7 @@
 ---
 name: esp32-nrf24l01
 description: Use when an nRF24L01 or nRF24L01+ does not respond - the status register reads 0x00, packets never arrive, the link works at 1 m and dies at 10, or the PA/LNA module browns out the board. Covers decoupling, pipes and auto-ack.
+license: MIT
 ---
 
 # nRF24L01 on ESP32

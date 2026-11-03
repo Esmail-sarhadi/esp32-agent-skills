@@ -1,6 +1,7 @@
 ---
 name: esp32-sd-card-and-logging
 description: Use when an ESP32 logs to an SD card - the mount fails, the card works on a PC and not on the board, files are corrupt after a power cut, or writes block the rest of the firmware. Covers SPI vs SDMMC, wear and crash-safe logging.
+license: MIT
 ---
 
 # SD cards and logging on ESP32

@@ -1,6 +1,7 @@
 ---
 name: esp32-thermal-enclosure-derating
 description: Use when deploying ESP32 electronics in sealed, hot, cold or outdoor enclosures; especially when Wi-Fi resets, sensor drift or component failures correlate with temperature and solar load.
+license: MIT
 ---
 
 # Thermal design and enclosure derating

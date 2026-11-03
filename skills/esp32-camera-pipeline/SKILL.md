@@ -1,6 +1,7 @@
 ---
 name: esp32-camera-pipeline
 description: Use when an ESP32 camera does not initialise, reboots when the flash fires, produces green or torn frames, or streams too slowly. Covers OV2640 limits, PSRAM framebuffers and the power budget that the camera hides.
+license: MIT
 ---
 
 # Camera pipeline on ESP32

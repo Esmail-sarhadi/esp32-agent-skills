@@ -1,6 +1,7 @@
 ---
 name: esp32-canopen-basics
 description: Use when an ESP32 joins a CANopen network - drives, IO modules or sensors - and the node stays in pre-operational, PDOs never arrive, or SDO reads time out. Covers NMT, node IDs, COB-IDs and heartbeat.
+license: MIT
 ---
 
 # CANopen on ESP32

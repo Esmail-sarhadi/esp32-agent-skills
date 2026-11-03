@@ -1,6 +1,7 @@
 ---
 name: esp32-opc-ua-gateway
 description: Use when connecting ESP32 telemetry to OPC UA systems through an industrial gateway, edge computer or protocol bridge.
+license: MIT
 ---
 
 # Opc Ua Gateway

@@ -1,6 +1,7 @@
 ---
 name: esp32-i2c-bus
 description: Use when adding I2C devices to an ESP32, when a sensor is not detected, or when the bus works alone and fails with a second device. Covers pull-ups, address conflicts, clock stretching and stuck-bus recovery.
+license: MIT
 ---
 
 # I2C on ESP32

@@ -1,6 +1,7 @@
 ---
 name: esp32-mqtt-and-cloud
 description: Use when an ESP32 publishes to MQTT, talks to a cloud endpoint, or drops messages. Covers the 256 byte buffer that silently truncates payloads, keepalive and last will, TLS memory, and why QoS 0 loses data.
+license: MIT
 ---
 
 # MQTT and cloud endpoints from ESP32

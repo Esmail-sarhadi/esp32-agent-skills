@@ -1,6 +1,7 @@
 ---
 name: esp32-isolated-digital-input
 description: Use when an ESP32 reads 24 V industrial signals - a PLC output, a proximity sensor, a dry contact - and the input must survive reverse polarity and ground differences. Covers opto input design, thresholds and debounce.
+license: MIT
 ---
 
 # 24 V digital inputs on ESP32

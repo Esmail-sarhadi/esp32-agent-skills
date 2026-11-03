@@ -1,6 +1,7 @@
 ---
 name: esp32-nvs-and-config
 description: Use when settings do not survive a reboot - the key is missing after an OTA, a write fails with no space, credentials vanish, or a config change needs migrating. Covers NVS namespaces, wear, encryption and versioning.
+license: MIT
 ---
 
 # NVS: configuration that survives

@@ -1,6 +1,7 @@
 ---
 name: esp32-sx126x-lora
 description: Use when integrating SX1261/SX1262 radios, diagnosing BUSY/DIO1 issues, configuring RF paths or migrating from SX127x.
+license: MIT
 ---
 
 # Sx126x Lora

@@ -1,6 +1,7 @@
 ---
 name: esp32-wifi-reliability
 description: Use when an ESP32 drops off Wi-Fi, reconnects in a loop, is slow to respond, or works on the bench and fails in the field. Covers reconnect storms, power save, AP+STA, and what the RSSI actually tells you.
+license: MIT
 ---
 
 # Wi-Fi that stays connected

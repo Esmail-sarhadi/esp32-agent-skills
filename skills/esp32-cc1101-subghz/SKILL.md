@@ -1,6 +1,7 @@
 ---
 name: esp32-cc1101-subghz
 description: Use when integrating CC1101 sub-GHz radios, diagnosing packet loss, selecting RF settings or building a low-power point-to-point link.
+license: MIT
 ---
 
 # Cc1101 Subghz

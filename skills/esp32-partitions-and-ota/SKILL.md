@@ -1,6 +1,7 @@
 ---
 name: esp32-partitions-and-ota
 description: Use when enabling OTA, when the build says "Sketch too big", or when a device boot-loops after a partition change. Covers the table layout, the 64 KB alignment rule and what an OTA rollback actually needs.
+license: MIT
 ---
 
 # Partitions and OTA on ESP32

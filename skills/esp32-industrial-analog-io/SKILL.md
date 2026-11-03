@@ -1,6 +1,7 @@
 ---
 name: esp32-industrial-analog-io
 description: Use when connecting 4–20 mA loops, 0–10 V transmitters, industrial analog inputs, analog outputs or protected field wiring to ESP32.
+license: MIT
 ---
 
 # ESP32 Industrial Analog Io

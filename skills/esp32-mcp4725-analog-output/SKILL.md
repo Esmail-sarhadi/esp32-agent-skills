@@ -1,6 +1,7 @@
 ---
 name: esp32-mcp4725-analog-output
 description: Use when an ESP32 must output an analog voltage - 0 to 10 V command, valve position, 4-20 mA loop driver or a setpoint - with an MCP4725 or a similar I2C DAC. Covers reference, buffering and the load it cannot drive.
+license: MIT
 ---
 
 # Analog output with MCP4725

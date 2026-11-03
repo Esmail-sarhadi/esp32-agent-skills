@@ -1,6 +1,7 @@
 ---
 name: esp32-mcpwm-power-stage
 description: Use when driving a motor, inverter, half bridge, complementary PWM output or other power stage with ESP32 MCPWM; especially when dead time, synchronization, fault braking or safe startup matters.
+license: MIT
 ---
 
 # MCPWM power-stage control

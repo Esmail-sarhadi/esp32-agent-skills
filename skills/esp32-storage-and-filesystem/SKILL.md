@@ -1,6 +1,7 @@
 ---
 name: esp32-storage-and-filesystem
 description: Use when choosing or debugging storage on ESP32 - the filesystem will not mount after a power cut, the partition is smaller than the chip, config is lost on reset, or the flash wears out. Covers LittleFS, FAT, SPIFFS and NVS.
+license: MIT
 ---
 
 # Storage on ESP32

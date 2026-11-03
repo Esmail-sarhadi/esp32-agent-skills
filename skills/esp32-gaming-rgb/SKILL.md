@@ -1,6 +1,7 @@
 ---
 name: esp32-gaming-rgb
 description: Use when making an ESP32 LED strip appear inside a gaming lighting app such as OpenRGB or SignalRGB, or when the lighting lags behind the screen or the music.
+license: MIT
 ---
 
 # Gaming RGB from an ESP32

@@ -1,6 +1,7 @@
 ---
 name: esp32-ble-gatt
 description: Use when building or debugging a BLE peripheral on ESP32 - the phone cannot see the device, notifications stop after a reconnect, throughput is a tenth of what was expected, or pairing works once and never again. Covers GATT design, MTU, connection parameters and bonding.
+license: MIT
 ---
 
 # BLE GATT on ESP32

@@ -1,6 +1,7 @@
 ---
 name: esp32-lora-and-lorawan
 description: Use when an ESP32 drives a LoRa radio - the module never answers on SPI, DIO0 never fires, the join request is never accepted, or the gateway hears nothing. Covers SX127x wiring, airtime and duty cycle, and join failures.
+license: MIT
 ---
 
 # LoRa and LoRaWAN on ESP32

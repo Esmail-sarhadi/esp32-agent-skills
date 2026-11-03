@@ -1,6 +1,7 @@
 ---
 name: esp32-testing-and-ci
 description: Use when setting up tests or CI for ESP32 firmware - nothing can be tested without hardware, the binary no longer fits, or a change breaks a target nobody built. Covers host tests, on-target tests and the checks that catch size regressions.
+license: MIT
 ---
 
 # Testing and CI for ESP32 firmware

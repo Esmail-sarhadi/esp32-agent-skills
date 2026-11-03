@@ -1,6 +1,7 @@
 ---
 name: esp32-rs232-rs422
 description: Use when integrating RS232 or RS422 transceivers, long serial cables, point-to-point links, full-duplex links or industrial serial equipment.
+license: MIT
 ---
 
 # ESP32 Rs232 Rs422

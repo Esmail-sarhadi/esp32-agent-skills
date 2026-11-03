@@ -1,6 +1,7 @@
 ---
 name: esp32-emc-and-enclosure
 description: Use when a working board fails once it is in its box - range collapses, the sensor drifts, the device resets when a motor runs nearby, or it dies of heat. Covers antenna keepout, grounding, cable routing and thermal limits.
+license: MIT
 ---
 
 # The enclosure changes the circuit

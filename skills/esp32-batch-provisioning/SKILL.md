@@ -1,6 +1,7 @@
 ---
 name: esp32-batch-provisioning
 description: Use when more than a handful of ESP32s need Wi-Fi credentials - each unit is typed in by hand, provisioning fails on Android but works on iOS, the QR payload is rejected, or a batch needs the same settings. Covers SoftAP, BLE and QR provisioning plus batch flashing.
+license: MIT
 ---
 
 # Provisioning a batch

@@ -1,6 +1,7 @@
 ---
 name: esp32-wifi-roaming
 description: Use when designing Wi-Fi roaming, multi-AP failover, reconnect policy, RSSI thresholds or field deployments across access points.
+license: MIT
 ---
 
 # Wifi Roaming

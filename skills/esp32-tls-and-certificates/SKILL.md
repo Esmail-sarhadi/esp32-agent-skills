@@ -1,6 +1,7 @@
 ---
 name: esp32-tls-and-certificates
 description: Use when HTTPS on the ESP32 fails - the handshake times out, memory runs out, the certificate is rejected, or it works with the time unset and fails after. Covers mbedTLS memory, cert bundles, SNI and clock dependency.
+license: MIT
 ---
 
 # TLS on ESP32

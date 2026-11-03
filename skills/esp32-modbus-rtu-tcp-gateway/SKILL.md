@@ -1,6 +1,7 @@
 ---
 name: esp32-modbus-rtu-tcp-gateway
 description: Use when an ESP32 bridges Modbus RTU on RS485 to Modbus TCP on Ethernet or Wi-Fi - the SCADA reads time out, unit ids do not map, or two clients collide. Covers MBAP framing, transaction ids and serialisation.
+license: MIT
 ---
 
 # Modbus RTU to TCP gateway

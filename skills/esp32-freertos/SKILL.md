@@ -1,6 +1,7 @@
 ---
 name: esp32-freertos
 description: Use when adding tasks, timers or interrupts to an ESP32 sketch, when the device resets with a watchdog or stack overflow, or when two tasks fight over a shared variable.
+license: MIT
 ---
 
 # FreeRTOS on ESP32

@@ -1,6 +1,7 @@
 ---
 name: esp32-usb-otg-serial-jtag
 description: Use when selecting or debugging native USB device, USB host, USB-Serial-JTAG or OTG functionality on ESP32-family chips; especially when a design assumes every ESP32 has the same USB controller or boot/debug path.
+license: MIT
 ---
 
 # USB, OTG and Serial/JTAG capability

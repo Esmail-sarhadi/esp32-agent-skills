@@ -1,6 +1,7 @@
 ---
 name: esp32-voltage-current-monitoring
 description: Use when measuring supply voltage, current or power with INA219, INA226 or similar monitor ICs.
+license: MIT
 ---
 
 # Voltage Current Monitoring

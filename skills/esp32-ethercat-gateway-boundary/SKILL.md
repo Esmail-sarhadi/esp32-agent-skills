@@ -1,6 +1,7 @@
 ---
 name: esp32-ethercat-gateway-boundary
 description: Use when evaluating EtherCAT integration, an ESP32 gateway boundary or translating industrial real-time fieldbus data.
+license: MIT
 ---
 
 # Ethercat Gateway Boundary

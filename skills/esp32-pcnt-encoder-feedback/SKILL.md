@@ -1,6 +1,7 @@
 ---
 name: esp32-pcnt-encoder-feedback
 description: Use when counting pulses, measuring frequency or decoding incremental encoder feedback with ESP32 PCNT; especially when counts drift, glitches appear or counters overflow during long runs.
+license: MIT
 ---
 
 # PCNT pulse counting and encoder feedback

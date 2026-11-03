@@ -1,6 +1,7 @@
 ---
 name: esp32-wifi-enterprise-eap
 description: Use when an ESP32 must join a WPA2-Enterprise network - corporate, campus or plant Wi-Fi - with EAP-TLS or PEAP. Covers certificates, time sync, identity fields and the failures that look like bad passwords.
+license: MIT
 ---
 
 # WPA2-Enterprise on ESP32

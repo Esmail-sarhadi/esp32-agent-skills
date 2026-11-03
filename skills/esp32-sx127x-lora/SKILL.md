@@ -1,6 +1,7 @@
 ---
 name: esp32-sx127x-lora
 description: Use when an ESP32 drives an SX1276 or SX1278 - the chip answers on SPI but never transmits, DIO0 never fires, packets arrive corrupted, or the range is a tenth of what the link budget says. Covers register mode, DIO mapping and RF layout.
+license: MIT
 ---
 
 # SX1276 / SX1278 on ESP32

@@ -1,6 +1,7 @@
 ---
 name: esp32-http-server
 description: Use when an ESP32 serves HTTP or WebSocket - a handler never fires, large responses truncate, the server stops answering under load, or an upload kills the connection. Covers esp_http_server configuration and handler design.
+license: MIT
 ---
 
 # HTTP server on ESP32

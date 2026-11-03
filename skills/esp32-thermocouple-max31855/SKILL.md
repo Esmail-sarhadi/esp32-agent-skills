@@ -1,6 +1,7 @@
 ---
 name: esp32-thermocouple-max31855
 description: Use when integrating K-type thermocouples with MAX31855 or diagnosing open sensor, cold-junction error and noisy temperature readings.
+license: MIT
 ---
 
 # Thermocouple Max31855

@@ -1,6 +1,7 @@
 ---
 name: esp32-iec-60870-5-104
 description: Use when an ESP32 talks to a SCADA master over IEC 60870-5-104 - the connection starts and drops, general interrogation never finishes, or the master reports sequence errors. Covers APCI framing, k/w windows and ASDU types.
+license: MIT
 ---
 
 # IEC 60870-5-104 on ESP32

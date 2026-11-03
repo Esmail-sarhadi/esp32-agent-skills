@@ -1,6 +1,7 @@
 ---
 name: esp32-modbus-security-and-mapping
 description: Use when implementing Modbus RTU/TCP register maps, scaling, access control, exception handling or multi-vendor interoperability.
+license: MIT
 ---
 
 # Modbus Security And Mapping

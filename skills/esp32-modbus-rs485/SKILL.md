@@ -1,6 +1,7 @@
 ---
 name: esp32-modbus-rs485
 description: Use when an ESP32 talks Modbus RTU over RS485 - wiring a MAX485, timing the DE pin, computing the CRC, or debugging a slave that never answers.
+license: MIT
 ---
 
 # Modbus RTU over RS485 on ESP32

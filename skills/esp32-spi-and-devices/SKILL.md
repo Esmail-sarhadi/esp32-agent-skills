@@ -1,6 +1,7 @@
 ---
 name: esp32-spi-and-devices
 description: Use when an ESP32 talks to SPI peripherals - the second device on the bus fails, the bus is initialised twice, transfers are slow or corrupted, or the clock rate is a guess. Covers bus versus device, DMA and chip select.
+license: MIT
 ---
 
 # SPI on ESP32

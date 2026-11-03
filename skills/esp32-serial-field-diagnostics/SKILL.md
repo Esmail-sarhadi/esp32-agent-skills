@@ -1,6 +1,7 @@
 ---
 name: esp32-serial-field-diagnostics
 description: Use when diagnosing UART framing errors, RS485 timeouts, serial corruption, boot-log interference, FIFO overruns or intermittent field communication.
+license: MIT
 ---
 
 # Serial Field Diagnostics

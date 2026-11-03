@@ -1,6 +1,7 @@
 ---
 name: esp32-4-20ma-transmitter
 description: Use when an ESP32 must drive a 4-20 mA current loop - as a transmitter into a PLC, a valve command, or a two-wire loop. Covers XTR116-class parts, loop power, isolation and the live-zero rule.
+license: MIT
 ---
 
 # 4-20 mA output from ESP32

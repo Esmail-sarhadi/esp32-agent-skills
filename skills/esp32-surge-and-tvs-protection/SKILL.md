@@ -1,6 +1,7 @@
 ---
 name: esp32-surge-and-tvs-protection
 description: Use when field wiring can deliver a surge - long cables, outdoor sensors, inductive loads, 24 V miswired into a 3.3 V input. Covers TVS selection, clamping voltage, series impedance and what a TVS cannot do.
+license: MIT
 ---
 
 # Surge protection for ESP32 I/O

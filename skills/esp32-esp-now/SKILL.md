@@ -1,6 +1,7 @@
 ---
 name: esp32-esp-now
 description: Use when ESP32s talk to each other without a router - peers never receive, messages stop after a channel change, the payload is truncated, or the range is far shorter than the datasheet. Covers pairing, channels, encryption and long range mode.
+license: MIT
 ---
 
 # ESP-NOW between ESP32s

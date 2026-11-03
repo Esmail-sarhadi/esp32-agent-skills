@@ -1,6 +1,7 @@
 ---
 name: esp32-modbus-rtu-slave
 description: Use when the ESP32 must be a Modbus RTU slave for a PLC or SCADA master - the master times out, gets exception 02 or 04, or reads stale values. Covers address range, response timing, exception codes and register mapping.
+license: MIT
 ---
 
 # ESP32 as a Modbus RTU slave

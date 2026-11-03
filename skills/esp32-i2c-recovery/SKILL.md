@@ -1,6 +1,7 @@
 ---
 name: esp32-i2c-recovery
 description: Use when an I2C bus hangs, SDA/SCL is stuck, a peripheral powers off independently, or device initialization must recover safely.
+license: MIT
 ---
 
 # I2c Recovery

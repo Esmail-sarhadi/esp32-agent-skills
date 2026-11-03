@@ -1,6 +1,7 @@
 ---
 name: esp32-touch-and-input
 description: Use when capacitive touch or buttons misbehave - touch triggers by itself, works dry and fails when wet, a button bounces, or the pin reads pressed at boot. Covers touch sensing, calibration, debounce and the GPIO matrix.
+license: MIT
 ---
 
 # Touch and input on ESP32

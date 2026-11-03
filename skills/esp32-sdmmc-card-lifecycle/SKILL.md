@@ -1,6 +1,7 @@
 ---
 name: esp32-sdmmc-card-lifecycle
 description: Use when integrating removable SD cards over SDMMC or SPI on ESP32; especially when mount is unreliable, cards corrupt after power loss, hot removal crashes the firmware or logging blocks real-time work.
+license: MIT
 ---
 
 # SD card interface and lifecycle

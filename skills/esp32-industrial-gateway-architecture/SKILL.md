@@ -1,6 +1,7 @@
 ---
 name: esp32-industrial-gateway-architecture
 description: Use when designing an ESP32 industrial gateway between Modbus, CAN, Ethernet, Wi-Fi, LoRa, MQTT or cloud services.
+license: MIT
 ---
 
 # Industrial Gateway Architecture

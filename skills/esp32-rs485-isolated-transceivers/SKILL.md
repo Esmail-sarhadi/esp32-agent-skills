@@ -1,6 +1,7 @@
 ---
 name: esp32-rs485-isolated-transceivers
 description: Use when an RS485 port must survive a real installation - ground potential between buildings, a 24 V miswire, a drive that destroys transceivers, or a bus that works on the bench and fails on site. Covers ADM2587E, ISO3082, MAX3485 and protection.
+license: MIT
 ---
 
 # Isolated RS485 on ESP32

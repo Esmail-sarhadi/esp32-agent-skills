@@ -1,6 +1,7 @@
 ---
 name: esp32-enc28j60-ethernet
 description: Use when an ESP32 uses an ENC28J60 for wired Ethernet - no link, DHCP that never completes, a connection that dies under load, or 2 Mbit/s where 100 was expected. Covers its 8 KB buffer, missing auto-negotiation and SPI limits.
+license: MIT
 ---
 
 # ENC28J60 on ESP32

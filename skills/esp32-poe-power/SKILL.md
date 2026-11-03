@@ -1,6 +1,7 @@
 ---
 name: esp32-poe-power
 description: Use when an ESP32 board is powered over Ethernet - no power at all, a PD that never negotiates, resets under load, or a design that must survive a PoE switch. Covers 802.3af/at classes, PD controllers and the isolation barrier.
+license: MIT
 ---
 
 # Power over Ethernet for ESP32 boards

@@ -1,6 +1,7 @@
 ---
 name: esp32-load-cells-hx711
 description: Use when reading load cells with HX711, diagnosing unstable weight, drift, saturation or calibration errors.
+license: MIT
 ---
 
 # Load Cells Hx711

@@ -1,6 +1,7 @@
 ---
 name: esp32-multicore-and-ipc
 description: Use when code behaves differently depending on which core it runs on - a task starves the Wi-Fi stack, a shared variable corrupts, a queue overflows, or a task never runs at all. Covers affinity, priorities, spinlocks and ISR dispatch.
+license: MIT
 ---
 
 # Two cores on ESP32

@@ -1,6 +1,7 @@
 ---
 name: esp32-factory-test-and-calibration
 description: Use when units are built in more than one - the test rig has to pass or fail a board in seconds, calibration values must survive flashing, or a returned unit cannot be identified. Covers the test firmware, the jig and per-unit data.
+license: MIT
 ---
 
 # Factory test and calibration

@@ -1,6 +1,7 @@
 ---
 name: esp32-energy-meter-modbus
 description: Use when an ESP32 reads a Modbus energy meter - SDM120, SDM630, Eastron or similar - and the values are nonsense, swapped, or scaled by 1000. Covers float word order, register tables and polling rates.
+license: MIT
 ---
 
 # Reading an energy meter over Modbus

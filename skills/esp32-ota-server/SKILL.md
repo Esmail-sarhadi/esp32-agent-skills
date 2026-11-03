@@ -1,6 +1,7 @@
 ---
 name: esp32-ota-server
 description: Use when firmware updates are served to devices - an update downloads and does not boot, a bad release bricks a batch, devices update in a loop, or the rollback never happens. Covers versioning, staged rollout and the server side.
+license: MIT
 ---
 
 # The server side of OTA

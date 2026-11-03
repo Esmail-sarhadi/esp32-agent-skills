@@ -1,6 +1,7 @@
 ---
 name: esp32-snmp-agent
 description: Use when an ESP32 must be monitored by a network management system - Zabbix, PRTG, LibreNMS - over SNMP v2c or v3. Covers the OID tree, community strings, BER encoding and why the standard agent does not fit.
+license: MIT
 ---
 
 # SNMP on ESP32

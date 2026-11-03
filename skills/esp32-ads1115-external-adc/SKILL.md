@@ -1,6 +1,7 @@
 ---
 name: esp32-ads1115-external-adc
 description: Use when the ESP32's own ADC is not good enough - 12 bits of noise, ADC2 dead under Wi-Fi, or a sensor 5 m away. Covers ADS1115 wiring, PGA, single-ended vs differential and the input range trap.
+license: MIT
 ---
 
 # ADS1115 on ESP32

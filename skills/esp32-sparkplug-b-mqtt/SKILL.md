@@ -1,6 +1,7 @@
 ---
 name: esp32-sparkplug-b-mqtt
 description: Use when an ESP32 publishes to an industrial MQTT broker that expects Sparkplug B - Ignition, HiveMQ, or a plant historian - and the topic namespace, birth messages or sequence numbers are wrong.
+license: MIT
 ---
 
 # Sparkplug B on ESP32

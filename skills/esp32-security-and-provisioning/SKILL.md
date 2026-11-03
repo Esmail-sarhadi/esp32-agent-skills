@@ -1,6 +1,7 @@
 ---
 name: esp32-security-and-provisioning
 description: Use when an ESP32 product needs secure boot, flash encryption, per-device keys or a factory reset that actually erases secrets. Covers eFuse, the irreversible steps, and the order they must happen in.
+license: MIT
 ---
 
 # Security and provisioning on ESP32

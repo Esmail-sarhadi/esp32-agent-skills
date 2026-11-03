@@ -1,6 +1,7 @@
 ---
 name: esp32-build-and-sdkconfig
 description: Use when the build itself is the problem - settings do not take effect, PlatformIO and IDF disagree, a flag is silently overridden, the binary is too big, or the same source builds differently on two machines. Covers sdkconfig, build flags and partition choice.
+license: MIT
 ---
 
 # Build configuration on ESP32

@@ -1,6 +1,7 @@
 ---
 name: esp32-watchdogs-and-timers
 description: Use when the board resets by itself, a long operation trips the task watchdog, a timer callback crashes, or the reset reason says watchdog but the code looks fine. Covers TWDT, the interrupt watchdog, esp_timer and what is safe inside a callback.
+license: MIT
 ---
 
 # Watchdogs and timers on ESP32

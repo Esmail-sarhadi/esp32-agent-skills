@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**A hundred and one skills and seven checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**A hundred and one skills and ten checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -123,11 +123,32 @@ The `skills/` directory follows the Agent Skills layout (`SKILL.md` with `name`
 and `description` frontmatter), so the agent loads a skill only when the task
 actually touches pins or power.
 
-**Claude Code**
+**Claude Code, as a plugin**
 
 ```bash
-cp -r skills/* ~/.claude/skills/
+/plugin marketplace add Esmail-sarhadi/esp32-agent-skills
+/plugin install esp32-agent-skills
 ```
+
+The repository ships `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`,
+so the skills arrive as a managed plugin instead of a directory you keep in sync by hand.
+
+**Claude Code, by copy**
+
+```bash
+./install.sh                       # into ~/.claude/skills
+./install.sh --target ~/.codex/skills
+./install.sh --dry-run             # show what would change
+```
+
+`install.ps1` does the same on Windows. Both copy and never delete: an existing
+skill directory is left alone unless you pass `--force` (`-Force`).
+
+**Any agent working inside this repository**
+
+`AGENTS.md` is the entry point. It carries the rule that matters - run the
+checker before writing the code - plus how to pick a skill, how to add one, and
+what each claim in the corpus is worth.
 
 **Cursor / other agents that read project rules**
 
@@ -305,7 +326,7 @@ they drop straight into CI or a pre-flash hook.
 | `examples/panic-log.txt` | A real `LoadProhibited` dump with a four frame backtrace. |
 | `examples/modbus-register-map.csv` | Valid example register map with explicit offsets, types and scaling. |
 | `examples/modbus-register-map-broken.csv` | Deliberately invalid map covering overlap, zero scale and coil type errors. |
-| `tests/` | 540 unit tests: the six tools, the pin and partition databases, and one shape test per skill. |
+| `tests/` | 559 unit tests: the ten tools, the pin and partition databases, one shape test per skill, and the packaging layer. |
 
 ## Verified on hardware
 

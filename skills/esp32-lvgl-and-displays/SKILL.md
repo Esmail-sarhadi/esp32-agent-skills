@@ -1,6 +1,7 @@
 ---
 name: esp32-lvgl-and-displays
 description: Use when an ESP32 drives a display - the panel stays white, the image tears, refresh is too slow, colours are swapped, or LVGL runs out of memory. Covers SPI and RGB panels, DMA buffers, PSRAM and the flush callback.
+license: MIT
 ---
 
 # Displays and LVGL on ESP32

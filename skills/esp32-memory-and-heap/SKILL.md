@@ -1,6 +1,7 @@
 ---
 name: esp32-memory-and-heap
 description: Use when an ESP32 runs out of memory, fragments over days, cannot allocate a DMA buffer, or a task crashes with a stack overflow. Covers internal RAM versus PSRAM, heap capabilities, stack sizing and what DMA can actually reach.
+license: MIT
 ---
 
 # Memory and heap on ESP32

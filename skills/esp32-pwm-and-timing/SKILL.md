@@ -1,6 +1,7 @@
 ---
 name: esp32-pwm-and-timing
 description: Use when driving an LED, a motor, a servo or a buzzer with PWM on ESP32 - the frequency is wrong, the resolution collapses, the servo jitters, or the duty value does nothing. Covers LEDC's frequency/resolution trade-off.
+license: MIT
 ---
 
 # PWM and timing on ESP32

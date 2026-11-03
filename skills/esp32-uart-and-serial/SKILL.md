@@ -1,6 +1,7 @@
 ---
 name: esp32-uart-and-serial
 description: Use when serial communication misbehaves - logs interleave with protocol bytes, a half-duplex bus echoes, the FIFO overflows at high baud, or the board will not boot with something on UART0. Covers pin choice, flow control, RS485 direction and log flooding.
+license: MIT
 ---
 
 # UART on ESP32

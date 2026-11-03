@@ -1,6 +1,7 @@
 ---
 name: esp32-power-integrity
 description: Use when diagnosing ESP32 brownouts, radio transmit resets, battery sag, relay inrush, regulator heating or intermittent boot failures.
+license: MIT
 ---
 
 # Power Integrity

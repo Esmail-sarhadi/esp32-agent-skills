@@ -1,6 +1,7 @@
 ---
 name: esp32-actuators-and-relays
 description: Use when an ESP32 drives a relay, solenoid, servo or motor - the coil browns out the board, the relay clicks but the contact does nothing, the servo jitters, or the LED glows when it should be off. Covers drive circuits, flyback, inrush and isolation.
+license: MIT
 ---
 
 # Actuators and relays on ESP32

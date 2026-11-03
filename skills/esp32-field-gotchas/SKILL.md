@@ -1,6 +1,7 @@
 ---
 name: esp32-field-gotchas
 description: Use when an ESP32 misbehaves in a way the code does not explain - reboots, brownouts, dead I2C, garbled UART, a sketch that will not flash, a crash with no line number. One hundred and sixty failures collected from Stack Overflow, each with the cause and the fix.
+license: MIT
 ---
 
 # ESP32 field notes

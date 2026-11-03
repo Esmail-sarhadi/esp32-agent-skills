@@ -1,6 +1,7 @@
 ---
 name: esp32-secure-ota-production
 description: Use when designing production OTA, signed firmware delivery, rollback, anti-rollback, secure boot, flash encryption or fleet rollout.
+license: MIT
 ---
 
 # Secure Ota Production

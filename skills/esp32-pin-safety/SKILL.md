@@ -1,6 +1,7 @@
 ---
 name: esp32-pin-safety
 description: Use when choosing, reviewing or debugging ESP32 GPIO assignments in firmware. Catches the four failure modes that compile cleanly and then kill the board — flash pins, input-only pins, strapping pins, ADC2 with Wi-Fi — before anything is flashed.
+license: MIT
 ---
 
 # ESP32 pin safety

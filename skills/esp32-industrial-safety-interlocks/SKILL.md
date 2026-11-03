@@ -1,6 +1,7 @@
 ---
 name: esp32-industrial-safety-interlocks
 description: Use when ESP32 firmware controls relays, contactors, pumps, heaters, valves or machinery where an unsafe output state could damage equipment or injure people; especially when designing interlocks, E-stop behavior or restart policy.
+license: MIT
 ---
 
 # Industrial output interlocks and safe states

@@ -1,6 +1,7 @@
 ---
 name: esp32-time-and-rtc
 description: Use when ESP32 time is wrong, certificates fail to validate, schedules fire at the wrong hour, or the clock drifts across deep sleep. Covers SNTP, time zones, the RTC across sleep, and why time must be checked before it is trusted.
+license: MIT
 ---
 
 # Time on ESP32

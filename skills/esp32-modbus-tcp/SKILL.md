@@ -1,6 +1,7 @@
 ---
 name: esp32-modbus-tcp
 description: Use when an ESP32 implements or debugs Modbus TCP, including MBAP framing, transaction IDs, register maps, gateway behavior or TCP session failures.
+license: MIT
 ---
 
 # ESP32 Modbus Tcp

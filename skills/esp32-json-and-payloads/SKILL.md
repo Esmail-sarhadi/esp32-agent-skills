@@ -1,6 +1,7 @@
 ---
 name: esp32-json-and-payloads
 description: Use when JSON on the ESP32 is truncated, crashes, or leaks - the document is empty, the parse fails on a valid payload, floats lose precision, or the heap shrinks with every request. Covers ArduinoJson capacity, streaming and cJSON ownership.
+license: MIT
 ---
 
 # JSON on a microcontroller

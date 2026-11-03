@@ -1,6 +1,7 @@
 ---
 name: esp32-fault-injection-hil
 description: Use when creating hardware-in-the-loop tests, fault injection, soak tests or regression rigs for ESP32 industrial devices.
+license: MIT
 ---
 
 # Fault Injection Hil

@@ -1,6 +1,7 @@
 ---
 name: esp32-dma-cache-psram
 description: Use when debugging DMA failures, PSRAM buffers, cache coherency, alignment, camera, SPI, I2S or peripheral transfer corruption.
+license: MIT
 ---
 
 # Dma Cache Psram

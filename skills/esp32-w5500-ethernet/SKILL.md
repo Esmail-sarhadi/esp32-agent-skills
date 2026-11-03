@@ -1,6 +1,7 @@
 ---
 name: esp32-w5500-ethernet
 description: Use when using W5500 SPI Ethernet with ESP32, diagnosing DHCP, socket failures, link loss, SPI timing or Ethernet/Wi-Fi coexistence.
+license: MIT
 ---
 
 # ESP32 W5500 Ethernet

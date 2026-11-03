@@ -1,6 +1,7 @@
 ---
 name: esp32-adc-and-sensors
 description: Use when reading an analog sensor on an ESP32 - the reading is noisy, saturates, drifts, or returns nonsense once Wi-Fi connects. Covers ADC1 vs ADC2, attenuation, calibration, source impedance and averaging.
+license: MIT
 ---
 
 # Reading analog sensors on ESP32

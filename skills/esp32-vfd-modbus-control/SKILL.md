@@ -1,6 +1,7 @@
 ---
 name: esp32-vfd-modbus-control
 description: Use when an ESP32 controls a variable frequency drive over RS485 - the drive ignores commands, runs at the wrong speed, faults on start, or the register map does not match the manual. Covers control words, scaling and safe states.
+license: MIT
 ---
 
 # Controlling a VFD over Modbus

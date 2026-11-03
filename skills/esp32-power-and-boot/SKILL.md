@@ -1,6 +1,7 @@
 ---
 name: esp32-power-and-boot
 description: Use when an ESP32 board resets randomly, browns out, fails to boot, or drains a battery in days. Covers the power budget, the boot strap states and deep-sleep leakage, and says what to measure before changing code.
+license: MIT
 ---
 
 # ESP32 power and boot

@@ -1,6 +1,7 @@
 ---
 name: esp32-can-fd-gateway
 description: Use when building CAN or CAN-FD gateways with ESP32, including TWAI, external CAN-FD controllers, bus-off recovery and industrial isolation.
+license: MIT
 ---
 
 # ESP32 Can Fd Gateway
