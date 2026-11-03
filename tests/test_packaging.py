@@ -50,6 +50,20 @@ class ManifestTest(unittest.TestCase):
         listed = re.findall(r"^  - (esp32-[a-z0-9-]+)$", text, re.M)
         self.assertEqual(sorted(listed), skill_dirs())
 
+    def test_agent_yaml_lists_all_specialist_roles(self):
+        text = read(os.path.join(ROOT, "agent.yaml"))
+        listed = re.findall(r"^  - agents/([a-z0-9-]+)\.md$", text, re.M)
+        expected = sorted(name[:-3] for name in os.listdir(os.path.join(ROOT, "agents"))
+                          if name.endswith(".md") and name.lower() != "readme.md")
+        self.assertEqual(listed, expected)
+
+    def test_agent_yaml_lists_all_workflows(self):
+        text = read(os.path.join(ROOT, "agent.yaml"))
+        listed = re.findall(r"^  - workflows/([a-z0-9-]+)\.md$", text, re.M)
+        expected = sorted(name[:-3] for name in os.listdir(os.path.join(ROOT, "workflows"))
+                          if name.endswith(".md"))
+        self.assertEqual(listed, expected)
+
     def test_agent_yaml_version_matches_the_version_file(self):
         text = read(os.path.join(ROOT, "agent.yaml"))
         version = read(os.path.join(ROOT, "VERSION")).strip()

@@ -73,6 +73,16 @@ def collect_tools() -> list:
             if os.path.isfile(os.path.join(TOOLS, name + ".py"))]
 
 
+def collect_markdown(folder: str) -> list:
+    """List top-level Markdown role/workflow files, excluding README indexes."""
+    path = os.path.join(ROOT, folder)
+    if not os.path.isdir(path):
+        return []
+    return sorted(name[:-3] for name in os.listdir(path)
+                  if name.endswith(".md") and name.lower() != "readme.md"
+                  and os.path.isfile(os.path.join(path, name)))
+
+
 def count_tests() -> int:
     """Number of test functions, so the description never claims a stale figure."""
     total = 0
@@ -85,7 +95,7 @@ def count_tests() -> int:
     return total
 
 
-def build_agent_yaml(skills, tools, version) -> str:
+def build_agent_yaml(skills, tools, version, agents, workflows) -> str:
     lines = [
         'spec_version: "0.1.0"',
         "name: esp32-agent-skills",
@@ -110,8 +120,18 @@ def build_agent_yaml(skills, tools, version) -> str:
     lines.append("checkers:")
     for tool in tools:
         lines.append("  - tools/%s.py" % tool)
+    lines.append("agents:")
+    for agent in agents:
+        lines.append("  - agents/%s.md" % agent)
+    lines.append("workflows:")
+    for workflow in workflows:
+        lines.append("  - workflows/%s.md" % workflow)
     lines.append("install:")
     lines.append("  claude: .claude-plugin/plugin.json")
+    lines.append("  codex: ~/.agents/skills/ (install.sh --harness codex)")
+    lines.append("  opencode: ~/.config/opencode/skills/ (install.sh --harness opencode)")
+    lines.append("  cursor: .cursor/rules/esp32-domain.mdc")
+    lines.append("  gemini: GEMINI.md")
     lines.append("  generic: skills/")
     return "\n".join(lines) + "\n"
 
@@ -180,9 +200,11 @@ def build_marketplace_json(skills, tools, version) -> str:
 def targets():
     skills = collect_skills()
     tools = collect_tools()
+    agents = collect_markdown("agents")
+    workflows = collect_markdown("workflows")
     version = read_version()
     return [
-        (os.path.join(ROOT, "agent.yaml"), build_agent_yaml(skills, tools, version)),
+        (os.path.join(ROOT, "agent.yaml"), build_agent_yaml(skills, tools, version, agents, workflows)),
         (os.path.join(PLUGIN_DIR, "plugin.json"), build_plugin_json(skills, tools, version)),
         (os.path.join(PLUGIN_DIR, "marketplace.json"),
          build_marketplace_json(skills, tools, version)),

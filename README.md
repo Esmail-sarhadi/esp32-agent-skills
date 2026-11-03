@@ -133,31 +133,34 @@ actually touches pins or power.
 The repository ships `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`,
 so the skills arrive as a managed plugin instead of a directory you keep in sync by hand.
 
-**Claude Code, by copy**
+**Install into multiple harnesses**
 
 ```bash
-./install.sh                       # into ~/.claude/skills
-./install.sh --target ~/.codex/skills
-./install.sh --dry-run             # show what would change
+./install.sh --harness claude       # ~/.claude/skills
+./install.sh --harness codex        # ~/.agents/skills
+./install.sh --harness opencode     # ~/.config/opencode/skills
+./install.sh --harness all          # Claude + Codex + OpenCode
+./install.sh --harness all --dry-run
 ```
 
-`install.ps1` does the same on Windows. Both copy and never delete: an existing
-skill directory is left alone unless you pass `--force` (`-Force`).
+PowerShell equivalents: `./install.ps1 -Harness codex` and
+`./install.ps1 -Harness all -DryRun`. Both installers are idempotent and leave
+existing skill folders untouched unless `--force` / `-Force` is supplied.
+See [harnesses/README.md](harnesses/README.md) for supported locations and
+capability boundaries.
 
-**Any agent working inside this repository**
+**Rules, contexts and specialist agents**
 
-`AGENTS.md` is the entry point. It carries the rule that matters - run the
-checker before writing the code - plus how to pick a skill, how to add one, and
-what each claim in the corpus is worth.
+- [Rules](rules/) provide short always-relevant engineering guardrails.
+- [Contexts](contexts/embedded-engineering.md) explain how to use the knowledge base.
+- [Specialist agent roles](agents/README.md) cover architecture, implementation,
+  hardware review, validation, field-failure investigation and security.
+- [Reusable workflows](workflows/) cover board bring-up, peripheral integration,
+  field-failure triage and OTA release readiness.
 
-**Cursor / other agents that read project rules**
-
-Point the rule file at the skill you need, or paste its body into `.cursorrules`:
-
-```markdown
-When writing ESP32 firmware, follow skills/esp32-pin-safety/SKILL.md before
-choosing any GPIO number. Never invent a pin number.
-```
+`AGENTS.md` remains the repository entry point. Cursor has a native project rule
+at `.cursor/rules/esp32-domain.mdc`; Gemini CLI has `GEMINI.md`. OpenCode and
+Codex installation details are documented in the harness matrix.
 
 **Any agent with shell access**
 
