@@ -1,9 +1,9 @@
 spec_version: "0.1.0"
 name: esp32-agent-skills
-version: "1.1.0"
+version: "1.2.0"
 description: >-
-  Agent skills and checkers for ESP32 firmware: 101 skills across pin safety,
-  power, partitioning, industrial protocols and field failures, plus 10
+  Agent skills and checkers for ESP32 firmware: 201 skills across pin safety,
+  power, radio, industrial protocols, security and validation, plus 10
   command-line checkers that exit non-zero on a real problem.
 author: Esmail Sarhadi
 license: MIT
@@ -17,6 +17,31 @@ keywords:
   - modbus
   - skills
 skills:
+  - adc-calibration-linearity
+  - anti-rollback-policy
+  - audio-buffer-underrun
+  - battery-state-estimation
+  - ble-gatt-contract-review
+  - ble-gatt-regression
+  - ble-pairing-security
+  - ble-throughput-latency
+  - board-capability-matrix
+  - brownout-root-cause
+  - camera-framebuffer-budget
+  - can-twai-bus-off-recovery
+  - canopen-node-commissioning
+  - canopen-safety-boundary
+  - charger-powerpath-review
+  - configuration-transactionality
+  - dac-output-accuracy
+  - deep-sleep-current-audit
+  - dependency-vulnerability-triage
+  - device-identity-provisioning
+  - display-tearing-sync
+  - dma-buffer-placement
+  - dns-failure-diagnostics
+  - encoder-pcnt-validation
+  - esp-now-reliability
   - esp32-4-20ma-transmitter
   - esp32-actuators-and-relays
   - esp32-adc-and-sensors
@@ -118,6 +143,81 @@ skills:
   - esp32-wifi-enterprise-eap
   - esp32-wifi-reliability
   - esp32-wifi-roaming
+  - ethernet-link-recovery
+  - ethernet-rmii-clock-review
+  - fail-safe-output-state
+  - fault-injection-network
+  - fault-injection-power
+  - firmware-provenance-attestation
+  - firmware-sbom-generation
+  - flash-encryption-production
+  - flash-psram-capacity
+  - gpio-matrix-audit
+  - heap-fragmentation-forensics
+  - http-client-resilience
+  - i2c-device-discovery
+  - i2c-electrical-budget
+  - i2c-multi-master-review
+  - i2s-audio-clock-budget
+  - imu-calibration-frame
+  - industrial-watchdog-policy
+  - iram-dram-budget
+  - jpeg-streaming-backpressure
+  - light-sleep-wakeup-design
+  - littlefs-wear-budget
+  - load-cell-noise-budget
+  - lora-link-budget
+  - lorawan-device-lifecycle
+  - lvgl-rendering-budget
+  - modbus-conformance-testing
+  - modbus-register-contract
+  - modbus-rtu-timing
+  - modbus-tcp-hardening
+  - motor-control-mcpwm-review
+  - mqtt-conformance-testing
+  - mqtt-payload-schema
+  - mqtt-session-recovery
+  - mqtt-topic-acl-design
+  - ntp-time-bootstrap
+  - nvs-schema-migration
+  - opcua-gateway-boundary
+  - ota-image-compatibility
+  - ota-power-loss-matrix
+  - partition-ota-budget
+  - peripheral-matrix-planner
+  - pinmux-conflict-analysis
+  - power-rail-budget
+  - pressure-sensor-compensation
+  - protocol-parser-fuzzing
+  - psram-performance-tradeoffs
+  - relay-inductive-load-review
+  - reproducible-firmware-build
+  - rs485-direction-timing
+  - rs485-termination-bias
+  - rtc-drift-calibration
+  - rtd-lead-compensation
+  - sd-card-filesystem-integrity
+  - secret-leakage-audit
+  - secure-boot-key-lifecycle
+  - secure-debug-port-policy
+  - sensor-fusion-timestamping
+  - spi-signal-integrity
+  - subghz-regulatory-check
+  - task-stack-budget
+  - thermal-derating-review
+  - thermocouple-cold-junction
+  - threat-model-device-lifecycle
+  - tls-trust-anchor-rotation
+  - touch-sensor-drift
+  - uart-framing-hardening
+  - usb-otg-role-review
+  - usb-serial-jtag-debug
+  - wifi-coexistence-analysis
+  - wifi-enterprise-eap-review
+  - wifi-event-state-machine
+  - wifi-provisioning-ux
+  - wifi-roaming-policy
+  - wifi-throughput-diagnostics
 checkers:
   - tools/pincheck.py
   - tools/partition_check.py
