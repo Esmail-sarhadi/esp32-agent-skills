@@ -76,7 +76,17 @@ listing, so a skill cannot be added without a test. `tools/gen_manifest.py
 | `python tools/gen_manifest.py --check` | manifests match the tree |
 | `python tools/esp32_skills_cli.py --list` | the ten checkers, one entry point |
 | `python build.py` | zipapp and Windows executable into `dist/` |
+| `./install.sh --harness codex` | install skills into `~/.agents/skills` |
+| `./install.sh --harness opencode` | install skills into `~/.config/opencode/skills` |
+| `./install.sh --harness all --dry-run` | preview Claude, Codex and OpenCode installs |
 | `python -m unittest discover -s tests` | the full suite |
+
+## Agent harnesses
+
+The canonical corpus stays in `skills/`. Use `harnesses/README.md` for the
+supported integration matrix. Do not create manually maintained duplicate
+copies of the full corpus. Harness-specific rules belong in `rules/` and
+small native entry points such as `.cursor/rules/` and `GEMINI.md`.
 
 ## Style
 
