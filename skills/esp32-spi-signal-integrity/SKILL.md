@@ -1,6 +1,6 @@
 ---
 name: esp32-spi-signal-integrity
-description: Use when reviewing or implementing esp32 spi signal integrity on an ESP32 target.
+description: Use when reviewing or implementing esp32 spi signal integrity on an ESP32 target., including target-specific constraints and repeatable validation steps.
 license: MIT
 ---
 
