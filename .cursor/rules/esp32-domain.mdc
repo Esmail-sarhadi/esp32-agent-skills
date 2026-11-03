@@ -1,0 +1,20 @@
+---
+description: ESP32 and embedded firmware engineering guidance for pin selection, power, peripherals, industrial protocols, OTA, debugging and hardware validation.
+alwaysApply: true
+---
+
+# ESP32 Embedded Engineering
+
+- Read the repository root `AGENTS.md` before making changes.
+- The canonical task-specific knowledge lives in `skills/<id>/SKILL.md`.
+  Search for the skill matching the failure mode, not just the component name.
+- Identify exact SoC, module, board revision, framework/version and toolchain
+  before making hardware-sensitive recommendations.
+- Run relevant checkers from `tools/` before code changes and before flashing.
+- Treat datasheets, errata, schematics and version-matched official docs as
+  primary evidence. Preserve uncertainty and issue status.
+- Never disable brownout detection to hide a power-integrity fault.
+- Never imply an ESP32 is a safety-rated controller.
+- Distinguish software/CI success from physical hardware validation.
+- See `rules/common/agent-workflow.md` and
+  `rules/embedded/hardware-safety.md` for the full workflow.
