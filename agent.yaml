@@ -129,6 +129,18 @@ checkers:
   - tools/mqtt_topic_check.py
   - tools/flash_layout.py
   - tools/i2c_address_check.py
+agents:
+  - agents/embedded-security-reviewer.md
+  - agents/esp32-architect.md
+  - agents/field-failure-investigator.md
+  - agents/firmware-implementer.md
+  - agents/hardware-reviewer.md
+  - agents/validation-engineer.md
+workflows:
+  - workflows/board-bringup.md
+  - workflows/field-failure-triage.md
+  - workflows/ota-release.md
+  - workflows/peripheral-integration.md
 install:
   claude: .claude-plugin/plugin.json
   codex: ~/.agents/skills/ (install.sh --harness codex)
