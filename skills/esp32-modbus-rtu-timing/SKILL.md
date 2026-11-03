@@ -1,6 +1,6 @@
 ---
 name: esp32-modbus-rtu-timing
-description: Use when reviewing or implementing esp32 modbus rtu timing on an ESP32 target.
+description: Use when reviewing or implementing esp32 modbus rtu timing on an ESP32 target., including target-specific constraints and repeatable validation steps.
 license: MIT
 ---
 
