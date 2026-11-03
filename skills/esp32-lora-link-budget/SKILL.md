@@ -1,6 +1,6 @@
 ---
 name: esp32-lora-link-budget
-description: Use when reviewing or implementing esp32 lora link budget on an ESP32 target.
+description: Use when reviewing or implementing esp32 lora link budget on an ESP32 target., including target-specific constraints and repeatable validation steps.
 license: MIT
 ---
 
