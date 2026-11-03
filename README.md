@@ -1,6 +1,6 @@
 # ESP32 Agent Skills
 
-**A hundred and one skills and ten checkers that stop AI coding agents from writing ESP32 firmware that compiles and then kills the board.**
+**Two hundred and one skills and ten checkers for ESP32 and industrial embedded engineering, with a multi-harness agent toolkit.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -44,6 +44,18 @@ This repository gives the agent that memory, and gives you a checker that
 verifies the result in one command.
 
 ![Two readings of the same board: what the agent assumes, and what the silicon does](docs/assets/split.jpg)
+
+## Expanded engineering coverage
+
+The 100-skill expansion adds focused playbooks for SoC/board capability and pinmux planning, flash/PSRAM/stack/heap budgets, power and sleep analysis, Wi-Fi/BLE/radio reliability, Ethernet and industrial buses, sensor and display pipelines, OTA/security lifecycle, SBOM and reproducible builds, protocol fuzzing, fault injection and HIL fixture design.
+
+Each new skill requires exact target/version context, evidence-backed review, a validation matrix and explicit hardware-only limitations. The expansion quality suite adds 400 independent unittest cases (four checks per skill) for frontmatter, required engineering sections, safety guardrails, and validation/evidence requirements:
+
+```bash
+python -m unittest tests.test_expanded_skill_quality
+```
+
+These tests validate skill-package quality; they do not claim that physical hardware behavior has been tested.
 
 ## Quickstart
 
