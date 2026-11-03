@@ -1,6 +1,6 @@
 ---
 name: esp32-deep-sleep-current-audit
-description: Use when reviewing or implementing esp32 deep sleep current audit on an ESP32 target.
+description: Use when reviewing or implementing esp32 deep sleep current audit on an ESP32 target., including target-specific constraints and repeatable validation steps.
 license: MIT
 ---
 
