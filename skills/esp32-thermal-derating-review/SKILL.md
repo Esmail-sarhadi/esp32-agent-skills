@@ -1,6 +1,6 @@
 ---
 name: esp32-thermal-derating-review
-description: Use when reviewing or implementing esp32 thermal derating review on an ESP32 target.
+description: Use when reviewing or implementing esp32 thermal derating review on an ESP32 target., including target-specific constraints and repeatable validation steps.
 license: MIT
 ---
 
