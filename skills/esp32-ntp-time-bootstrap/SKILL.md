@@ -1,6 +1,6 @@
 ---
 name: esp32-ntp-time-bootstrap
-description: Use when reviewing or implementing esp32 ntp time bootstrap on an ESP32 target.
+description: Use when reviewing or implementing esp32 ntp time bootstrap on an ESP32 target., including target-specific constraints and repeatable validation steps.
 license: MIT
 ---
 
