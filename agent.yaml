@@ -131,4 +131,8 @@ checkers:
   - tools/i2c_address_check.py
 install:
   claude: .claude-plugin/plugin.json
+  codex: ~/.agents/skills/ (install.sh --harness codex)
+  opencode: ~/.config/opencode/skills/ (install.sh --harness opencode)
+  cursor: .cursor/rules/esp32-domain.mdc
+  gemini: GEMINI.md
   generic: skills/
