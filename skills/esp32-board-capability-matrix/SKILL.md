@@ -1,6 +1,6 @@
 ---
 name: esp32-board-capability-matrix
-description: Use when reviewing or implementing esp32 board capability matrix on an ESP32 target.
+description: Use when reviewing or implementing esp32 board capability matrix on an ESP32 target., including target-specific constraints and repeatable validation steps.
 license: MIT
 ---
 
