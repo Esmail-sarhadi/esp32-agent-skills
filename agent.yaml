@@ -3,7 +3,7 @@ name: esp32-agent-skills
 version: "1.2.0"
 description: >-
   Agent skills and checkers for ESP32 firmware: 201 skills across pin safety,
-  power, radio, industrial protocols, security and validation, plus 10
+  power, partitioning, industrial protocols and field failures, plus 10
   command-line checkers that exit non-zero on a real problem.
 author: Esmail Sarhadi
 license: MIT
