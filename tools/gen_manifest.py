@@ -112,6 +112,10 @@ def build_agent_yaml(skills, tools, version) -> str:
         lines.append("  - tools/%s.py" % tool)
     lines.append("install:")
     lines.append("  claude: .claude-plugin/plugin.json")
+    lines.append("  codex: .agents/skills/ (install.sh --harness codex)")
+    lines.append("  opencode: ~/.config/opencode/skills/ (install.sh --harness opencode)")
+    lines.append("  cursor: .cursor/rules/esp32-domain.mdc")
+    lines.append("  gemini: GEMINI.md")
     lines.append("  generic: skills/")
     return "\n".join(lines) + "\n"
 
