@@ -1,6 +1,6 @@
 ---
 name: esp32-i2c-device-discovery
-description: Use when reviewing or implementing esp32 i2c device discovery on an ESP32 target.
+description: Use when reviewing or implementing esp32 i2c device discovery on an ESP32 target., including target-specific constraints and repeatable validation steps.
 license: MIT
 ---
 
