@@ -61,12 +61,15 @@ $EDITOR skills/esp32-your-topic/SKILL.md
 cp LICENSE skills/esp32-your-topic/LICENSE.txt
 python tools/validate_skills.py      # frontmatter, name, length, no TODO
 python tools/gen_manifest.py         # agent.yaml and .claude-plugin stay in step
+python tools/gen_readme_catalog.py   # README skills table stays in step
 python -m unittest discover -s tests
 ```
 
 `tests/test_skills_corpus.py` generates one test per skill from the directory
 listing, so a skill cannot be added without a test. `tools/gen_manifest.py
---check` fails in CI when a manifest has drifted from the tree.
+--check` fails in CI when a manifest has drifted from the tree, and
+`tools/gen_readme_catalog.py --check` does the same for the README catalog.
+Never edit the table between the catalog markers by hand; the generator owns it.
 
 ## Commands
 
@@ -74,6 +77,7 @@ listing, so a skill cannot be added without a test. `tools/gen_manifest.py
 |---|---|
 | `python tools/validate_skills.py` | frontmatter and shape of every skill |
 | `python tools/gen_manifest.py --check` | manifests match the tree |
+| `python tools/gen_readme_catalog.py --check` | README skills table matches the tree |
 | `python tools/esp32_skills_cli.py --list` | the ten checkers, one entry point |
 | `python build.py` | zipapp and Windows executable into `dist/` |
 | `./install.sh --harness codex` | install skills into `~/.agents/skills` |
