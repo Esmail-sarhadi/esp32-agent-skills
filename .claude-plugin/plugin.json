@@ -1,7 +1,7 @@
 {
   "name": "esp32-agent-skills",
-  "version": "1.3.0",
-  "description": "601 ESP32 firmware skills and 10 checkers that stop an agent writing code which compiles and then kills the board: pin safety, flash layout, power budget, panic decoding, Modbus, industrial protocols.",
+  "version": "1.4.0",
+  "description": "644 ESP32 engineering skills and 10 checkers for real-world firmware failures: Wi-Fi/BLE/802.15.4 coexistence, brownouts, crash forensics, OTA rollback, deep sleep, UART/RS485 and industrial protocols.",
   "author": {
     "name": "Esmail Sarhadi",
     "url": "https://github.com/Esmail-sarhadi"
