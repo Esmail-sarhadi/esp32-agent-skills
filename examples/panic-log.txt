@@ -1,0 +1,20 @@
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+entry 0x400b5090
+Guru Meditation Error: Core  1 panic'ed (LoadProhibited). Exception was unhandled.
+
+Core  1 register dump:
+PC      : 0x400d4a3e  PS      : 0x00060830  A0      : 0x800d1f2c  A1      : 0x3ffb1f30
+A2      : 0x00000000  A3      : 0x3ffb8214  A4      : 0x00000001  A5      : 0x3ffb81f4
+EXCVADDR: 0x00000000  LBEG    : 0x400014fd  LEND    : 0x4000150d  LCOUNT  : 0xffffffff
+
+Backtrace: 0x400d4a3e:0x3ffb1f30 0x400d1f29:0x3ffb1f60 0x400d0c81:0x3ffb1f90 0x400d0d45:0x3ffb1fc0
+
+ELF file SHA256: 0000000000000000
+
+Rebooting...

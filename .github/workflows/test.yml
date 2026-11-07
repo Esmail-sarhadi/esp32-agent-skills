@@ -1,0 +1,104 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Validate every skill against the schema
+        run: python tools/validate_skills.py
+
+      - name: Manifests must match the tree
+        run: python tools/gen_manifest.py --check
+
+      - name: README skills catalog must match the tree
+        run: python tools/gen_readme_catalog.py --check
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Pin map example (expected to report errors)
+        run: python tools/pincheck.py --soc esp32 --file examples/pinmap.txt || true
+
+      - name: Partition table must pass
+        run: python tools/partition_check.py --file examples/partitions-ota-4mb.csv --flash 4MB --ota
+
+      - name: Broken partition table must fail
+        run: |
+          if python tools/partition_check.py --file examples/partitions-broken.csv --flash 4MB --ota; then
+            echo "expected a non-zero exit for the broken layout"; exit 1
+          fi
+
+      - name: Power budget smoke test
+        run: python tools/power_budget.py --battery 3000 --wakes-per-hour 12 --wake-ms 2000
+
+      - name: Modbus RTU frame smoke test
+        run: python tools/modbus_frame.py --build read --slave 1 --start 0 --count 10
+
+      - name: A corrupt CRC must fail
+        run: |
+          if python tools/modbus_frame.py --check "11 03 00 6B 00 03 76 88"; then
+            echo "expected a non-zero exit for a bad CRC"; exit 1
+          fi
+
+      - name: LoRa airtime smoke test
+        run: python tools/airtime.py --sf 12 --bw 125 --payload 20
+
+      - name: A 30 second interval must fail the duty cycle
+        run: |
+          if python tools/airtime.py --sf 12 --payload 20 --interval 30; then
+            echo "expected a non-zero exit for a 30 s interval at SF12"; exit 1
+          fi
+
+      - name: Panic decode smoke test
+        run: python tools/panic_decode.py --file examples/panic-log.txt
+
+      - name: Modbus register map must pass
+        run: python tools/modbus_map_check.py --file examples/modbus-register-map.csv
+
+      - name: Broken Modbus register map must fail
+        run: |
+          if python tools/modbus_map_check.py --file examples/modbus-register-map-broken.csv; then
+            echo "expected a non-zero exit for the broken Modbus map"; exit 1
+          fi
+
+  compile:
+    # The skills recommend APIs. If one of those calls stops compiling, the
+    # advice is wrong and this job says so before a reader finds out.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache the PlatformIO toolchain
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio
+          key: pio-${{ runner.os }}-espressif32-8.0.0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PlatformIO
+        run: pip install platformio
+
+      - name: Compile every rule in the skills
+        run: pio run -d examples/compiled

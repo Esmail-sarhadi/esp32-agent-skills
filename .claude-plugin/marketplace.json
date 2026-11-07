@@ -1,0 +1,31 @@
+{
+  "name": "esp32-agent-skills",
+  "owner": {
+    "name": "Esmail Sarhadi",
+    "url": "https://github.com/Esmail-sarhadi"
+  },
+  "metadata": {
+    "description": "ESP32 firmware skills and checkers for coding agents: the hardware failures that compile cleanly and then stop the board."
+  },
+  "plugins": [
+    {
+      "name": "esp32-agent-skills",
+      "source": "./",
+      "description": "601 skills and 10 checkers for ESP32, ESP32-S3, -C3, -C6 and -H2 firmware.",
+      "version": "1.3.0",
+      "author": {
+        "name": "Esmail Sarhadi",
+        "url": "https://github.com/Esmail-sarhadi"
+      },
+      "homepage": "https://esmail-sarhadi.github.io/esp32-agent-skills/",
+      "repository": "https://github.com/Esmail-sarhadi/esp32-agent-skills",
+      "license": "MIT",
+      "keywords": [
+        "esp32",
+        "embedded",
+        "firmware",
+        "skills"
+      ]
+    }
+  ]
+}

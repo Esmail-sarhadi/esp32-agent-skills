@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "note": "Pin constraints transcribed from Espressif datasheets and the ESP-IDF GPIO documentation. Only facts that are unambiguous across every module variant are encoded here; board-specific quirks (on-board LEDs, USB bridges) are intentionally excluded.",
+  "socs": {
+    "esp32": {
+      "label": "ESP32 (classic, WROOM-32 / WROVER)",
+      "valid_range": [
+        0,
+        39
+      ],
+      "reserved_flash": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "input_only": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "uart0": [
+        1,
+        3
+      ],
+      "adc2_blocked_by_wifi": [
+        0,
+        2,
+        4,
+        12,
+        13,
+        14,
+        15,
+        25,
+        26,
+        27
+      ],
+      "strapping": {
+        "0": "must be HIGH at boot, pulled LOW selects the serial bootloader",
+        "2": "must be LOW or floating at boot, also drives the on-board LED on many boards",
+        "5": "must be HIGH at boot, it latches the SDIO timing",
+        "12": "must be LOW at boot on 3.3 V flash modules, HIGH selects 1.8 V and the board will not boot",
+        "15": "must be HIGH at boot, pulling it LOW silences the boot log"
+      },
+      "not_on_wroom": [
+        16,
+        17
+      ],
+      "notes": {
+        "not_on_wroom": "GPIO16/17 exist only on WROVER modules, they are wired to the PSRAM on WROOM."
+      },
+      "usb": []
+    },
+    "esp32s3": {
+      "label": "ESP32-S3",
+      "valid_range": [
+        0,
+        48
+      ],
+      "reserved_flash": [
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "input_only": [],
+      "uart0": [
+        43,
+        44
+      ],
+      "adc2_blocked_by_wifi": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "strapping": {
+        "0": "must be HIGH at boot, pulled LOW selects the serial bootloader",
+        "3": "must be floating or HIGH at boot, it selects the JTAG signal source",
+        "45": "must be LOW at boot, it selects the VDD_SPI voltage",
+        "46": "must be LOW at boot, it enables the ROM boot messages"
+      },
+      "not_on_wroom": [],
+      "notes": {
+        "usb": "GPIO19/GPIO20 are the native USB D-/D+ pins; using them as plain GPIO disables USB CDC.",
+        "octal_psram": "Modules with octal PSRAM additionally reserve GPIO33-37."
+      },
+      "usb": [
+        19,
+        20
+      ]
+    },
+    "esp32c3": {
+      "label": "ESP32-C3",
+      "valid_range": [
+        0,
+        21
+      ],
+      "reserved_flash": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "input_only": [],
+      "uart0": [
+        21,
+        20
+      ],
+      "adc2_blocked_by_wifi": [
+        5
+      ],
+      "strapping": {
+        "2": "must be HIGH at boot, pulled LOW selects the serial bootloader",
+        "8": "must be HIGH at boot, it selects the boot mode",
+        "9": "must be HIGH at boot, it enables the ROM boot messages"
+      },
+      "not_on_wroom": [],
+      "notes": {
+        "usb": "GPIO18/GPIO19 are the native USB D-/D+ pins.",
+        "uart0": "GPIO20/GPIO21 default to UART0 RX/TX."
+      },
+      "usb": [
+        18,
+        19
+      ]
+    }
+  }
+}
