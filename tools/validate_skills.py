@@ -22,7 +22,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SKILLS = os.path.join(ROOT, "skills")
 SCHEMA = os.path.join(ROOT, "schemas", "skill.schema.json")
 
-NAME_RE = re.compile(r"^esp32-[a-z0-9]+(?:-[a-z0-9]+)*$")
+NAME_RE = re.compile(r"^(?:esp32-)?[a-z0-9]+(?:-[a-z0-9]+)*$")
 DESCRIPTION_PREFIX = "Use when"
 REQUIRED = ("name", "description", "license")
 ALLOWED = set(REQUIRED) | {"metadata", "tools", "version"}

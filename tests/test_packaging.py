@@ -47,7 +47,7 @@ class ManifestTest(unittest.TestCase):
 
     def test_agent_yaml_lists_every_skill_and_nothing_else(self):
         text = read(os.path.join(ROOT, "agent.yaml"))
-        listed = re.findall(r"^  - (esp32-[a-z0-9-]+)$", text, re.M)
+        listed = re.findall(r"^  - ([a-z0-9-]+)$", text, re.M)
         self.assertEqual(sorted(listed), skill_dirs())
 
     def test_agent_yaml_lists_all_specialist_roles(self):
