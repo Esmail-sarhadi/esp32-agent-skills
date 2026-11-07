@@ -47,7 +47,8 @@ class ManifestTest(unittest.TestCase):
 
     def test_agent_yaml_lists_every_skill_and_nothing_else(self):
         text = read(os.path.join(ROOT, "agent.yaml"))
-        listed = re.findall(r"^  - ([a-z0-9-]+)$", text, re.M)
+        skill_section = text.split("skills:\\n", 1)[1].split("checkers:\\n", 1)[0]
+        listed = re.findall(r"^  - ([a-z0-9-]+)$", skill_section, re.M)
         self.assertEqual(sorted(listed), skill_dirs())
 
     def test_agent_yaml_lists_all_specialist_roles(self):
