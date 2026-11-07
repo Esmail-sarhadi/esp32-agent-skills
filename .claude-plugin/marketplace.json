@@ -11,7 +11,7 @@
     {
       "name": "esp32-agent-skills",
       "source": "./",
-      "description": "644 skills and 10 checkers for ESP32-family firmware, field diagnostics and industrial embedded systems.",
+      "description": "644 skills and 10 checkers for ESP32, ESP32-S3, -C3, -C6 and -H2 firmware.",
       "version": "1.4.0",
       "author": {
         "name": "Esmail Sarhadi",
