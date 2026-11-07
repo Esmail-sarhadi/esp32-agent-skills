@@ -1228,3 +1228,132 @@ class AdvancedSkillQualityTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+    def test_wifi_disconnect_reason_forensics(self):
+        self.assert_skill_contract("wifi-disconnect-reason-forensics", "WIFI DISCONNECT REASON FORENSICS")
+
+    def test_wifi_event_loop_ip_lifecycle(self):
+        self.assert_skill_contract("wifi-event-loop-ip-lifecycle", "WIFI EVENT LOOP AND IP LIFECYCLE")
+
+    def test_wifi_credential_change_recovery(self):
+        self.assert_skill_contract("wifi-credential-change-recovery", "WIFI CREDENTIAL CHANGE RECOVERY")
+
+    def test_wifi_ble_coexistence_regression_matrix(self):
+        self.assert_skill_contract("wifi-ble-coexistence-regression-matrix", "WIFI BLE COEXISTENCE REGRESSION MATRIX")
+
+    def test_esp32_c6_wifi_ble_802154_coexistence(self):
+        self.assert_skill_contract("esp32-c6-wifi-ble-802154-coexistence", "ESP32 C6 WIFI BLE 802154 COEXISTENCE")
+
+    def test_wifi_watchdog_load_isolation(self):
+        self.assert_skill_contract("wifi-watchdog-load-isolation", "WIFI TASK WATCHDOG LOAD ISOLATION")
+
+    def test_ble_scan_window_coexistence_audit(self):
+        self.assert_skill_contract("ble-scan-window-coexistence-audit", "BLE SCAN WINDOW COEXISTENCE AUDIT")
+
+    def test_brownout_rail_transient_measurement(self):
+        self.assert_skill_contract("brownout-rail-transient-measurement", "BROWNOUT RAIL TRANSIENT MEASUREMENT")
+
+    def test_guru_meditation_backtrace_symbolication(self):
+        self.assert_skill_contract("guru-meditation-backtrace-symbolication", "GURU MEDITATION BACKTRACE SYMBOLICATION")
+
+    def test_task_watchdog_blocking_path_audit(self):
+        self.assert_skill_contract("task-watchdog-blocking-path-audit", "TASK WATCHDOG BLOCKING PATH AUDIT")
+
+    def test_heap_corruption_allocation_forensics(self):
+        self.assert_skill_contract("heap-corruption-allocation-forensics", "HEAP CORRUPTION AND ALLOCATION FORENSICS")
+
+    def test_nvs_no_free_pages_recovery(self):
+        self.assert_skill_contract("nvs-no-free-pages-recovery", "NVS NO FREE PAGES SAFE RECOVERY")
+
+    def test_ota_pending_verify_rollback_qualification(self):
+        self.assert_skill_contract("ota-pending-verify-rollback-qualification", "OTA PENDING VERIFY AND ROLLBACK QUALIFICATION")
+
+    def test_ota_image_size_and_partition_fit(self):
+        self.assert_skill_contract("ota-image-size-and-partition-fit", "OTA IMAGE SIZE AND PARTITION FIT")
+
+    def test_deep_sleep_immediate_wakeup_diagnosis(self):
+        self.assert_skill_contract("deep-sleep-immediate-wakeup-diagnosis", "DEEP SLEEP IMMEDIATE WAKEUP DIAGNOSIS")
+
+    def test_deep_sleep_timer_wakeup_reliability(self):
+        self.assert_skill_contract("deep-sleep-timer-wakeup-reliability", "DEEP SLEEP TIMER WAKEUP RELIABILITY")
+
+    def test_uart_rs485_direction_turnaround(self):
+        self.assert_skill_contract("uart-rs485-direction-turnaround", "UART RS485 DIRECTION AND TURNAROUND TIMING")
+
+    def test_modbus_rtu_silent_interval_validation(self):
+        self.assert_skill_contract("modbus-rtu-silent-interval-validation", "MODBUS RTU SILENT INTERVAL VALIDATION")
+
+    def test_uart_rx_overflow_and_event_queue_audit(self):
+        self.assert_skill_contract("uart-rx-overflow-and-event-queue-audit", "UART RX OVERFLOW AND EVENT QUEUE AUDIT")
+
+    def test_usb_cdc_uart0_flashing_path_audit(self):
+        self.assert_skill_contract("usb-cdc-uart0-flashing-path-audit", "USB CDC AND UART0 FLASHING PATH AUDIT")
+
+    def test_flash_mode_size_frequency_compatibility(self):
+        self.assert_skill_contract("flash-mode-size-frequency-compatibility", "FLASH MODE SIZE AND FREQUENCY COMPATIBILITY")
+
+    def test_psram_capability_allocation_audit(self):
+        self.assert_skill_contract("psram-capability-allocation-audit", "PSRAM CAPABILITY ALLOCATION AUDIT")
+
+    def test_adc2_wifi_target_specific_arbitration(self):
+        self.assert_skill_contract("adc2-wifi-target-specific-arbitration", "ADC2 WIFI ARBITRATION BY SOC TARGET")
+
+    def test_gpio_strapping_external_load_review(self):
+        self.assert_skill_contract("gpio-strapping-external-load-review", "GPIO STRAPPING AND EXTERNAL LOAD REVIEW")
+
+    def test_tls_certificate_time_and_sni_diagnostics(self):
+        self.assert_skill_contract("tls-certificate-time-and-sni-diagnostics", "TLS CERTIFICATE TIME AND SNI DIAGNOSTICS")
+
+    def test_dns_stale_cache_and_failover(self):
+        self.assert_skill_contract("dns-stale-cache-and-failover", "DNS STALE CACHE AND FAILOVER")
+
+    def test_i2c_bus_stuck_recovery(self):
+        self.assert_skill_contract("i2c-bus-stuck-recovery", "I2C BUS STUCK AND RECOVERY")
+
+    def test_mqtt_session_qos_reconnect_semantics(self):
+        self.assert_skill_contract("mqtt-session-qos-reconnect-semantics", "MQTT SESSION QOS AND RECONNECT SEMANTICS")
+
+    def test_nvs_flash_wear_write_amplification(self):
+        self.assert_skill_contract("nvs-flash-wear-write-amplification", "NVS FLASH WEAR AND WRITE AMPLIFICATION")
+
+    def test_freertos_stack_overflow_task_sizing(self):
+        self.assert_skill_contract("freertos-stack-overflow-task-sizing", "FREERTOS STACK OVERFLOW TASK SIZING")
+
+    def test_isr_latency_and_critical_section_audit(self):
+        self.assert_skill_contract("isr-latency-and-critical-section-audit", "ISR LATENCY AND CRITICAL SECTION AUDIT")
+
+    def test_brownout_vs_watchdog_reset_classification(self):
+        self.assert_skill_contract("brownout-vs-watchdog-reset-classification", "BROWNOUT VERSUS WATCHDOG RESET CLASSIFICATION")
+
+    def test_modbus_register_map_unit_and_endian_audit(self):
+        self.assert_skill_contract("modbus-register-map-unit-and-endian-audit", "MODBUS REGISTER MAP UNIT AND ENDIAN AUDIT")
+
+    def test_power_save_wifi_latency_budget(self):
+        self.assert_skill_contract("power-save-wifi-latency-budget", "WIFI POWER SAVE LATENCY AND AVAILABILITY BUDGET")
+
+    def test_ota_power_loss_fault_injection(self):
+        self.assert_skill_contract("ota-power-loss-fault-injection", "OTA POWER LOSS FAULT INJECTION")
+
+    def test_esp32_board_power_sequencing_audit(self):
+        self.assert_skill_contract("esp32-board-power-sequencing-audit", "ESP32 BOARD POWER SEQUENCING AUDIT")
+
+    def test_wifi_provisioning_captive_portal_recovery(self):
+        self.assert_skill_contract("wifi-provisioning-captive-portal-recovery", "WIFI PROVISIONING AND CAPTIVE PORTAL RECOVERY")
+
+    def test_serial_log_capture_and_baud_forensics(self):
+        self.assert_skill_contract("serial-log-capture-and-baud-forensics", "SERIAL LOG CAPTURE AND BAUD FORENSICS")
+
+    def test_idf_version_regression_bisect(self):
+        self.assert_skill_contract("idf-version-regression-bisect", "ESP IDF VERSION REGRESSION BISECT")
+
+    def test_field_crash_telemetry_minimal_record(self):
+        self.assert_skill_contract("field-crash-telemetry-minimal-record", "FIELD CRASH TELEMETRY MINIMAL RECORD")
+
+    def test_modbus_rs485_bus_contention_diagnostics(self):
+        self.assert_skill_contract("modbus-rs485-bus-contention-diagnostics", "MODBUS RS485 BUS CONTENTION DIAGNOSTICS")
+
+    def test_brownout_safe_actuator_reset_state(self):
+        self.assert_skill_contract("brownout-safe-actuator-reset-state", "BROWNOUT SAFE ACTUATOR RESET STATE")
+
+    def test_esp32_error_code_actionable_triage(self):
+        self.assert_skill_contract("esp32-error-code-actionable-triage", "ESP ERR CODE ACTIONABLE TRIAGE")

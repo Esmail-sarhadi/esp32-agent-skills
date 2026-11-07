@@ -1,5 +1,0 @@
-name,table,address,type,access,scale,unit,description
-device_status,holding,0x0000,U16,R,1,1,Device status bitfield from vendor map rev C
-temperature,input,0x0010,I16,R,0.1,degC,Temperature in tenths of a degree
-energy_total,holding,0x0020,U32,RW,1,kWh,Accumulated energy low word first
-relay_1,coil,0x0001,BOOL,RW,1,1,Relay output command

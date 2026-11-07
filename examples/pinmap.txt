@@ -1,8 +1,0 @@
-# A typical pin map written by a coding agent for an ESP32 relay board.
-# Run: python tools/pincheck.py --soc esp32 --file examples/pinmap.txt
-12=relay1
-13=relay2
-34=button
-6=status_led
-1=debug_tx
-34=spare_button

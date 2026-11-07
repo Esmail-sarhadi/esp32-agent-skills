@@ -1,5 +1,0 @@
-name,table,address,type,access,scale,unit,description
-temperature,input,10,I32,R,0.1,degC,Temperature occupies offsets 10 and 11
-duplicate,input,11,U16,R,1,1,Overlaps temperature at offset 11
-bad_scale,holding,20,U16,R,0,bar,Zero scale is invalid
-bad_coil,coil,4,U16,RW,1,1,Coil must be BOOL
