@@ -4,13 +4,17 @@
   "title": "ESP32 agent skill frontmatter",
   "description": "The YAML block at the top of every skills/<name>/SKILL.md. tools/validate_skills.py implements these rules without a JSON Schema dependency; this file is the readable statement of the same contract.",
   "type": "object",
-  "required": ["name", "description", "license"],
+  "required": [
+    "name",
+    "description",
+    "license"
+  ],
   "additionalProperties": false,
   "properties": {
     "name": {
       "type": "string",
-      "pattern": "^esp32-[a-z0-9]+(?:-[a-z0-9]+)*$",
-      "description": "Must equal the directory name, so a skill cannot be moved without its identity moving with it."
+      "pattern": "^(?:esp32-)?[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Must equal the directory name. ESP32-prefixed names are preferred; concise domain names are also permitted for focused issue playbooks."
     },
     "description": {
       "type": "string",
@@ -20,7 +24,9 @@
     },
     "license": {
       "type": "string",
-      "enum": ["MIT"],
+      "enum": [
+        "MIT"
+      ],
       "description": "Every skill ships its own LICENSE.txt; the field keeps the frontmatter honest about it."
     },
     "version": {
