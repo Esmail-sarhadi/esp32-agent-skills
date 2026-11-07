@@ -1,10 +1,10 @@
 spec_version: "0.1.0"
 name: esp32-agent-skills
-version: "1.2.0"
+version: "1.3.0"
 description: >-
-  Agent skills and checkers for ESP32 firmware: 201 skills across pin safety,
-  power, partitioning, industrial protocols and field failures, plus 10
-  command-line checkers that exit non-zero on a real problem.
+  Agent skills and checkers for ESP32 firmware: 601 skills across
+  hardware, RTOS, connectivity, industrial protocols, security, production and
+  field reliability, plus 10 command-line checkers.
 author: Esmail Sarhadi
 license: MIT
 homepage: https://esmail-sarhadi.github.io/esp32-agent-skills/
@@ -17,52 +17,174 @@ keywords:
   - modbus
   - skills
 skills:
+  - esp32-0-10v-input-protection
+  - esp32-4-20ma-loop-compliance
   - esp32-4-20ma-transmitter
+  - esp32-actuator-manual-override
+  - esp32-actuator-safe-reset-state
   - esp32-actuators-and-relays
   - esp32-adc-and-sensors
   - esp32-adc-calibration-linearity
+  - esp32-adc-oversampling-validity
+  - esp32-adc-pin-allocation
+  - esp32-adc-reference-error-budget
+  - esp32-adc-source-impedance-review
   - esp32-addressable-leds
   - esp32-ads1115-external-adc
   - esp32-ads1256-precision-adc
+  - esp32-allocation-free-hot-path
+  - esp32-analog-anti-alias-filter
+  - esp32-analog-isolation-boundary
+  - esp32-antenna-enclosure-detuning
+  - esp32-antenna-impedance-review
   - esp32-anti-rollback-policy
+  - esp32-anti-rollback-version-policy
+  - esp32-append-only-log-design
+  - esp32-atomic-operation-review
   - esp32-audio-buffer-underrun
+  - esp32-audio-codec-register-sequence
+  - esp32-audio-dma-buffer-sizing
   - esp32-audio-i2s
+  - esp32-audio-latency-budget
+  - esp32-audio-resampling-drift
+  - esp32-audio-sample-rate-conversion
+  - esp32-audio-underrun-recovery
+  - esp32-authorization-role-model
+  - esp32-barcode-qr-provisioning-flow
   - esp32-batch-provisioning
   - esp32-battery-and-charging
+  - esp32-battery-chemistry-selection
+  - esp32-battery-fuel-gauge-calibration
+  - esp32-battery-protection-boundary
   - esp32-battery-state-estimation
+  - esp32-binary-artifact-retention
+  - esp32-binary-size-regression
+  - esp32-ble-bond-lifecycle
+  - esp32-ble-connection-interval-budget
+  - esp32-ble-connection-telemetry
+  - esp32-ble-factory-reset-identity
+  - esp32-ble-firmware-update-transport
   - esp32-ble-gatt
+  - esp32-ble-gatt-cache-invalidation
   - esp32-ble-gatt-contract-review
   - esp32-ble-gatt-regression
+  - esp32-ble-indication-confirmation
+  - esp32-ble-long-write-validation
+  - esp32-ble-malformed-packet-hardening
+  - esp32-ble-mobile-interoperability
+  - esp32-ble-mtu-throughput-budget
+  - esp32-ble-multiple-central-policy
+  - esp32-ble-notification-backpressure
+  - esp32-ble-pairing-mode-selection
   - esp32-ble-pairing-security
+  - esp32-ble-privacy-address-policy
+  - esp32-ble-provisioning-state-machine
+  - esp32-ble-qr-secret-design
+  - esp32-ble-service-versioning
   - esp32-ble-throughput-latency
+  - esp32-bluetooth-wifi-coexistence
   - esp32-board-capability-matrix
+  - esp32-board-revision-migration
+  - esp32-board-schematic-intake
+  - esp32-boot-mode-qualification
+  - esp32-boundary-value-test-design
+  - esp32-braking-energy-path
+  - esp32-bridge-excitation-stability
+  - esp32-brownout-log-correlation
   - esp32-brownout-root-cause
+  - esp32-brownout-threshold-validation
   - esp32-build-and-sdkconfig
+  - esp32-build-flag-precedence-audit
+  - esp32-build-provenance-attestation
+  - esp32-cache-coherency-boundary
+  - esp32-calibration-coefficient-traceability
+  - esp32-calibration-temperature-compensation
+  - esp32-camera-frame-ownership
   - esp32-camera-framebuffer-budget
+  - esp32-camera-low-light-exposure-control
   - esp32-camera-pipeline
+  - esp32-camera-power-sequencing
+  - esp32-camera-psram-bandwidth-budget
+  - esp32-camera-xclk-timing-validation
+  - esp32-can-bit-timing-calculation
+  - esp32-can-bus-load-budget
+  - esp32-can-bus-off-recovery-policy
   - esp32-can-fd-gateway
   - esp32-can-twai
   - esp32-can-twai-bus-off-recovery
   - esp32-canopen-basics
+  - esp32-canopen-heartbeat-consumer
   - esp32-canopen-node-commissioning
+  - esp32-canopen-pdo-mapping-review
   - esp32-canopen-safety-boundary
+  - esp32-captive-portal-detection
   - esp32-cc1101-subghz
   - esp32-charger-powerpath-review
+  - esp32-charger-termination-review
+  - esp32-chip-revision-audit
+  - esp32-ci-target-matrix-design
+  - esp32-circular-log-retention
+  - esp32-clock-source-selection
+  - esp32-closed-loop-control-saturation
+  - esp32-compiler-warning-policy
+  - esp32-complementary-pwm-safety
+  - esp32-component-license-compliance
+  - esp32-concurrency-stress-testing
+  - esp32-configuration-schema-migration
   - esp32-configuration-transactionality
+  - esp32-contactor-feedback-monitor
+  - esp32-core-dump-retention-policy
+  - esp32-corrective-action-regression
+  - esp32-cpu-frequency-policy
+  - esp32-crash-consistent-file-update
+  - esp32-crash-loop-containment
+  - esp32-credential-revocation-flow
+  - esp32-credential-storage-policy
+  - esp32-critical-section-audit
+  - esp32-cross-core-data-ownership
+  - esp32-crystal-layout-review
   - esp32-dac-output-accuracy
+  - esp32-data-retention-policy
+  - esp32-debug-header-contract
+  - esp32-debug-port-production-lock
   - esp32-debugging
   - esp32-deep-sleep-current-audit
+  - esp32-deferred-interrupt-work
+  - esp32-degraded-mode-operation
+  - esp32-dependency-lockfile-integrity
   - esp32-dependency-vulnerability-triage
+  - esp32-deterministic-test-fixtures
+  - esp32-device-certificate-enrollment
+  - esp32-device-identity-duplicate-detection
   - esp32-device-identity-provisioning
+  - esp32-device-identity-rotation
+  - esp32-diagnostic-log-rate-limit
   - esp32-din-rail-power
+  - esp32-display-brightness-power-budget
+  - esp32-display-bus-bandwidth-budget
+  - esp32-display-framebuffer-placement
+  - esp32-display-tearing-prevention
   - esp32-display-tearing-sync
+  - esp32-dma-alignment-qualification
   - esp32-dma-buffer-placement
   - esp32-dma-cache-psram
   - esp32-dns-failure-diagnostics
+  - esp32-dns-timeout-policy
+  - esp32-dram-static-budget
+  - esp32-dual-copy-config-commit
   - esp32-emc-and-enclosure
+  - esp32-emergency-stop-interface-boundary
   - esp32-enc28j60-ethernet
+  - esp32-enclosure-thermal-model
+  - esp32-encoder-index-homing
   - esp32-encoder-pcnt-validation
+  - esp32-encoder-quadrature-integrity
+  - esp32-encrypted-persistent-records
+  - esp32-end-of-line-test-coverage
   - esp32-energy-meter-modbus
+  - esp32-energy-per-operation-budget
+  - esp32-engineering-change-impact-analysis
+  - esp32-esp-idf-version-pinning
   - esp32-esp-now
   - esp32-esp-now-reliability
   - esp32-ethercat-gateway-boundary
@@ -70,154 +192,432 @@ skills:
   - esp32-ethernet-link-recovery
   - esp32-ethernet-rmii-clock-review
   - esp32-ethernet-rmii-phy
+  - esp32-event-group-state-model
+  - esp32-factory-fixture-interface-contract
+  - esp32-factory-reset-acceptance-test
+  - esp32-factory-reset-data-erasure
   - esp32-factory-test-and-calibration
   - esp32-fail-safe-output-state
+  - esp32-failure-signature-clustering
+  - esp32-fat-filesystem-integrity
+  - esp32-fault-counter-persistence
   - esp32-fault-injection-hil
+  - esp32-fault-injection-matrix
   - esp32-fault-injection-network
   - esp32-fault-injection-power
   - esp32-field-gotchas
+  - esp32-field-recall-evidence-package
+  - esp32-field-return-to-factory-triage
+  - esp32-field-telemetry-schema
+  - esp32-fieldbus-fault-containment
+  - esp32-fieldbus-gateway-buffering
+  - esp32-filesystem-full-recovery
+  - esp32-firmware-integrity-measurement
   - esp32-firmware-provenance-attestation
+  - esp32-firmware-sbom-component-inventory
   - esp32-firmware-sbom-generation
+  - esp32-firmware-size-budget-gate
+  - esp32-firmware-version-lockdown
+  - esp32-fixture-contact-resistance-check
+  - esp32-fixture-golden-unit-validation
+  - esp32-flash-cache-disabled-path
+  - esp32-flash-encryption-key-custody
   - esp32-flash-encryption-production
   - esp32-flash-psram-capacity
+  - esp32-flash-vendor-compatibility
+  - esp32-flash-wear-leveling-review
+  - esp32-font-asset-memory-budget
+  - esp32-frame-pool-exhaustion-recovery
   - esp32-freertos
   - esp32-gaming-rgb
+  - esp32-gatt-characteristic-permissions
+  - esp32-generated-code-review
+  - esp32-golden-vector-management
+  - esp32-gpio-drive-strength-review
+  - esp32-gpio-expander-boundary
+  - esp32-gpio-interrupt-load-budget
   - esp32-gpio-matrix-audit
+  - esp32-gpio-matrix-route-review
+  - esp32-gpio-reset-state-audit
   - esp32-gps-and-nmea
+  - esp32-hardware-bom-risk-review
   - esp32-hardware-bringup
+  - esp32-hardware-in-loop-fixture-contract
+  - esp32-hardware-revision-test-matrix
+  - esp32-health-monitor-state-machine
+  - esp32-heap-capability-allocation
   - esp32-heap-forensics
+  - esp32-heap-fragmentation-budget
   - esp32-heap-fragmentation-forensics
+  - esp32-hmi-communication-loss-state
   - esp32-http-client-resilience
   - esp32-http-server
+  - esp32-http-timeout-budget
+  - esp32-human-interface-localization
   - esp32-i2c-bus
+  - esp32-i2c-controller-allocation
   - esp32-i2c-device-discovery
   - esp32-i2c-electrical-budget
   - esp32-i2c-multi-master-review
   - esp32-i2c-recovery
   - esp32-i2s-audio-clock-budget
+  - esp32-i2s-clock-tree-validation
+  - esp32-i2s-pin-route-planning
   - esp32-iec-60870-5-104
+  - esp32-iec104-asdu-mapping-review
   - esp32-imu-calibration-frame
+  - esp32-inductive-load-clamp-review
   - esp32-industrial-analog-io
   - esp32-industrial-gateway-architecture
   - esp32-industrial-safety-interlocks
+  - esp32-industrial-timeout-hierarchy
   - esp32-industrial-watchdog-policy
+  - esp32-input-only-signal-planning
+  - esp32-instrumentation-amplifier-selection
+  - esp32-intermittent-fault-reproduction
+  - esp32-ipv6-readiness-review
   - esp32-iram-dram-budget
+  - esp32-iram-isr-callgraph-audit
   - esp32-isolated-digital-input
+  - esp32-isr-latency-budget
+  - esp32-jpeg-encode-backpressure
   - esp32-jpeg-streaming-backpressure
   - esp32-json-and-payloads
+  - esp32-jtag-lifecycle-control
+  - esp32-jtag-pin-preservation
+  - esp32-latency-tail-analysis
+  - esp32-ledc-channel-allocation
   - esp32-light-sleep-wakeup-design
+  - esp32-limit-switch-debounce
+  - esp32-linker-map-review
+  - esp32-linker-script-change-review
+  - esp32-littlefs-power-cut-recovery
   - esp32-littlefs-wear-budget
+  - esp32-littlefs-wear-estimation
+  - esp32-load-cell-creep-compensation
   - esp32-load-cell-noise-budget
   - esp32-load-cells-hx711
+  - esp32-lock-free-ring-buffer-review
+  - esp32-long-duration-soak-test
   - esp32-lora-and-lorawan
+  - esp32-lora-bandwidth-airtime-tradeoff
+  - esp32-lora-coding-rate-selection
+  - esp32-lora-frequency-error-budget
   - esp32-lora-link-budget
+  - esp32-lora-preamble-detection-budget
+  - esp32-lora-rx-window-scheduling
+  - esp32-lora-spreading-factor-selection
   - esp32-lorawan-device-lifecycle
+  - esp32-lorawan-duty-cycle-audit
+  - esp32-lorawan-frame-counter-persistence
+  - esp32-lorawan-join-lifecycle
+  - esp32-low-battery-state-machine
   - esp32-lvgl-and-displays
   - esp32-lvgl-rendering-budget
+  - esp32-lvgl-task-priority-review
   - esp32-lwip-network-diagnostics
+  - esp32-mac-address-allocation-audit
+  - esp32-manufacturing-data-retention
+  - esp32-manufacturing-variant-matrix
+  - esp32-manufacturing-yield-analysis
   - esp32-max31865-rtd
   - esp32-mcp4725-analog-output
+  - esp32-mcpwm-deadtime-validation
   - esp32-mcpwm-power-stage
+  - esp32-mcpwm-signal-routing
+  - esp32-measurement-uncertainty-budget
+  - esp32-media-network-jitter-buffer
+  - esp32-media-pipeline-soak-test
+  - esp32-media-timestamp-synchronization
   - esp32-memory-and-heap
+  - esp32-memory-leak-soak-test
+  - esp32-memory-pool-sizing
+  - esp32-microphone-bias-noise-review
+  - esp32-modbus-broadcast-policy
   - esp32-modbus-conformance-testing
+  - esp32-modbus-exception-contract
   - esp32-modbus-register-contract
+  - esp32-modbus-register-versioning
   - esp32-modbus-rs485
+  - esp32-modbus-rtu-silent-interval
   - esp32-modbus-rtu-slave
   - esp32-modbus-rtu-tcp-gateway
   - esp32-modbus-rtu-timing
+  - esp32-modbus-scaling-units-review
   - esp32-modbus-security-and-mapping
   - esp32-modbus-tcp
+  - esp32-modbus-tcp-connection-limit
   - esp32-modbus-tcp-hardening
+  - esp32-module-antenna-clearance
+  - esp32-module-memory-topology
+  - esp32-motion-command-watchdog
   - esp32-motor-control-mcpwm-review
+  - esp32-motor-stall-detection
+  - esp32-motor-startup-current-limit
   - esp32-mqtt-and-cloud
   - esp32-mqtt-conformance-testing
+  - esp32-mqtt-over-cellular-fallback
   - esp32-mqtt-payload-schema
   - esp32-mqtt-session-recovery
   - esp32-mqtt-topic-acl-design
   - esp32-multicore-and-ipc
+  - esp32-mutation-testing-firmware-logic
+  - esp32-mutex-ownership-design
+  - esp32-mutual-tls-device-auth
+  - esp32-network-chaos-test
+  - esp32-network-interface-failover
+  - esp32-network-outage-forensics
   - esp32-nrf24l01
   - esp32-ntp-time-bootstrap
   - esp32-nvs-and-config
+  - esp32-nvs-atomic-record-design
+  - esp32-nvs-namespace-versioning
   - esp32-nvs-schema-migration
   - esp32-opc-ua-gateway
   - esp32-opcua-gateway-boundary
+  - esp32-opcua-namespace-mapping
+  - esp32-opcua-security-policy-boundary
+  - esp32-open-drain-bus-planning
+  - esp32-operator-alarm-priority
+  - esp32-operator-permission-separation
+  - esp32-ota-artifact-provenance
+  - esp32-ota-boot-confirmation-state
+  - esp32-ota-canary-cohort-selection
+  - esp32-ota-delta-update-budget
+  - esp32-ota-download-resume-policy
+  - esp32-ota-emergency-stop-rollout
+  - esp32-ota-factory-recovery-path
+  - esp32-ota-firmware-size-gate
+  - esp32-ota-fleet-health-gate
+  - esp32-ota-fleet-version-skew
   - esp32-ota-image-compatibility
+  - esp32-ota-image-signature-check
+  - esp32-ota-maintenance-window-policy
+  - esp32-ota-migration-compatibility
+  - esp32-ota-network-failure-recovery
+  - esp32-ota-partition-compatibility
   - esp32-ota-power-loss-matrix
+  - esp32-ota-release-manifest-design
+  - esp32-ota-rollback-trigger-design
   - esp32-ota-server
+  - esp32-ota-staged-rollout-policy
+  - esp32-ota-storage-wear-impact
+  - esp32-ota-write-power-loss-test
+  - esp32-panic-backtrace-symbolization
   - esp32-partition-ota-budget
   - esp32-partitions-and-ota
   - esp32-pcnt-encoder-feedback
+  - esp32-pcnt-unit-allocation
+  - esp32-performance-counter-profiling
+  - esp32-peripheral-instance-budget
   - esp32-peripheral-matrix-planner
+  - esp32-persistent-counter-integrity
+  - esp32-physical-attack-surface-review
+  - esp32-pid-anti-windup-review
+  - esp32-pin-map-change-impact
   - esp32-pin-safety
   - esp32-pinmux-conflict-analysis
+  - esp32-platformio-environment-isolation
   - esp32-poe-power
   - esp32-power-and-boot
+  - esp32-power-fail-persistence
   - esp32-power-integrity
+  - esp32-power-interruption-test-plan
+  - esp32-power-on-reset-sequencing
+  - esp32-power-path-load-sharing
   - esp32-power-rail-budget
   - esp32-pressure-sensor-compensation
+  - esp32-pressure-transducer-scaling
+  - esp32-priority-assignment-audit
+  - esp32-priority-inversion-analysis
+  - esp32-producer-consumer-pipeline
+  - esp32-production-image-authentication
+  - esp32-production-key-injection
+  - esp32-production-test-time-budget
+  - esp32-property-based-parser-tests
+  - esp32-protocol-fuzz-harness
   - esp32-protocol-parser-fuzzing
+  - esp32-protocol-version-interoperability
+  - esp32-psram-cache-access-review
   - esp32-psram-performance-tradeoffs
+  - esp32-psram-wiring-review
   - esp32-pt100-pt1000-rtd
   - esp32-pwm-and-timing
+  - esp32-queue-backpressure-policy
+  - esp32-radio-collision-avoidance
+  - esp32-radio-loss-chaos-testing
+  - esp32-radio-packet-retry-policy
+  - esp32-radio-peak-current-budget
+  - esp32-radio-production-test
+  - esp32-radio-sleep-wakeup-timing
+  - esp32-rail-sequencing-review
+  - esp32-real-time-deadline-analysis
+  - esp32-regression-minimization
+  - esp32-regulator-transient-response
+  - esp32-relay-contact-life-budget
   - esp32-relay-inductive-load-review
+  - esp32-release-acceptance-evidence
+  - esp32-release-tag-signing
+  - esp32-remote-debug-safety-boundary
+  - esp32-replay-protection-counter
+  - esp32-reproducible-build-comparison
   - esp32-reproducible-firmware-build
+  - esp32-requirement-test-traceability
+  - esp32-reset-reason-forensics
+  - esp32-reset-supervisor-selection
+  - esp32-resource-exhaustion-recovery
+  - esp32-resource-exhaustion-test
+  - esp32-reverse-polarity-protection
+  - esp32-rework-and-retest-policy
+  - esp32-rf-cochannel-interference-test
+  - esp32-rf-ground-plane-review
+  - esp32-rf-link-margin-calculation
+  - esp32-rf-output-power-calibration
   - esp32-rfm69-subghz
+  - esp32-rmt-channel-allocation
   - esp32-rmt-waveform-io
+  - esp32-root-cause-proof-standard
   - esp32-rs232-rs422
+  - esp32-rs485-bus-topology-review
+  - esp32-rs485-common-mode-budget
   - esp32-rs485-direction-timing
   - esp32-rs485-isolated-transceivers
   - esp32-rs485-termination-bias
+  - esp32-rtc-domain-planning
   - esp32-rtc-drift-calibration
+  - esp32-rtd-four-wire-sensing
   - esp32-rtd-lead-compensation
+  - esp32-rtd-three-wire-error-budget
+  - esp32-scheduler-saturation-test
+  - esp32-screen-burnin-lifecycle
   - esp32-sd-card-and-logging
   - esp32-sd-card-filesystem-integrity
+  - esp32-sd-card-latency-budget
+  - esp32-sd-card-removal-detection
+  - esp32-sdkconfig-diff-review
   - esp32-sdmmc-card-lifecycle
   - esp32-secret-leakage-audit
+  - esp32-secret-redaction-logging
+  - esp32-secret-scan-firmware-repo
   - esp32-secure-boot-key-lifecycle
+  - esp32-secure-boot-provisioning-plan
   - esp32-secure-debug-port-policy
+  - esp32-secure-element-key-boundary
+  - esp32-secure-element-selection
+  - esp32-secure-factory-reset
   - esp32-secure-ota-production
+  - esp32-secure-randomness-validation
   - esp32-security-and-provisioning
+  - esp32-security-event-audit-trail
+  - esp32-sensor-calibration-record
+  - esp32-sensor-drift-field-detection
   - esp32-sensor-fusion-timestamping
+  - esp32-sensor-ground-loop-analysis
+  - esp32-sensor-open-short-detection
+  - esp32-sensor-sampling-synchronization
   - esp32-serial-field-diagnostics
+  - esp32-serial-number-provisioning
+  - esp32-servo-command-rate-limit
+  - esp32-signed-configuration-update
+  - esp32-sleep-leakage-audit
   - esp32-snmp-agent
+  - esp32-soc-family-portability
+  - esp32-socket-lifecycle-audit
+  - esp32-software-timer-load-audit
+  - esp32-solenoid-flyback-selection
   - esp32-sparkplug-b-mqtt
+  - esp32-speaker-amplifier-pop-suppression
   - esp32-spi-and-devices
+  - esp32-spi-host-resource-planning
   - esp32-spi-signal-integrity
+  - esp32-stack-overflow-detection
+  - esp32-stack-watermark-qualification
+  - esp32-state-machine-model-testing
+  - esp32-static-analysis-baseline
+  - esp32-stepper-pulse-timing
   - esp32-storage-and-filesystem
+  - esp32-storage-corruption-detection
+  - esp32-strapping-load-analysis
+  - esp32-strapping-network-review
+  - esp32-subghz-regional-plan-review
   - esp32-subghz-regulatory-check
+  - esp32-supply-ripple-measurement
   - esp32-surge-and-tvs-protection
+  - esp32-surge-load-dump-review
   - esp32-sx126x-lora
   - esp32-sx127x-lora
+  - esp32-task-affinity-policy
+  - esp32-task-decomposition-review
+  - esp32-task-lifecycle-cleanup
   - esp32-task-stack-budget
+  - esp32-tcp-keepalive-policy
+  - esp32-test-coverage-quality-review
+  - esp32-test-flakiness-triage
   - esp32-testing-and-ci
   - esp32-thermal-derating-review
   - esp32-thermal-enclosure-derating
+  - esp32-thermal-sensor-placement
+  - esp32-thermal-shutdown-policy
   - esp32-thermocouple-cold-junction
+  - esp32-thermocouple-cold-junction-budget
   - esp32-thermocouple-max31855
+  - esp32-thermocouple-open-circuit-detection
   - esp32-threat-model-device-lifecycle
   - esp32-time-and-rtc
+  - esp32-time-correlated-event-log
   - esp32-tls-and-certificates
+  - esp32-tls-session-resumption
   - esp32-tls-trust-anchor-rotation
+  - esp32-toolchain-cache-integrity
   - esp32-touch-and-input
+  - esp32-touch-calibration-validation
+  - esp32-touch-channel-allocation
+  - esp32-touch-gesture-state-machine
   - esp32-touch-sensor-drift
+  - esp32-trust-anchor-update-policy
   - esp32-uart-and-serial
   - esp32-uart-framing-hardening
+  - esp32-uart-pin-remap-review
+  - esp32-udp-loss-accounting
+  - esp32-ui-control-safety-review
+  - esp32-ui-render-backpressure
+  - esp32-usb-cdc-throughput-budget
+  - esp32-usb-device-descriptor-review
+  - esp32-usb-disconnect-recovery
+  - esp32-usb-hid-report-contract
+  - esp32-usb-host-power-budget
   - esp32-usb-otg-role-review
   - esp32-usb-otg-serial-jtag
+  - esp32-usb-role-swap-state-machine
   - esp32-usb-serial-jtag-debug
   - esp32-vfd-modbus-control
+  - esp32-video-stream-frame-dropping
   - esp32-voltage-current-monitoring
   - esp32-w5500-ethernet
+  - esp32-wake-current-profile
+  - esp32-watchdog-reset-triage
+  - esp32-watchdog-task-contract
   - esp32-watchdogs-and-timers
   - esp32-wifi-coexistence-analysis
+  - esp32-wifi-coexistence-scheduling
+  - esp32-wifi-connect-state-machine
+  - esp32-wifi-credential-rotation
+  - esp32-wifi-dhcp-renewal-recovery
   - esp32-wifi-enterprise-eap
   - esp32-wifi-enterprise-eap-review
   - esp32-wifi-event-state-machine
   - esp32-wifi-provisioning-ux
+  - esp32-wifi-reconnect-backoff
   - esp32-wifi-reliability
   - esp32-wifi-roaming
   - esp32-wifi-roaming-policy
+  - esp32-wifi-roaming-thresholds
+  - esp32-wifi-rssi-telemetry
+  - esp32-wifi-scan-disruption-budget
+  - esp32-wifi-throughput-benchmark
   - esp32-wifi-throughput-diagnostics
+  - esp32-worst-case-execution-time
+  - esp32-zero-copy-buffer-ownership
 checkers:
   - tools/pincheck.py
   - tools/partition_check.py

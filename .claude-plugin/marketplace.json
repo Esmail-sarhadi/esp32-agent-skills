@@ -11,8 +11,8 @@
     {
       "name": "esp32-agent-skills",
       "source": "./",
-      "description": "201 skills and 10 checkers for ESP32, ESP32-S3, -C3, -C6 and -H2 firmware.",
-      "version": "1.2.0",
+      "description": "601 ESP32 engineering skills and 10 checkers for embedded firmware, industrial protocols, hardware constraints and verification.",
+      "version": "1.3.0",
       "author": {
         "name": "Esmail Sarhadi",
         "url": "https://github.com/Esmail-sarhadi"
