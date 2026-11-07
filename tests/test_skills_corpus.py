@@ -1,9 +1,8 @@
 """Coverage for the second half of the corpus.
 
-Two jobs. First, the thirty-three skills added in the expansion get the same scrutiny the
-first twenty-six got: frontmatter, body shape, a table, no placeholders, and a
-license next to them. That is one test per skill, generated from the directory
-listing so a new skill cannot be added without one.
+The complete 601-skill corpus is checked for frontmatter, body shape, structure,
+placeholders and a per-skill license. One generated test is created for every
+skill directory, so a new skill cannot be added without receiving the same checks.
 
 Second, the four checkers get the edge cases the first file did not reach: the
 C3 and S3 pin tables, partition tables that are wrong in each specific way, the
@@ -129,8 +128,8 @@ for _name in SKILL_NAMES:
 # ---------------------------------------------------------------------------
 
 class SkillCorpusTest(unittest.TestCase):
-    def test_the_corpus_has_two_hundred_and_one_skills(self):
-        self.assertEqual(len(SKILL_NAMES), 201)
+    def test_the_corpus_has_six_hundred_and_one_skills(self):
+        self.assertEqual(len(SKILL_NAMES), 601)
 
     def test_names_are_unique(self):
         self.assertEqual(len(SKILL_NAMES), len(set(SKILL_NAMES)))
