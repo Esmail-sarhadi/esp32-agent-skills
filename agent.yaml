@@ -1,8 +1,8 @@
 spec_version: "0.1.0"
 name: esp32-agent-skills
-version: "1.3.0"
+version: "1.4.0"
 description: >-
-  Agent skills and checkers for ESP32 firmware: 601 skills across pin safety,
+  Agent skills and checkers for ESP32 firmware: 644 skills across pin safety,
   power, partitioning, industrial protocols and field failures, plus 10
   command-line checkers that exit non-zero on a real problem.
 author: Esmail Sarhadi
@@ -17,6 +17,14 @@ keywords:
   - modbus
   - skills
 skills:
+  - adc2-wifi-target-specific-arbitration
+  - ble-scan-window-coexistence-audit
+  - brownout-rail-transient-measurement
+  - brownout-safe-actuator-reset-state
+  - brownout-vs-watchdog-reset-classification
+  - deep-sleep-immediate-wakeup-diagnosis
+  - deep-sleep-timer-wakeup-reliability
+  - dns-stale-cache-and-failover
   - esp32-0-10v-input-protection
   - esp32-4-20ma-loop-compliance
   - esp32-4-20ma-transmitter
@@ -84,6 +92,7 @@ skills:
   - esp32-ble-throughput-latency
   - esp32-bluetooth-wifi-coexistence
   - esp32-board-capability-matrix
+  - esp32-board-power-sequencing-audit
   - esp32-board-revision-migration
   - esp32-board-schematic-intake
   - esp32-boot-mode-qualification
@@ -96,6 +105,7 @@ skills:
   - esp32-build-and-sdkconfig
   - esp32-build-flag-precedence-audit
   - esp32-build-provenance-attestation
+  - esp32-c6-wifi-ble-802154-coexistence
   - esp32-cache-coherency-boundary
   - esp32-calibration-coefficient-traceability
   - esp32-calibration-temperature-compensation
@@ -184,6 +194,7 @@ skills:
   - esp32-energy-meter-modbus
   - esp32-energy-per-operation-budget
   - esp32-engineering-change-impact-analysis
+  - esp32-error-code-actionable-triage
   - esp32-esp-idf-version-pinning
   - esp32-esp-now
   - esp32-esp-now-reliability
@@ -618,6 +629,38 @@ skills:
   - esp32-wifi-throughput-diagnostics
   - esp32-worst-case-execution-time
   - esp32-zero-copy-buffer-ownership
+  - field-crash-telemetry-minimal-record
+  - flash-mode-size-frequency-compatibility
+  - freertos-stack-overflow-task-sizing
+  - gpio-strapping-external-load-review
+  - guru-meditation-backtrace-symbolication
+  - heap-corruption-allocation-forensics
+  - i2c-bus-stuck-recovery
+  - idf-version-regression-bisect
+  - isr-latency-and-critical-section-audit
+  - modbus-register-map-unit-and-endian-audit
+  - modbus-rs485-bus-contention-diagnostics
+  - modbus-rtu-silent-interval-validation
+  - mqtt-session-qos-reconnect-semantics
+  - nvs-flash-wear-write-amplification
+  - nvs-no-free-pages-recovery
+  - ota-image-size-and-partition-fit
+  - ota-pending-verify-rollback-qualification
+  - ota-power-loss-fault-injection
+  - power-save-wifi-latency-budget
+  - psram-capability-allocation-audit
+  - serial-log-capture-and-baud-forensics
+  - task-watchdog-blocking-path-audit
+  - tls-certificate-time-and-sni-diagnostics
+  - uart-rs485-direction-turnaround
+  - uart-rx-overflow-and-event-queue-audit
+  - usb-cdc-uart0-flashing-path-audit
+  - wifi-ble-coexistence-regression-matrix
+  - wifi-credential-change-recovery
+  - wifi-disconnect-reason-forensics
+  - wifi-event-loop-ip-lifecycle
+  - wifi-provisioning-captive-portal-recovery
+  - wifi-watchdog-load-isolation
 checkers:
   - tools/pincheck.py
   - tools/partition_check.py

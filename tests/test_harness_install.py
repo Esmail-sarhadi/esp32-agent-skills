@@ -32,7 +32,7 @@ class HarnessInstallerTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             target = home / ".agents" / "skills"
             installed = list(target.glob("*/SKILL.md"))
-            self.assertEqual(len(installed), 601)
+            self.assertEqual(len(installed), 644)
             self.assertTrue((target / "esp32-pin-safety" / "SKILL.md").is_file())
 
     def test_second_install_is_idempotent_and_preserves_existing_file(self):
@@ -44,7 +44,7 @@ class HarnessInstallerTests(unittest.TestCase):
             skill.write_text("user-edited\n", encoding="utf-8")
             second = self.run_installer("--harness", "codex", home=home)
             self.assertEqual(second.returncode, 0, second.stderr)
-            self.assertIn("601 already present, left alone", second.stdout)
+            self.assertIn("644 already present, left alone", second.stdout)
             self.assertEqual(skill.read_text(encoding="utf-8"), "user-edited\n")
 
     def test_force_replaces_existing_skill(self):
@@ -62,7 +62,7 @@ class HarnessInstallerTests(unittest.TestCase):
             home = Path(temp)
             result = self.run_installer("--harness", "opencode", "--dry-run", home=home)
             self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertIn("601 skill(s) would be installed", result.stdout)
+            self.assertIn("644 skill(s) would be installed", result.stdout)
             self.assertFalse((home / ".config" / "opencode" / "skills").exists())
 
     def test_unknown_harness_fails_clearly(self):
