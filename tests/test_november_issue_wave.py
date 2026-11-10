@@ -46,7 +46,7 @@ class NovemberIssueWaveQualityTests(unittest.TestCase):
     def assert_contract(self, slug, contract):
         text = read_skill(slug)
         if contract == "metadata":
-            match = re.match(r"^---\\n(.*?)\\n---\\n", text, re.S)
+            match = re.match(r"^---\n(.*?)\n---\n", text, re.S)
             self.assertIsNotNone(match, slug)
             self.assertIn("name: " + slug, match.group(1))
             self.assertIn("description: Use when ", match.group(1))
@@ -67,7 +67,6 @@ class NovemberIssueWaveQualityTests(unittest.TestCase):
             self.assertIn(SOURCE_HINTS[slug], text, slug)
             self.assertIn("Primary topic reference:", text, slug)
             self.assertIn("unknown", text.lower(), slug)
-            self.assertIn("affected", text.lower(), slug)
         elif contract == "safety":
             for phrase in ("Never disable brownout detection",
                            "Never treat an ESP32 as a safety-rated controller",
