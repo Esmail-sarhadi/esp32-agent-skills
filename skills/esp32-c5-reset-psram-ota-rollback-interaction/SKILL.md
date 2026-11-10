@@ -42,7 +42,6 @@ Model the feature as explicit states and transitions. For each transition, ident
 6. **Implement a bounded correction.** Use explicit ownership, finite queues, validated inputs, bounded retries and deterministic error propagation. Prefer a documented workaround or patched release over an undocumented timing hack.
 7. **Exercise negative paths.** Include reset, timeout, cancellation, power interruption, malformed input, resource exhaustion and repeated recovery.
 8. **Qualify the release.** Tie the result to the exact target and build provenance. Keep unresolved risks visible and do not label untested hardware behavior as passed.
-
 ## Constraints and invariants
 
 - Never invent GPIO capabilities, peripheral availability, memory properties or timing guarantees for an unspecified SoC.
