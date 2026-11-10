@@ -53,3 +53,26 @@ This expansion is based on recurring symptom clusters found in Espressif documen
 - Upstream issues can be open, version-specific, board-specific or unresolved. Their workaround must not be copied blindly.
 - Skills instruct agents to freeze the target/version tuple, preserve raw evidence, isolate a reproducer, test competing hypotheses and separate host tests from hardware qualification.
 - Hardware/RF/power/EMC and safety claims still require the actual board, instruments and applicable standards.
+
+
+## Follow-up research: runtime, storage and security edge cases
+
+Research date: 2026-11-10
+
+This wave targets narrow failure modes surfaced in current upstream reports and Espressif advisories. Reports are configuration-specific evidence, not proof that every ESP32 target is affected.
+
+| Evidence | Engineering risk | Added skill |
+|---|---|---|
+| ESP-IDF external RAM guide: https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/external-ram.html | PSRAM-backed task stacks and buffers may be inaccessible during cache-disabled flash operations or deep-sleep transitions | esp32-psram-stack-flash-boundary |
+| Fatal error guide: https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/fatal-errors.html | IRAM-safe ISR paths must not call flash-resident code or access inaccessible data while cache is disabled | esp32-flash-cache-disabled-isr-audit |
+| ESP-IDF #19403: https://github.com/espressif/esp-idf/issues/19403 | Reported wear-leveling page-edge access can cause silent data loss in a specific implementation path | esp32-wear-leveling-page-boundary-integrity |
+| ESP-IDF #19400: https://github.com/espressif/esp-idf/issues/19400 | Reported interaction between ISR and task timer dispatch may lose or fail to re-arm timer events | esp32-esp-timer-isr-task-race-audit |
+| ESP-IDF #19378: https://github.com/espressif/esp-idf/issues/19378 | Non-blocking TLS/select state may fail to progress after timeout in a reported configuration | esp32-tls-nonblocking-select-recovery |
+| ESP32-C5 advisory: https://documentation.espressif.com/AR2025-008_ESP32-C5_Series_Chips_Bug_Advisory_EN.html | Version-scoped PSRAM reset, crypto alignment and sleep coexistence defects require exact affected/fixed commit checks | esp32-c5-psram-crypto-alignment-qualification; esp32-c5-reset-psram-ota-rollback-interaction |
+| ESP-IDF #19409: https://github.com/espressif/esp-idf/issues/19409 | EAP-TLS reauthentication can stall critical Wi-Fi processing on a reported setup | esp32-wifi-eap-tls-reauth-starvation |
+| ESP-IDF #19405: https://github.com/espressif/esp-idf/issues/19405 | ESP-NOW TX queue ownership problems can wedge transmit and exhaust buffers | esp32-espnow-tx-queue-ownership |
+| ESP-IDF #19402: https://github.com/espressif/esp-idf/issues/19402 | SDMMC teardown and mutex lifetime can create priority/lifecycle deadlocks | esp32-sdmmc-host-lifecycle-lock-order |
+| ESP-IDF #19395: https://github.com/espressif/esp-idf/issues/19395 | RGB panel scan-out needs explicit recovery and bandwidth qualification under concurrent memory load | esp32-rgb-panel-bounce-buffer-recovery |
+| ESP-IDF security advisories: https://github.com/espressif/esp-idf/security/advisories | Product exposure requires component, version, commit, target and configuration matching against SBOM/build provenance | esp32-security-advisory-version-triage |
+
+Issue titles and descriptions are used to derive testable investigation scenarios. No Google search-volume ranking is claimed. Security exposure and silicon errata must be checked against the exact firmware dependency graph, affected version range and target revision before deciding impact.

@@ -1,8 +1,8 @@
 spec_version: "0.1.0"
 name: esp32-agent-skills
-version: "1.4.0"
+version: "1.5.0"
 description: >-
-  Agent skills and checkers for ESP32 firmware: 644 skills across pin safety,
+  Agent skills and checkers for ESP32 firmware: 656 skills across pin safety,
   power, partitioning, industrial protocols and field failures, plus 10
   command-line checkers that exit non-zero on a real problem.
 author: Esmail Sarhadi
@@ -105,6 +105,8 @@ skills:
   - esp32-build-and-sdkconfig
   - esp32-build-flag-precedence-audit
   - esp32-build-provenance-attestation
+  - esp32-c5-psram-crypto-alignment-qualification
+  - esp32-c5-reset-psram-ota-rollback-interaction
   - esp32-c6-wifi-ble-802154-coexistence
   - esp32-cache-coherency-boundary
   - esp32-calibration-coefficient-traceability
@@ -198,6 +200,8 @@ skills:
   - esp32-esp-idf-version-pinning
   - esp32-esp-now
   - esp32-esp-now-reliability
+  - esp32-esp-timer-isr-task-race-audit
+  - esp32-espnow-tx-queue-ownership
   - esp32-ethercat-gateway-boundary
   - esp32-ethernet
   - esp32-ethernet-link-recovery
@@ -231,6 +235,7 @@ skills:
   - esp32-firmware-version-lockdown
   - esp32-fixture-contact-resistance-check
   - esp32-fixture-golden-unit-validation
+  - esp32-flash-cache-disabled-isr-audit
   - esp32-flash-cache-disabled-path
   - esp32-flash-encryption-key-custody
   - esp32-flash-encryption-production
@@ -451,6 +456,7 @@ skills:
   - esp32-protocol-version-interoperability
   - esp32-psram-cache-access-review
   - esp32-psram-performance-tradeoffs
+  - esp32-psram-stack-flash-boundary
   - esp32-psram-wiring-review
   - esp32-pt100-pt1000-rtd
   - esp32-pwm-and-timing
@@ -485,6 +491,7 @@ skills:
   - esp32-rf-link-margin-calculation
   - esp32-rf-output-power-calibration
   - esp32-rfm69-subghz
+  - esp32-rgb-panel-bounce-buffer-recovery
   - esp32-rmt-channel-allocation
   - esp32-rmt-waveform-io
   - esp32-root-cause-proof-standard
@@ -507,6 +514,7 @@ skills:
   - esp32-sd-card-removal-detection
   - esp32-sdkconfig-diff-review
   - esp32-sdmmc-card-lifecycle
+  - esp32-sdmmc-host-lifecycle-lock-order
   - esp32-secret-leakage-audit
   - esp32-secret-redaction-logging
   - esp32-secret-scan-firmware-repo
@@ -518,6 +526,7 @@ skills:
   - esp32-secure-factory-reset
   - esp32-secure-ota-production
   - esp32-secure-randomness-validation
+  - esp32-security-advisory-version-triage
   - esp32-security-and-provisioning
   - esp32-security-event-audit-trail
   - esp32-sensor-calibration-record
@@ -577,6 +586,7 @@ skills:
   - esp32-time-and-rtc
   - esp32-time-correlated-event-log
   - esp32-tls-and-certificates
+  - esp32-tls-nonblocking-select-recovery
   - esp32-tls-session-resumption
   - esp32-tls-trust-anchor-rotation
   - esp32-toolchain-cache-integrity
@@ -609,11 +619,13 @@ skills:
   - esp32-watchdog-reset-triage
   - esp32-watchdog-task-contract
   - esp32-watchdogs-and-timers
+  - esp32-wear-leveling-page-boundary-integrity
   - esp32-wifi-coexistence-analysis
   - esp32-wifi-coexistence-scheduling
   - esp32-wifi-connect-state-machine
   - esp32-wifi-credential-rotation
   - esp32-wifi-dhcp-renewal-recovery
+  - esp32-wifi-eap-tls-reauth-starvation
   - esp32-wifi-enterprise-eap
   - esp32-wifi-enterprise-eap-review
   - esp32-wifi-event-state-machine

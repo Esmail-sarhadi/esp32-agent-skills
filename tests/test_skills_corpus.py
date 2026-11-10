@@ -1,6 +1,6 @@
 """Coverage for the second half of the corpus.
 
-The complete 644-skill corpus is checked for frontmatter, body shape, structure,
+The complete 656-skill corpus is checked for frontmatter, body shape, structure,
 placeholders and a per-skill license. One generated test is created for every
 skill directory, so a new skill cannot be added without receiving the same checks.
 
@@ -128,8 +128,8 @@ for _name in SKILL_NAMES:
 # ---------------------------------------------------------------------------
 
 class SkillCorpusTest(unittest.TestCase):
-    def test_the_corpus_has_six_hundred_and_forty_four_skills(self):
-        self.assertEqual(len(SKILL_NAMES), 644)
+    def test_the_corpus_has_six_hundred_and_fifty_six_skills(self):
+        self.assertEqual(len(SKILL_NAMES), 656)
 
     def test_names_are_unique(self):
         self.assertEqual(len(SKILL_NAMES), len(set(SKILL_NAMES)))
