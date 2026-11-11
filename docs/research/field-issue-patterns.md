@@ -106,3 +106,25 @@ The following reports were opened or updated between 2026-11-05 and 2026-11-11. 
 - Espressif AR2026-006 remains relevant to ECDSA Secure Boot on ESP32-H2/C5/C61/P4/S31 affected revisions. The advisory says no software fix is available for affected ROM verification, recommends RSA-based Secure Boot where supported, and states application-layer ECDSA verification/OTA is not affected. https://documentation.espressif.com/AR2026-006_Security_Advisory_Concerning_ECDSA_Secure_Boot_Issue_in_ESP32-H2_ESP32-C5_ESP32-C61_ESP32-P4_ESP32-S31_EN.html
 
 No Google search-volume or popularity ranking is claimed. Open user reports remain version- and target-scoped until reproduced or confirmed by maintainers.
+
+## Follow-up research: ESP-IDF security advisories and fresh issue reports
+
+Research date: 2026-11-11. Advisory versions and release availability below were checked against Espressif's GitHub Security Advisories and release list on this date.
+
+| Source | Scope and preconditions | Severity / versions | Action and evidence limit |
+|---|---|---|---|
+| GHSA-49x8-xqjg-2pjg: https://github.com/espressif/esp-idf/security/advisories/GHSA-49x8-xqjg-2pjg | ESP-TEE on ESP32-C5/C6/C61/H2; unvalidated REE stack pointer is used before switching to trusted TEE stack on ecall and interrupt entry. Requires local code execution in REE. | Critical 9.3; affected v5.5.5, v6.0.3, v6.1; fixed v5.5.6, v6.0.4 and v6.1.1. | Added esp32-tee-privilege-switch-boundary-audit. No runtime workaround. On 2026-11-11 v6.0.4/v6.1.1 were listed as pending; inspect component presence and exact commit. |
+| GHSA-ch63-jxm5-vmvf: https://github.com/espressif/esp-idf/security/advisories/GHSA-ch63-jxm5-vmvf | lwIP cached DNS lookup writes multiple cached A/AAAA records through a single ip_addr_t output when CONFIG_LWIP_DNS_MAX_HOST_IP > 1. Trigger is a later cache hit, not the first network lookup. | High 7.4; affected v5.2.3–5.2.8, v5.3.2–5.3.6, v5.4.0–5.4.4, v5.5.0–5.5.5, v6.0.0–6.0.2. | Added esp32-lwip-dns-cache-multi-address-bounds. v5.5.6 and v6.0.3 are fixed; v5.3.7/v5.4.5 pending; v5.2 EOL has no fix. Keep the setting at its default of 1 until patched. Stack protection detects but does not prevent the overwrite. |
+| GHSA-rjvf-fxv5-x87j: https://github.com/espressif/esp-idf/security/advisories/GHSA-rjvf-fxv5-x87j | BLE Mesh GATT read, Bluedroid host, PB-GATT or GATT Proxy bearer. Negative signed callback return is interpreted as an unsigned length. NimBLE adapter is not affected. | High 7.1; affected v5.2.7, v5.3.5, v5.4.4, v5.5.5, v6.0.2. | Extended esp32-ble-malformed-packet-hardening. v5.2.8, v5.3.6, v5.5.6 and v6.0.3 are fixed; v5.4.5 pending; v6.1+ not affected. |
+| GHSA-c26h-gm53-qg83: https://github.com/espressif/esp-idf/security/advisories/GHSA-c26h-gm53-qg83 | OpenThread Border Router ND6 parser; requires CONFIG_OPENTHREAD_BORDER_ROUTER=y and a crafted ICMPv6 Router Advertisement on the infrastructure link. Thread end devices and non-BR builds are outside scope. | High 7.1; affected v5.2.7, v5.3.5, v5.4.4, v5.5.4, v6.0.2. | Added to security-advisory triage. Fixed v5.2.8, v5.3.6, v5.5.5 and v6.0.3; v5.4.5 pending; v6.1+ not affected. No runtime workaround; restrict infrastructure-link reachability until patched. |
+| ESP-IDF #19415: https://github.com/espressif/esp-idf/issues/19415 | ESP32-C3, ESP-IDF v5.5.5, NimBLE central, BLE 1M; intermittent ATT timeout and multi-second notification delivery gaps. | Opened 2026-11-11; issue report has no raw controller capture and is not a maintainer-confirmed regression. | Existing BLE throughput, connection-budget and notification-backpressure skills cover the investigation class. No new skill added; require HCI/VHCI trace and independent reproduction. |
+
+### Release and ecosystem snapshot
+
+- ESP-IDF releases visible on 2026-11-11: v5.5.6 (2026-10-16), v6.0.3 (2026-09-02), v6.1 (2026-08-27), v5.3.6 (2026-09-15), v5.2.8 (2026-09-11). v5.2 reached EOL in August 2026.
+- Arduino-ESP32 latest stable visible: 3.3.12, based on ESP-IDF v5.5.5 (2026-09-18). 4.0.0-RC1 is a pre-release based on ESP-IDF v6.1 (2026-09-23). The base IDF version is a risk indicator only; verify the actual bundled component and configuration before declaring a product exposed.
+- PlatformIO platform-espressif32 v8.0.0 was published 2026-10-19. Issue #1792 about a DFRobot FireBeetle 2 flash-size/partition confusion was closed 2026-11-06. Pin the platform and inspect the resolved framework package; do not assume PlatformIO's platform tag equals an ESP-IDF release tag.
+- Arduino-ESP32 #13096 remains open and awaiting triage (ESP32-S3 HWCDC disconnect on latest master, Windows 11 + WSL2); #13102 is an open USB CDC feature request, not a confirmed defect.
+- No recent Stack Overflow or Reddit discussion located in this scan independently confirms the exact upstream advisory or issue mechanisms. User discussions are not used as a substitute for Espressif's advisory or issue evidence.
+
+No Google search-volume or popularity ranking is claimed. Affected-version ranges are advisory-specific; do not merge them into one generic "ESP-IDF vulnerable" range.

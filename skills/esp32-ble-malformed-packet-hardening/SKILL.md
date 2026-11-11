@@ -51,6 +51,15 @@ Identify the owner of every resource and boundary: hardware, driver, task, proto
 - Do not disable brownout detection, watchdogs, authentication or integrity checks to hide a failure.
 - Do not claim functional safety, electrical isolation, regulatory compliance or hardware validation without applicable evidence.
 
+
+### BLE Mesh GATT signed-length case (CVE-2026-113781)
+
+GHSA-rjvf-fxv5-x87j (published 2026-11-02, High 7.1) reports a signed GATT read callback result stored as an unsigned 16-bit length in the Bluedroid adapter; a negative ATT error can become a huge copy length and overrun a stack buffer. Scope: ESP-BLE-MESH, CONFIG_BT_BLUEDROID_ENABLED, and an advertising PB-GATT or GATT Proxy bearer. NimBLE does not use this path; ESP-IDF v6.1+ is not affected.
+
+Affected → fixed: v5.2 through v5.2.7 → v5.2.8; v5.3 through v5.3.5 → v5.3.6; v5.4 through v5.4.4 → v5.4.5 (pending 2026-11-11); v5.5 through v5.5.5 → v5.5.6; v6.0 through v6.0.2 → v6.0.3. Fix commits: master 00adfb3, v6.0 c146056, v5.5 ce902a8, v5.4 2fed52c, v5.3 f9da09d, v5.2 812f7de. Verify commit ancestry in the actual build.
+
+No runtime workaround exists. Upgrade to a fixed release; as interim exposure reduction, disable PB-GATT/GATT Proxy only when not required, or use NimBLE if supported by the product. Do not disable mesh authentication. Test negative callback returns, zero and oversized lengths, both bearers, signed error propagation and source-buffer clamping. Host tests do not prove stack behavior on silicon. Primary source: https://github.com/espressif/esp-idf/security/advisories/GHSA-rjvf-fxv5-x87j
+
 ## Failure analysis
 
 | Stimulus | Questions | Required evidence |
