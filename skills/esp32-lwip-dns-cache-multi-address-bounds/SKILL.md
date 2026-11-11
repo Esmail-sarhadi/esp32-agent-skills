@@ -47,7 +47,6 @@ Espressif advisory GHSA-ch63-jxm5-vmvf, CVE-2026-113783, was published 2026-10-3
 | v6.1 branch | Check exact tag and ancestry | 98e6e7a |
 
 As of 2026-11-11, v5.5.6 and v6.0.3 are released; v5.3.7 and v5.4.5 were listed as not yet released. The v5.2 branch has reached end of life and has no fixed release. Verify the current release feed before deployment.
-
 ## Design and investigation sequence
 
 1. Freeze the IDF commit, lwIP component, board and generated configuration.
@@ -58,7 +57,6 @@ As of 2026-11-11, v5.5.6 and v6.0.3 are released; v5.3.7 and v5.4.5 were listed 
 6. Prefer a fixed release or verified branch commit. If an upgrade is temporarily impossible, keep the maximum at one and document the loss of multi-address behavior.
 7. Rebuild all affected components and retain sdkconfig, dependency lock, ELF, map and firmware hash.
 8. Verify the actual target and resolver behavior before closing the issue.
-
 ## Constraints and invariants
 
 - A single-address API must never write more than one ip_addr_t to the caller's output.
@@ -69,7 +67,6 @@ As of 2026-11-11, v5.5.6 and v6.0.3 are released; v5.3.7 and v5.4.5 were listed 
 - Do not weaken DNS authentication, TLS verification, stack protection or watchdogs to hide the symptom.
 - Preserve DNS failure and timeout semantics; do not silently return a partial or stale address list as complete.
 - Treat the v5.2 EOL line as unpatched unless the product carries a reviewed downstream fix.
-
 ## Failure analysis
 
 | Observation | Likely investigation path | Evidence limit |
@@ -79,7 +76,6 @@ As of 2026-11-11, v5.5.6 and v6.0.3 are released; v5.3.7 and v5.4.5 were listed 
 | CONFIG_LWIP_DNS_MAX_HOST_IP is one | This specific multi-address precondition is not met | Other DNS parser bugs may still exist |
 | Stack canary aborts | Treat as detection of corruption, not prevention | Canary does not prove the only possible impact |
 | PlatformIO or Arduino build is affected | Resolve the actual IDF/lwIP package and sdkconfig | Platform version alone is insufficient |
-
 ## Verification plan
 
 - Host/unit: model cache entries with one and multiple addresses; verify single-address calls write one slot and explicit-capacity APIs never exceed the supplied count.
@@ -89,7 +85,6 @@ As of 2026-11-11, v5.5.6 and v6.0.3 are released; v5.3.7 and v5.4.5 were listed 
 - Hardware/system: run repeated lookups with controlled DNS responses and retain stack, reset and packet evidence.
 
 A host model cannot prove the actual lwIP stack frame, cache implementation or target behavior. Never use a production device or untrusted live DNS environment as a destructive fuzz target.
-
 ## Deliverables
 
 1. Exact affected/not-affected/unknown matrix for IDF, lwIP, configuration and API usage.
