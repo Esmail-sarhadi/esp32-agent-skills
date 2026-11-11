@@ -2,7 +2,7 @@ spec_version: "0.1.0"
 name: esp32-agent-skills
 version: "1.7.0"
 description: >-
-  Agent skills and checkers for ESP32 firmware: 658 skills across pin safety,
+  Agent skills and checkers for ESP32 firmware: 659 skills across pin safety,
   power, partitioning, industrial protocols and field failures, plus 10
   command-line checkers that exit non-zero on a real problem.
 author: Esmail Sarhadi
@@ -332,6 +332,7 @@ skills:
   - esp32-lvgl-and-displays
   - esp32-lvgl-rendering-budget
   - esp32-lvgl-task-priority-review
+  - esp32-lwip-dns-cache-multi-address-bounds
   - esp32-lwip-network-diagnostics
   - esp32-mac-address-allocation-audit
   - esp32-manufacturing-data-retention
@@ -571,8 +572,8 @@ skills:
   - esp32-task-decomposition-review
   - esp32-task-lifecycle-cleanup
   - esp32-task-stack-budget
-  - esp32-tee-privilege-switch-boundary-audit
   - esp32-tcp-keepalive-policy
+  - esp32-tee-privilege-switch-boundary-audit
   - esp32-test-coverage-quality-review
   - esp32-test-flakiness-triage
   - esp32-testing-and-ci
