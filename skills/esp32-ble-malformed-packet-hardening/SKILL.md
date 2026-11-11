@@ -51,6 +51,29 @@ Identify the owner of every resource and boundary: hardware, driver, task, proto
 - Do not disable brownout detection, watchdogs, authentication or integrity checks to hide a failure.
 - Do not claim functional safety, electrical isolation, regulatory compliance or hardware validation without applicable evidence.
 
+
+### BLE Mesh GATT callback signed-length boundary (CVE-2026-113781)
+
+Espressif advisory GHSA-rjvf-fxv5-x87j was published 2026-11-02 with High severity (CVSS 7.1). The reported Bluedroid host adapter path stores a signed GATT read callback result in an unsigned 16-bit variable. A negative ATT error code can therefore become a very large positive length and drive a copy beyond a small stack buffer.
+
+Scope is conditional: ESP-BLE-MESH with CONFIG_BT_BLUEDROID_ENABLED, and an advertising PB-GATT or GATT Proxy bearer. The advisory says the NimBLE host adapter does not use this path and ESP-IDF v6.1+ is not affected. A remote client within BLE range can reach the exposed GATT service; pairing is not required by the reported preconditions.
+
+| ESP-IDF line | Affected release | Patched release |
+|---|---|---|
+| v5.2 | through v5.2.7 | v5.2.8 |
+| v5.3 | through v5.3.5 | v5.3.6 |
+| v5.4 | through v5.4.4 | v5.4.5 (not yet released on 2026-11-11) |
+| v5.5 | through v5.5.5 | v5.5.6 |
+| v6.0 | through v6.0.2 | v6.0.3 |
+
+Fix commits: master 00adfb3; release/v6.0 c146056; release/v5.5 ce902a8; release/v5.4 2fed52c; release/v5.3 f9da09d; release/v5.2 812f7de. Verify commit ancestry in the exact build rather than relying on the tag name alone.
+
+There is no runtime workaround for the vulnerable parser. Upgrade to a fixed release. As an interim exposure reduction, disable PB-GATT and GATT Proxy when they are not required, or use the NimBLE host if the product architecture supports it. Do not disable mesh authentication or unrelated security controls.
+
+Test negative callback returns, zero-length reads, lengths at and beyond the source-buffer size, and both PB-GATT and GATT Proxy configurations. Verify that an error remains signed, an error response is returned, and no copy exceeds the source buffer. Host tests do not prove the exact stack behavior on silicon.
+
+Primary source: https://github.com/espressif/esp-idf/security/advisories/GHSA-rjvf-fxv5-x87j
+
 ## Failure analysis
 
 | Stimulus | Questions | Required evidence |
