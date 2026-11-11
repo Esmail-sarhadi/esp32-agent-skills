@@ -59,6 +59,7 @@ class NovemberFollowupIssueTests(unittest.TestCase):
             with self.subTest(token=token):
                 self.assertIn(token, text)
         self.assertIn("do not accept a later ESP_OK by itself", text)
+        self.assertIn("has not observed it on a physical device", text)
 
     def test_ota_retry_report_is_bound_to_the_reported_c6_sdk_tuple(self):
         text = skill("ota-pending-verify-rollback-qualification")
