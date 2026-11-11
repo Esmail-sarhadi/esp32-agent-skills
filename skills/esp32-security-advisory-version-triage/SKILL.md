@@ -70,7 +70,6 @@ A high-severity advisory does not automatically mean every product is exploitabl
 ### November 2026 advisory watch (checked 2026-11-11)
 
 Match each advisory to exact component, configuration and commit: GHSA-49x8-xqjg-2pjg (ESP-TEE; C5/C6/C61/H2; affected v5.5.5, v6.0.3 and v6.1; v5.5.6 fixed, v6.0.4/v6.1.1 pending; no runtime workaround); GHSA-ch63-jxm5-vmvf (lwIP DNS; requires CONFIG_LWIP_DNS_MAX_HOST_IP > 1 and a multi-address cache hit; v5.2 is EOL); GHSA-rjvf-fxv5-x87j (Bluedroid BLE Mesh GATT with PB-GATT or GATT Proxy; NimBLE not affected); GHSA-c26h-gm53-qg83 (OpenThread Border Router only; requires CONFIG_OPENTHREAD_BORDER_ROUTER=y). Full per-branch affected/fixed ranges and commit IDs are maintained in docs/research/field-issue-patterns.md. Never merge version ranges across advisories or infer exposure from chip family alone.
-
 ## Verification plan
 
 | Layer | Method | Pass/fail evidence |
