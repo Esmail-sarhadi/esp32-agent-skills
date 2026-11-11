@@ -110,8 +110,8 @@ class NovemberSecurityAdvisoryTests(unittest.TestCase):
         for token in (
             "GHSA-rjvf-fxv5-x87j", "CVE-2026-113781",
             "CONFIG_BT_BLUEDROID_ENABLED", "PB-GATT", "GATT Proxy",
-            "NimBLE host adapter", "v6.1+", "negative ATT error code",
-            "unsigned 16-bit variable",
+            "NimBLE does not use this path", "v6.1+", "negative ATT error",
+            "unsigned 16-bit length",
         ):
             with self.subTest(token=token):
                 self.assertIn(token, text)
