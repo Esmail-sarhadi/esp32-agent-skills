@@ -36,6 +36,15 @@ Identify the owner of each relevant resource: hardware rail, GPIO, peripheral, i
 7. **Verify independently.** Add host tests for deterministic logic, target tests for peripheral behavior and environmental tests for RF/power/thermal claims. Keep those evidence classes separate.
 8. **Close the incident.** Record root cause confidence, workaround limitations, fixed version, regression test, deployment/rollback plan and residual risk.
 
+
+### One-time initialization control words in PSRAM
+
+ESP-IDF #19411 reports a specific dual-core Xtensa failure when pthread_once_t (once_control) resides in PSRAM. In the reported ESP32-S3 rev v0.2 configuration with 2 MB PSRAM, IDF v5.5.4, v5.5.6 and a master build, esp_cpu_compare_and_set() can return false when the global external_ram_cas_lock is already held, without observing the target word. The current pthread_once() path reportedly interprets any false result as "already initialized" and returns success without running the initializer. The issue is open; this is not a family-wide statement about all Xtensa or PSRAM combinations.
+
+Until the affected implementation is fixed and verified, keep pthread_once_t control words in internal DRAM, not PSRAM, on the reported combination. Audit C++ std::call_once() and library paths that may use pthread_once(); do not assume a successful return proves the initializer ran. Add a dual-core contention test that verifies the initializer executes exactly once and records the control-word memory capability.
+
+Primary report: https://github.com/espressif/esp-idf/issues/19411
+
 ## Constraints and invariants
 
 - Never treat a community issue's workaround as a universal vendor recommendation.

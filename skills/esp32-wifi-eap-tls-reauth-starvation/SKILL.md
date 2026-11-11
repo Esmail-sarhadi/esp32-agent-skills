@@ -67,6 +67,17 @@ Model the feature as explicit states and transitions. For each transition, ident
 
 An EAP-TLS reauthentication can occupy critical Wi-Fi processing for a substantial interval on a reported configuration. Application-level reconnect loops can amplify the outage and hide the original event.
 
+
+### Duplicate EAP-TLS fragments and driver-task stalls
+
+ESP-IDF #19408 reports an EAP-TLS reauthentication failure on ESP32-S3 and ESP32-C5 with development build v6.1-830-g0eddff3320f. In the reported OpenWrt/hostapd + RADIUS setup, a 1408-byte TLS message is reassembled and processed, then a retransmitted 424-byte EAP-TLS fragment is treated as new input rather than a duplicate request. The reassembly state is restarted, the supplicant asks for more input, and the AP rejects the exchange with WIFI_REASON_802_1X_AUTH_FAILED (reason 23). Reconnection with the same credentials reportedly succeeds.
+
+A separate report, #19409, measures about 887 ms of Wi-Fi driver-task blocking during EAP-TLS reauthentication while wpa2_post() waits on s_wifi_wpa2_sync_sem even though TLS work is performed by wpa2T. The relationship between the duplicate-fragment failure and the long driver-task stall is not established; investigate them as separate hypotheses until a common cause is demonstrated.
+
+Instrument EAP identifier, fragment flags, fragment length, reassembly offset, cached response identity, retry count and Wi-Fi task blocked duration. Test duplicate fragments, delayed retransmissions, partial-message timeouts and temporary EAPOL TX resource failures. Do not solve the symptom only by extending timeouts or weakening authentication.
+
+Primary reports: https://github.com/espressif/esp-idf/issues/19408 and https://github.com/espressif/esp-idf/issues/19409
+
 ## Verification plan
 
 Use a layered validation matrix and keep the evidence types separate:

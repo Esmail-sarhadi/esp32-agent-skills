@@ -36,6 +36,15 @@ Identify the owner of each relevant resource: hardware rail, GPIO, peripheral, i
 7. **Verify independently.** Add host tests for deterministic logic, target tests for peripheral behavior and environmental tests for RF/power/thermal claims. Keep those evidence classes separate.
 8. **Close the incident.** Record root cause confidence, workaround limitations, fixed version, regression test, deployment/rollback plan and residual risk.
 
+
+### Confirmation after an uncertain otadata write
+
+A failed or ambiguous persistent write must not be treated as a safe retry signal. ESP-IDF #19413 reports that on ESP32-C6 rev v0.2 with ESP-IDF v6.0.1 (the reporter also cites master commit de1e5035b5), the first esp_ota_mark_app_valid_cancel_rollback() call can erase the running image's active otadata sector and then fail while writing it. A retry reportedly returns ESP_OK after the previous application's valid record becomes the active record, even though the running image is not ESP_OTA_IMG_VALID and is no longer the next boot target. This is an open, target/version-specific report, not a claim about every release.
+
+**Defensive invariant after any failed or uncertain confirmation write:** do not accept a later ESP_OK by itself. Read back the running partition with esp_ota_get_state_partition(esp_ota_get_running_partition(), &state) and require state == ESP_OTA_IMG_VALID; also require esp_ota_get_boot_partition() == esp_ota_get_running_partition(). If either check fails or cannot be completed, keep the update unconfirmed, stop rollout promotion and preserve the previous recovery image. The readback is the reporter's proposed workaround pending maintainer resolution; qualify it against the exact IDF release and flash device before production use.
+
+Primary report: https://github.com/espressif/esp-idf/issues/19413
+
 ## Constraints and invariants
 
 - Never treat a community issue's workaround as a universal vendor recommendation.

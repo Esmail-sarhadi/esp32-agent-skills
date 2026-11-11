@@ -1,8 +1,8 @@
 spec_version: "0.1.0"
 name: esp32-agent-skills
-version: "1.5.0"
+version: "1.6.0"
 description: >-
-  Agent skills and checkers for ESP32 firmware: 656 skills across pin safety,
+  Agent skills and checkers for ESP32 firmware: 657 skills across pin safety,
   power, partitioning, industrial protocols and field failures, plus 10
   command-line checkers that exit non-zero on a real problem.
 author: Esmail Sarhadi
@@ -40,6 +40,7 @@ skills:
   - esp32-addressable-leds
   - esp32-ads1115-external-adc
   - esp32-ads1256-precision-adc
+  - esp32-aes-gcm-multipart-stream-integrity
   - esp32-allocation-free-hot-path
   - esp32-analog-anti-alias-filter
   - esp32-analog-isolation-boundary
