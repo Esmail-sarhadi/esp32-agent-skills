@@ -28,7 +28,8 @@ class NovemberFollowupIssueTests(unittest.TestCase):
     def test_aes_gcm_scope_is_tied_to_v55_hardware_aes_configuration(self):
         text = skill("esp32-aes-gcm-multipart-stream-integrity")
         for token in ("release/v5.5", "v5.5.x", "CONFIG_MBEDTLS_HARDWARE_AES",
-                      "ESP32-C6", "classic ESP32", "#19406"):
+                      "ESP32-C6", "classic ESP32", "#19406",
+                      "flush the final remainder", "software GCM path"):
             with self.subTest(token=token):
                 self.assertIn(token, text)
 

@@ -33,6 +33,8 @@ ESP-IDF #19406 reports that the v5.5 hardware path initializes nc_off, nonce_cou
 
 The reporter identifies fix commits e6ac065424 on master, 8767271843 on release/v6.0 and 613469ffe7 on release/v6.1. These commits preserve the partial CTR and GHASH state in the GCM context. Verify that the exact commit is present in the branch actually used; do not assume a later tag or a v5.5 backport contains it without checking ancestry and source.
 
+For a confirmed affected v5.5 build, the reporter's temporary mitigations are to buffer intermediate updates to multiples of 16 bytes and flush the final remainder only before finish, or to disable CONFIG_MBEDTLS_HARDWARE_AES so the software GCM path is selected. These are release-specific workarounds: verify the selected backend, measure timing and energy, retain mandatory final-tag verification, and prefer the backported fix.
+
 ### Investigation sequence
 
 1. Freeze the exact IDF tag/commit and generated Kconfig. Record whether the hardware AES alternate implementation is linked.
