@@ -67,26 +67,9 @@ Model the feature as explicit states and transitions. For every transition ident
 A high-severity advisory does not automatically mean every product is exploitable, and an apparently unused feature is not proof of safety. Missing version provenance makes both false alarms and missed exposure likely.
 
 
-### November 2026 advisory snapshot
+### November 2026 advisory watch (checked 2026-11-11)
 
-The following upstream advisories are primary evidence and must be matched to the exact component, target, configuration and commit. These ranges are not interchangeable across release branches.
-
-| Advisory | Component and scope | Affected releases | Fixed releases / conditions |
-|---|---|---|---|
-| GHSA-49x8-xqjg-2pjg / CVE-2026-113780, Critical 9.3 | ESP-TEE trap entry; ESP32-C5/C6/C61/H2; local code execution in REE required | v5.5.5, v6.0.3, v6.1 | v5.5.6; v6.0.4 and v6.1.1 were listed as not yet released on 2026-11-11. No runtime workaround. |
-| GHSA-ch63-jxm5-vmvf / CVE-2026-113783, High 7.4 | lwIP DNS cached lookup; CONFIG_LWIP_DNS_MAX_HOST_IP > 1 and multiple cached A/AAAA records through a single-address API | v5.2.3–5.2.8, v5.3.2–5.3.6, v5.4.0–5.4.4, v5.5.0–5.5.5, v6.0.0–6.0.2 | v5.5.6 and v6.0.3; v5.3.7 and v5.4.5 pending on 2026-11-11; v5.2 is EOL. Default max-host-IP is 1. |
-| GHSA-rjvf-fxv5-x87j / CVE-2026-113781, High 7.1 | BLE Mesh GATT read path with Bluedroid, PB-GATT or GATT Proxy bearer | v5.2.7, v5.3.5, v5.4.4, v5.5.5, v6.0.2 | v5.2.8, v5.3.6, v5.5.6, v6.0.3; v5.4.5 pending; v6.1+ not affected. NimBLE host adapter is not affected. |
-| GHSA-c26h-gm53-qg83 / CVE-2026-113782, High 7.1 | OpenThread Border Router ND6 parser; CONFIG_OPENTHREAD_BORDER_ROUTER=y | v5.2.7, v5.3.5, v5.4.4, v5.5.4, v6.0.2 | v5.2.8, v5.3.6, v5.5.5, v6.0.3; v5.4.5 pending; v6.1+ not affected. |
-
-For the TEE issue, inspect both user ecall and interrupt entry paths. For DNS, distinguish the first network resolution from the later cache hit. For BLE Mesh, preserve the callback's signed return type and check the Bluedroid/GATT bearer prerequisites. For Thread, verify the Border Router Kconfig option; Thread end devices and non-Border-Router builds are outside the stated scope.
-
-Do not treat stack-smashing protection as a fix for an out-of-bounds write. Do not treat a component's presence in a source tree as proof it is linked or reachable in the shipped image. The TEE advisory has no runtime workaround; use the branch fix or a fixed release. The DNS interim setting and BLE/Thread bearer or network restrictions are exposure mitigations only, not substitutes for a verified patch.
-
-Primary sources:
-- https://github.com/espressif/esp-idf/security/advisories/GHSA-49x8-xqjg-2pjg
-- https://github.com/espressif/esp-idf/security/advisories/GHSA-ch63-jxm5-vmvf
-- https://github.com/espressif/esp-idf/security/advisories/GHSA-rjvf-fxv5-x87j
-- https://github.com/espressif/esp-idf/security/advisories/GHSA-c26h-gm53-qg83
+Match each advisory to exact component, configuration and commit: GHSA-49x8-xqjg-2pjg (ESP-TEE; C5/C6/C61/H2; affected v5.5.5, v6.0.3 and v6.1; v5.5.6 fixed, v6.0.4/v6.1.1 pending; no runtime workaround); GHSA-ch63-jxm5-vmvf (lwIP DNS; requires CONFIG_LWIP_DNS_MAX_HOST_IP > 1 and a multi-address cache hit; v5.2 is EOL); GHSA-rjvf-fxv5-x87j (Bluedroid BLE Mesh GATT with PB-GATT or GATT Proxy; NimBLE not affected); GHSA-c26h-gm53-qg83 (OpenThread Border Router only; requires CONFIG_OPENTHREAD_BORDER_ROUTER=y). Full per-branch affected/fixed ranges and commit IDs are maintained in docs/research/field-issue-patterns.md. Never merge version ranges across advisories or infer exposure from chip family alone.
 
 ## Verification plan
 
