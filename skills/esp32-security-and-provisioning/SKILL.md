@@ -57,6 +57,17 @@ revoke a bond held by a phone. A "factory reset" that only erases NVS leaves the
 device still trusted by every client that paired with it. If the product promises
 a reset, say precisely what it erases.
 
+
+## Security 2 SRP salt length and verifier integrity
+
+ESP-IDF #19370 is an open, Reviewing report for ESP32-C5 rev v1.2 and ESP-IDF v6.0.2. It reports that esp_srp_gen_salt_verifier(..., 16, ...) can export a 15-byte minimal bignum when the random salt's leading byte is 0x00, while the API path retains a 16-byte length and computes the verifier over the short buffer. The wrapper returns the salt pointer without an actual length, so a caller copying 16 bytes can read one byte past the allocation; the resulting verifier then rejects the correct PoP with CREDENTIALS_MISMATCH. The reporter measured 11 affected results in 2,000 generations (about 1/256), not a universal failure rate for every target or release.
+
+**Required invariant:** the allocated salt buffer, advertised length, bytes used to derive x and bytes provisioned to the client must be identical and exactly salt_len bytes. Preserve a leading zero when exporting a bignum; never copy salt_len bytes from an allocation whose size is only the minimal encoded length. Test leading-zero and non-leading-zero cases, independently recompute the SRP verifier from the exact provisioned salt, and run heap canaries or host sanitizers around the returned buffer. Treat a correct-PoP CREDENTIALS_MISMATCH as a server-side provisioning fault until the generated salt/verifier pair is verified; do not punish the user with lockout for a malformed pair.
+
+The report is open and under review. No upstream fix is established; patch or backport only after validating the exact IDF commit and API ownership contract.
+
+Primary report: https://github.com/espressif/esp-idf/issues/19370
+
 ## Rules for the agent
 
 - Never enable secure boot or flash encryption in a change that also touches

@@ -1,4 +1,4 @@
-"""Evidence contracts for the November 2026 AES-GCM, OTA, PSRAM and EAP-TLS reports."""
+"""Evidence contracts for November 2026 AES-GCM, OTA, PSRAM, EAP-TLS and SRP reports."""
 
 from pathlib import Path
 import unittest
@@ -92,5 +92,20 @@ class NovemberFollowupIssueTests(unittest.TestCase):
     def test_eap_tls_driver_stall_and_fragment_failure_are_not_assumed_same_cause(self):
         text = skill("esp32-wifi-eap-tls-reauth-starvation")
         for token in ("#19409", "887 ms", "not established", "wpa2_post"):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
+    def test_security2_srp_salt_length_preserves_leading_zero_and_verifier_input(self):
+        text = skill("esp32-security-and-provisioning")
+        for token in ("#19370", "esp_srp_gen_salt_verifier", "leading byte is 0x00",
+                      "15-byte", "16-byte", "heap", "CREDENTIALS_MISMATCH"):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+        self.assertIn("exactly salt_len bytes", text)
+
+    def test_security2_srp_probability_is_scoped_to_the_reported_c5_release(self):
+        text = skill("esp32-security-and-provisioning")
+        for token in ("ESP32-C5", "v1.2", "v6.0.2", "11 affected results in 2,000 generations",
+                      "about 1/256", "open and under review"):
             with self.subTest(token=token):
                 self.assertIn(token, text)
