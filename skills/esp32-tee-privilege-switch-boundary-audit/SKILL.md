@@ -44,7 +44,6 @@ Espressif advisory GHSA-49x8-xqjg-2pjg, CVE-2026-113780, was published 2026-10-2
 | master | Check exact ancestry | acb7d99 |
 
 As of 2026-11-11, the advisory identifies v5.5.6 as released; v6.0.4 and v6.1.1 were listed as not yet released. Recheck the official release feed before making a deployment decision. The affected SoC families named by the advisory are ESP32-C5, ESP32-C6, ESP32-C61 and ESP32-H2.
-
 ## Design and investigation sequence
 
 1. Freeze the exact SoC, silicon revision, IDF commit, component graph and generated configuration.
