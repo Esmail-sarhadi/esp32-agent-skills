@@ -99,7 +99,7 @@ class NovemberRuntimeFindingTests(unittest.TestCase):
         for token in (
             "#19450", "release/v5.5", "xPendingReadyList[xCurCoreID]",
             "xTaskResumeAll()", "vTaskNotifyGiveFromISR()",
-            "50 ms wake delays", "#19451", "7266fdc", "19–20 per 2 s", "1,530 µs",
+            "49,994 µs", "#19451", "7266fdc", "19–20 per 2 s", "1,530 µs",
         ):
             with self.subTest(token=token):
                 self.assertIn(token, text)
