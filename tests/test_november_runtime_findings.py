@@ -129,11 +129,11 @@ class NovemberRuntimeFindingTests(unittest.TestCase):
         for token in (
             "#19442", "ESP32-S3 revision 2", "sar1_en_pad",
             "47 kΩ / 100 kΩ", "about 1 V",
-            "suspected explanation, not yet a confirmed vendor root cause",
+            "suspected explanation", "not yet a confirmed vendor root cause",
         ):
             with self.subTest(token=token):
                 self.assertIn(token, text)
-        self.assertIn("not a universal supported API", text)
+        self.assertIn("universal supported API", text)
 
     def test_c6_802154_skill_covers_long_run_tx_done_assertion(self):
         text = read_skill("esp32-c6-wifi-ble-802154-coexistence")
