@@ -53,6 +53,14 @@ A repeatable engineering method for esp32 ota power loss matrix on ESP32 product
 ## Deliverable
 Return target/version scope, confirmed facts and unknowns, ranked findings, evidence references, remediation, rollback considerations, exact commands and test outcomes, plus hardware-only validation still required.
 
+## Failed erase cleanup in esp_ota_begin()
+
+[ESP-IDF #19439](https://github.com/espressif/esp-idf/issues/19439) reports an OTA resource leak on IDF v6.1 commit fff9895 and master as of 2026-11-13, reproduced on ESP32-C3 rev0.4; the reporter notes the code path is target-independent. esp_ota_begin() inserts an entry and publishes out_handle before erasing. If esp_partition_erase_range() fails, the function returns without removing the entry or restoring dangerous write protection for bootloader/partition-table targets. A later valid esp_ota_begin() can then return ESP_ERR_OTA_ALREADY_IN_PROGRESS until reboot.
+
+A maintainer reproduced the failure and prepared a cleanup patch on 2026-11-17; the issue was still under review at this scan. The proposed correction removes the entry, frees its allocation, restores write protection and publishes the handle only after erase succeeds. Do not assume a release contains this patch until its commit is merged and mapped to a release.
+
+Regression test: deliberately request an erase range larger than the partition, assert the first call fails without a usable handle, then assert a second valid begin succeeds and protection/state are restored. Also test bootloader and partition-table partition guards on a disposable test image. Never use a production bootloader or partition table as a destructive fault-injection target.
+
 ## References
 - ESP-IDF programming guide: https://docs.espressif.com/projects/esp-idf/en/stable/
 - Espressif technical documents: https://www.espressif.com/en/support/documents/technical-documents
