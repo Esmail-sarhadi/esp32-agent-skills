@@ -63,3 +63,17 @@ fill too).
 | values corrupt, no crash | shared struct without a lock |
 | crash inside an ISR | log, malloc or flash access in the handler |
 | works on C3, fails on ESP32 | code assumed a single core, or vice versa |
+
+## Cross-core scheduler suspension and flash interactions
+
+Two November 2026 reports expose distinct SMP lost-wakeup paths. A task being Ready does not mean it will run while its pinned core has suspended its scheduler.
+
+- In [ESP-IDF #19450](https://github.com/espressif/esp-idf/issues/19450), ESP32-S3 rev0.2 on IDF v6.1 (the same code was reported in master and release/v5.5) can leave a core-1 pinned task blocked after vTaskNotifyGiveFromISR(), xTaskNotifyFromISR() or xTaskResumeFromISR() runs on core 0 while core 1 has suspended its scheduler. The report traces the task to xPendingReadyList[xCurCoreID]; xTaskResumeAll() on core 1 drains its own list.
+- The proposed ISR-path fix is [PR #19451](https://github.com/espressif/esp-idf/pull/19451), commit 7266fdc, still open against master at this scan. On S3 rev0.2 / IDF v6.1, the new SMP test passes with the patch; late wake-ups fell from 19–20 per 2 s to zero and the largest gap from 49,994 µs to 1,530 µs. This PR changes ISR pending-ready-list ownership.
+- In [ESP-IDF #19456](https://github.com/espressif/esp-idf/issues/19456), ESP32-S3 rev0.1 on v6.3-dev and v5.3 (not v5.2.2) can leave ipc1 Ready but never scheduled while a core-1 task continuously reads flash through esp_partition_read(). A 1 kHz esp_timer callback on core 0 blocks in synchronous esp_ipc_call(1, ...), so all timer callbacks stop until core 1 reschedules.
+- The separate task-context fix is [PR #19457](https://github.com/espressif/esp-idf/pull/19457), commit dfaa88f, also open against master. On S3 rev0.1 / v6.3-dev, its new test passes and the #19456 reproducer completed 59,001 IPC calls in 60 seconds without a stall; without the fix it stalled on the first call. This PR changes SMP preemption/yield-pending behavior, not the ISR pending-ready-list path.
+
+PR #19451 does not fix the task-context path in #19456, and PR #19457 does not fix the ISR path in #19450. Neither was merged or mapped to a released IDF version at this scan. Treat both as high-risk FreeRTOS SMP changes: pin the exact commit, review the patch and run the matching on-target test before adopting it.
+
+Do not treat either report as a universal FreeRTOS rule. Preserve the exact IDF revision, task affinity, scheduler-suspend interval, flash API and ISR core. Avoid unbounded busy loops on a core that must service IPC, and do not put a potentially blocking cross-core esp_ipc_call() in a periodic timer callback without a bounded, target-tested handoff. A semaphore control path in #19450 behaved differently in that reproducer; validate the chosen primitive on the exact release rather than assuming every queue, notification or semaphore path is equivalent.
+

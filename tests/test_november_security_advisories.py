@@ -137,8 +137,8 @@ class NovemberSecurityAdvisoryTests(unittest.TestCase):
             with self.subTest(slug=slug):
                 self.assertIn("  - " + slug, manifest)
                 self.assertIn("| `" + slug + "` |", readme)
-        self.assertIn('version: "1.7.0"', manifest)
-        self.assertIn("659 skills", manifest)
+        self.assertIn('version: "1.8.0"', manifest)
+        self.assertIn("661 skills", manifest)
 
     def test_research_records_issue_19415_and_current_ecosystem_limits(self):
         text = read(ROOT / "docs" / "research" / "field-issue-patterns.md")

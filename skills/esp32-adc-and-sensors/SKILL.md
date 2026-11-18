@@ -62,6 +62,14 @@ sample window.
   removes most of the noise.
 - Long wires pick up noise; the capacitor is not optional there.
 
+## ESP32-S3 oneshot channel-release report
+
+[ESP-IDF #19442](https://github.com/espressif/esp-idf/issues/19442), opened 2026-11-14, describes ESP32-S3 revision 2 on IDF v5.4.2-25-g858a988d6e: ADC1 channel 5 / GPIO6, a 47 kΩ / 100 kΩ divider (about 32 kΩ Thevenin resistance), 100 nF capacitor and one sample per second. The handle-based oneshot API produced plausible initial readings, then the GPIO voltage fell by about 1 V and stayed low between conversions; the legacy API did not show the same behavior.
+
+The reporter traced adc_oneshot_ll_set_channel() setting SENS.sar_meas1_ctrl2.sar1_en_pad; normal cleanup calls adc_oneshot_ll_disable_all_unit(), which is a no-op on S3, while adc_oneshot_ll_disable_channel() appears not to be called. A persistent pad load is the reporter's suspected explanation, not yet a confirmed vendor root cause. The issue was in review at this scan.
+
+Measure the actual pin voltage between conversions, compare the exact driver revision and a low-impedance source, and preserve the divider/capacitor values. The reported linker --wrap=adc_oneshot_read workaround clears the selected channel bit, but it relies on target-specific register details and must not be copied as a universal supported API. Do not infer that every S3 board or every source impedance is affected.
+
 ## Averaging, honestly
 
 The ADC is noisy by design. Averaging N samples improves the reading by roughly

@@ -53,6 +53,14 @@ A repeatable engineering method for esp32 ota power loss matrix on ESP32 product
 ## Deliverable
 Return target/version scope, confirmed facts and unknowns, ranked findings, evidence references, remediation, rollback considerations, exact commands and test outcomes, plus hardware-only validation still required.
 
+## Failed erase cleanup in esp_ota_begin()
+
+[ESP-IDF #19439](https://github.com/espressif/esp-idf/issues/19439) reports an OTA resource leak on IDF v6.1 commit fff9895 and master as of 2026-11-13, reproduced on ESP32-C3 rev0.4; the reporter notes the code path is target-independent. esp_ota_begin() inserts an entry and publishes out_handle before erasing. If esp_partition_erase_range() fails, the function returns without removing the entry or restoring dangerous write protection for bootloader/partition-table targets. A later valid begin can return ESP_ERR_OTA_ALREADY_IN_PROGRESS until reboot.
+
+A maintainer reproduced the failure and prepared a patch. The reporter then confirmed the patch on an ESP32-C3 board and in QEMU: the failed-erase regression test fails without the change (a handle is returned and the next begin reports ESP_ERR_OTA_ALREADY_IN_PROGRESS) and passes with it. The v6.1 backport also passed on release/v6.1 at c1d1695. The patch restores write protection, removes/frees the partial entry and publishes the handle only after erase succeeds. The issue remained under review at this scan; a tested patch is not the same as a merged or released fix.
+
+Regression test: request an erase range larger than the partition, assert the first call fails without a usable handle, then assert a second valid begin succeeds and protection/state are restored. The reporter tested the board and QEMU single-stage cases; multi-stage reset cases were not run. Also test bootloader and partition-table partition guards on a disposable test image. Never use a production bootloader or partition table as a destructive fault-injection target.
+
 ## References
 - ESP-IDF programming guide: https://docs.espressif.com/projects/esp-idf/en/stable/
 - Espressif technical documents: https://www.espressif.com/en/support/documents/technical-documents

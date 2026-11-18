@@ -1,8 +1,8 @@
 spec_version: "0.1.0"
 name: esp32-agent-skills
-version: "1.7.0"
+version: "1.8.0"
 description: >-
-  Agent skills and checkers for ESP32 firmware: 659 skills across pin safety,
+  Agent skills and checkers for ESP32 firmware: 661 skills across pin safety,
   power, partitioning, industrial protocols and field failures, plus 10
   command-line checkers that exit non-zero on a real problem.
 author: Esmail Sarhadi
@@ -108,6 +108,7 @@ skills:
   - esp32-build-provenance-attestation
   - esp32-c5-psram-crypto-alignment-qualification
   - esp32-c5-reset-psram-ota-rollback-interaction
+  - esp32-c6-ecc-reset-power-state-audit
   - esp32-c6-wifi-ble-802154-coexistence
   - esp32-cache-coherency-boundary
   - esp32-calibration-coefficient-traceability
@@ -508,6 +509,7 @@ skills:
   - esp32-rtd-four-wire-sensing
   - esp32-rtd-lead-compensation
   - esp32-rtd-three-wire-error-budget
+  - esp32-s31-adc-phy-lock-order-audit
   - esp32-scheduler-saturation-test
   - esp32-screen-burnin-lifecycle
   - esp32-sd-card-and-logging
