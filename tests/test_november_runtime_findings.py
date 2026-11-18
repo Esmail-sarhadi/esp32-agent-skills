@@ -29,7 +29,7 @@ class NovemberRuntimeFindingTests(unittest.TestCase):
     def test_c6_ecc_scope_is_bound_to_reported_rom_and_sdk_tuple(self):
         text = read_skill("esp32-c6-ecc-reset-power-state-audit")
         for token in (
-            "#19421", "ESP32-C6", "revision v0.2", "esp32c6-20220919",
+            "issues/19421", "ESP32-C6", "revision v0.2", "esp32c6-20220919",
             "fff9895", "CONFIG_SECURE_BOOT_V2_ENABLED",
             "CONFIG_SECURE_SIGNED_APPS_ECDSA_V2_SCHEME",
             "CONFIG_MBEDTLS_HARDWARE_ECC",
@@ -71,7 +71,7 @@ class NovemberRuntimeFindingTests(unittest.TestCase):
     def test_s31_adc_phy_trigger_and_commit_are_exact(self):
         text = read_skill("esp32-s31-adc-phy-lock-order-audit")
         for token in (
-            "#19433", "ESP32-S31 Korvo-1", "f0114250e2",
+            "issues/19433", "ESP32-S31 Korvo-1", "f0114250e2",
             "9a97f6c54e", "WIFI_PS_MAX_MODEM", "A2DP",
             "ADC_ATTEN_DB_0", "5–15 minutes",
         ):
