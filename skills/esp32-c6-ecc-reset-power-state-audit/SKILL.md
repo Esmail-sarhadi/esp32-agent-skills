@@ -15,7 +15,7 @@ Treat the issue report as a strong, device-tested C6 observation, not yet as a v
 
 ## Required inputs
 
-Collect the exact ESP32-C6 ordering code and silicon revision; module and board; ROM build string; ESP-IDF commit and component revisions; bootloader and application hashes; Secure Boot V2 mode; ECDSA scheme; flash-encryption mode; eFuse state; sdkconfig; hardware-ECC configuration; the exact PSA/mbedTLS operations before reset; reset reason; and the complete ROM boot log.
+Collect the exact ESP32-C6 ordering code and silicon revision; module and board; ROM build string; ESP-IDF commit and component revisions; bootloader and application hashes; Secure Boot V2 mode (CONFIG_SECURE_BOOT_V2_ENABLED); ECDSA scheme (CONFIG_SECURE_SIGNED_APPS_ECDSA_V2_SCHEME); flash-encryption mode; eFuse state; sdkconfig; hardware-ECC configuration; the exact PSA/mbedTLS operations before reset; reset reason; and the complete ROM boot log.
 
 For the reported reproduction, the tuple was ESP32-C6 QFN32 revision v0.2 on ESP32-C6-DevKitM-1, ROM esp32c6-20220919, ESP-IDF v6.1 commit fff9895, Secure Boot V2, ECDSA P-256 signed apps, release-mode flash encryption and CONFIG_MBEDTLS_HARDWARE_ECC enabled.
 
