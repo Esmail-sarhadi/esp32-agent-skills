@@ -109,7 +109,7 @@ class NovemberRuntimeFindingTests(unittest.TestCase):
         for token in (
             "#19456", "v6.3-dev", "v5.3", "v5.2.2",
             "esp_partition_read()", "esp_ipc_call(1, ...)",
-            "1 kHz", "all timer callbacks stop", "#19457", "dfaa88f", "59,001 IPC calls", "not merged",
+            "1 kHz", "all timer callbacks stop", "#19457", "dfaa88f", "59,001 IPC calls", "Neither was merged",
         ):
             with self.subTest(token=token):
                 self.assertIn(token, text)
