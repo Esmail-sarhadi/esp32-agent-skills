@@ -61,6 +61,12 @@ Classify each statement as one of: **vendor-documented behavior**, **reproduced 
 
 Define what the firmware does when the condition persists: continue in degraded mode, retry with bounded backoff, isolate a peripheral, return to a safe output state, roll back an update or require service. Include a maximum retry/time budget and an observable diagnostic state. Avoid automatic reboot loops unless reset is the explicitly justified safety/recovery action.
 
+### Long-run IEEE 802.15.4 TX-done assertion
+
+[ESP-IDF #19425](https://github.com/espressif/esp-idf/issues/19425), opened 2026-11-12, reports ESP32-C6 revision v0.2 on ESP-IDF v6.1 with an ESP32-C6-WROOM-1U. After several hours of OpenThread operation with about 100 CSL children, esp_ieee802154_transmit_done() reaches the assertion that frame equals s_transmit_psdu in ISR context and the chip later reports an interrupt watchdog timeout. The report is non-deterministic and has no standalone minimal reproducer yet.
+
+Treat the pointer mismatch as a driver invariant failure to preserve and investigate, not as a reason to remove the assertion. Capture the complete register dump, matching ELF/map, 802.15.4 TX-done trace, child count, CSL timing and uptime. Do not add blocking logs, heap work or retries to the ISR. Require a long-duration C6 hardware soak and an upstream fix before declaring the path qualified.
+
 ## Verification plan
 
 Acceptance requires zero unexplained permanent receive stalls over a defined soak window, bounded recovery, documented radio duty cycle and target-specific evidence. Escalate reproducible silicon/IDF defects with a minimal project and full version tuple.
