@@ -99,7 +99,7 @@ class NovemberRuntimeFindingTests(unittest.TestCase):
         for token in (
             "#19450", "release/v5.5", "xPendingReadyList[xCurCoreID]",
             "xTaskResumeAll()", "vTaskNotifyGiveFromISR()",
-            "50 ms wake delays",
+            "50 ms wake delays", "#19451", "7266fdc", "19–20 per 2 s", "1,530 µs",
         ):
             with self.subTest(token=token):
                 self.assertIn(token, text)
@@ -109,7 +109,7 @@ class NovemberRuntimeFindingTests(unittest.TestCase):
         for token in (
             "#19456", "v6.3-dev", "v5.3", "v5.2.2",
             "esp_partition_read()", "esp_ipc_call(1, ...)",
-            "1 kHz", "all timer callbacks stop",
+            "1 kHz", "all timer callbacks stop", "#19457", "dfaa88f", "59,001 IPC calls", "not merged",
         ):
             with self.subTest(token=token):
                 self.assertIn(token, text)
@@ -119,7 +119,7 @@ class NovemberRuntimeFindingTests(unittest.TestCase):
         for token in (
             "#19439", "esp_ota_begin()", "ESP_ERR_OTA_ALREADY_IN_PROGRESS",
             "esp_partition_erase_range()", "dangerous write protection",
-            "only after erase succeeds",
+            "only after erase succeeds", "QEMU", "c1d1695f8", "multi-stage reset cases were not run",
         ):
             with self.subTest(token=token):
                 self.assertIn(token, text)
