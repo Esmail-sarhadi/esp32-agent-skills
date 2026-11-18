@@ -67,6 +67,8 @@ Define what the firmware does when the condition persists: continue in degraded 
 
 Treat the pointer mismatch as a driver invariant failure to preserve and investigate, not as a reason to remove the assertion. Capture the complete register dump, matching ELF/map, 802.15.4 TX-done trace, child count, CSL timing and uptime. Do not add blocking logs, heap work or retries to the ISR. Require a long-duration C6 hardware soak and an upstream fix before declaring the path qualified.
 
+A later issue comment proposes moving ieee802154_enter_critical() earlier in ieee802154_transmit_at() to match ieee802154_transmit_internal(). The commenter reports no crash so far, but this is an unreviewed experiment with no controlled before/after matrix. Do not treat it as a vendor-approved workaround or copy it without reviewing the matching driver commit and lock invariants.
+
 ## Verification plan
 
 Acceptance requires zero unexplained permanent receive stalls over a defined soak window, bounded recovery, documented radio duty cycle and target-specific evidence. Escalate reproducible silicon/IDF defects with a minimal project and full version tuple.
