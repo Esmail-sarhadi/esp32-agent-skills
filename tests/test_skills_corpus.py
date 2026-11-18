@@ -129,7 +129,7 @@ for _name in SKILL_NAMES:
 
 class SkillCorpusTest(unittest.TestCase):
     def test_the_corpus_has_six_hundred_and_sixty_one_skills(self):
-        self.assertEqual(len(SKILL_NAMES), 661
+        self.assertEqual(len(SKILL_NAMES), 661)
 
     def test_names_are_unique(self):
         self.assertEqual(len(SKILL_NAMES), len(set(SKILL_NAMES)))
