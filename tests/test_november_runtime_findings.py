@@ -162,7 +162,7 @@ class NovemberRuntimeFindingTests(unittest.TestCase):
         plugin = (ROOT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8")
         marketplace = (ROOT / ".claude-plugin" / "marketplace.json").read_text(encoding="utf-8")
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "1.8.0")
+        self.assertEqual(version, "1.8.1")
         for slug in (
             "esp32-c6-ecc-reset-power-state-audit",
             "esp32-s31-adc-phy-lock-order-audit",
@@ -170,9 +170,65 @@ class NovemberRuntimeFindingTests(unittest.TestCase):
             with self.subTest(slug=slug):
                 self.assertIn("  - " + slug, manifest)
                 self.assertIn(slug, readme)
-        self.assertIn('"version": "1.8.0"', plugin)
-        self.assertIn('"version": "1.8.0"', marketplace)
+        self.assertIn('"version": "1.8.1"', plugin)
+        self.assertIn('"version": "1.8.1"', marketplace)
         self.assertIn("661 skills", manifest)
+        self.assertIn("The repository now contains **661 skills**.", readme)
+
+
+    def test_p4_jpeg_report_preserves_cache_ownership_and_uncertainty(self):
+        text = read_skill("esp32-dma-cache-psram")
+        for token in ("#19496", "ESP32-P4 rev1.3", "v6.0.1", "64-byte",
+                      "PSRAM traffic", "dirty zero line", "CPU-written header",
+                      "aligned DMA payload", "not yet a maintainer-confirmed root cause"):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
+    def test_classic_esp32_ota_read_race_is_version_and_scheduler_scoped(self):
+        text = read_skill("esp32-ota-power-loss-matrix")
+        for token in ("#19487", "D0WD-Q5 hardware revision 1.01", "v6.1.1",
+                      "esp_ota_get_state_partition()", "esp_ipc_isr_release_other_cpu()",
+                      "3/3 watchdog resets", "maintainer stress attempt did not reproduce",
+                      "app_main-only success is not a universal workaround"):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
+    def test_usb_early_rx_fix_and_isr_load_report_are_distinct(self):
+        text = read_skill("usb-cdc-uart0-flashing-path-audit")
+        for token in ("#13137", "#13138", "5/5 early-write tests",
+                      "#13141", "20% CPU", "230400-baud",
+                      "PR #13138 does not address this interrupt-rate report",
+                      "Do not treat the PR for #13137 as a fix for #13141"):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
+    def test_research_log_records_versioned_upstream_sources(self):
+        text = (ROOT / "docs" / "research" / "field-issue-patterns.md").read_text(encoding="utf-8")
+        for token in ("2026-11-25", "#19496", "#19494", "#19493", "#19492",
+                      "#19487", "#19462", "#19464", "#19463", "#19466",
+                      "#19468", "#19495", "#13137", "#13141", "#13159",
+                      "No search-volume or popularity claims are made"):
+            with self.subTest(token=token):
+                self.assertIn(token, text)
+
+    def test_release_metadata_and_readme_count_are_consistent(self):
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        manifest = (ROOT / "agent.yaml").read_text(encoding="utf-8")
+        plugin = (ROOT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8")
+        marketplace = (ROOT / ".claude-plugin" / "marketplace.json").read_text(encoding="utf-8")
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertEqual(version, "1.8.1")
+        self.assertIn('version: "1.8.1"', manifest)
+        self.assertIn('"version": "1.8.1"', plugin)
+        self.assertIn('"version": "1.8.1"', marketplace)
+        self.assertIn("661 skills", manifest)
+        self.assertIn("The repository now contains **661 skills**.", readme)
+
+    def test_updated_skills_remain_within_corpus_line_limit(self):
+        for slug in ("esp32-dma-cache-psram", "esp32-ota-power-loss-matrix",
+                     "usb-cdc-uart0-flashing-path-audit"):
+            with self.subTest(slug=slug):
+                self.assertLessEqual(len(read_skill(slug).splitlines()), 120)
 
 
 if __name__ == "__main__":

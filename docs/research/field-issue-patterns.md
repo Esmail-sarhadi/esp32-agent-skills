@@ -164,3 +164,49 @@ This scan reviewed new ESP-IDF issues opened 2026-11-10 through 2026-11-18, Ardu
 
 The new and updated skills are issue-driven documentation; they do not prove the bugs on every board. No hardware was attached to this scan. The new C6 secure-boot reset, S31 ADC/PHY lock cycle, S3 ADC pad loading, C6 OpenThread ISR and BLE controller memory-pressure reports all require target hardware validation. No Google search-volume or popularity ranking is claimed. No new Skill was created for reports already covered by the PSRAM/OTA/AES-GCM corpus or for reports that still lack sufficient independent reproduction.
 
+## Weekly follow-up research: 2026-11-25
+
+### Release and toolchain baseline
+
+- ESP-IDF v6.1.1 was published 2026-11-16 as a bug-fix release; v5.5.6 remains the latest listed v5.5 patch in this scan.
+- Arduino-ESP32 3.3.13 was published 2026-11-17 on the v5.5.6+ line; Arduino-ESP32 4.0.0 was published 2026-11-19 on ESP-IDF v6.1.1. Test the two core lines separately.
+- PlatformIO espressif32 v8.0.0 was published 2026-10-19. Its release notes list Arduino 3.3.12 and ESP-IDF 6.0.0, not Arduino 3.3.13 or 4.0.0. Pin resolved framework/package versions; do not infer support from the platform version alone.
+- The official Espressif advisory index showed no newly dated security advisory in 2026-11-18..2026-11-25. Latest listed security items include AR2026-005 (2026-06-11, ESP32-S3 AES key recovery via voltage fault injection) and AR2026-001 (2026-04-08, CPA/XTS-AES on ESP32-C5 and other listed series).
+
+### New or materially updated upstream reports
+
+| Source | Target and version | Symptom / evidence | Confidence and action |
+|---|---|---|---|
+| [ESP-IDF #19496](https://github.com/espressif/esp-idf/issues/19496) | ESP32-P4 rev1.3, IDF v6.0.1, custom board | JPEG encoder reportedly returns ESP_OK while a 64-byte cache-line block is zeroed under PSRAM traffic, about 1/100 busy encodes. | Medium: detailed cache-line/source analysis, newly opened and no maintainer response. Verify pre-DMA cache ownership and preserve CPU-written header. |
+| [ESP-IDF #19494](https://github.com/espressif/esp-idf/issues/19494) | ESP32-P4 rev1.3, IDF v6.0.1 and master source review | Hardware AES-GCM initialization can leak earlier DMA descriptor/alignment allocations when a later allocation such as len_buf fails. | Medium-high for the allocation-unwind path: equivalent fix reportedly passed 10 injected failures and 384 buffer cases on v6.1.0/P4; rebased master patch has not been built on hardware. |
+| [ESP-IDF #19493](https://github.com/espressif/esp-idf/issues/19493) | ESP32-H2 v1.2 and C6 v0.2, IDF v5.5.5 (same path reported on master) | With PM/tickless idle and 802.15.4 sleep, an ISR path can reach esp_phy_disable() and a mutex; lock_acquire_generic() aborts if the ISR cannot take it immediately. | Medium-high source-path confidence; reporter observed one H2 failure during Zigbee OTA with BLE active and supplied a lock-hammer reproducer. No maintainer confirmation yet. |
+| [ESP-IDF #19492](https://github.com/espressif/esp-idf/issues/19492) | ESP32-H4HR2 ECO2 rev0.2, IDF v6.1.1 | Even hello_world boot loops with CPU_LOCKUP. Maintainer response says H4 ECO2 needs release/v6.2 or master; v6.1.x ROM linker script supports earlier H4 revisions only. | High confidence as a target/version compatibility boundary from maintainer response. Re-run idf.py --preview set-target esp32h4 and rebuild with the supported branch. |
+| [ESP-IDF #19487](https://github.com/espressif/esp-idf/issues/19487) | Classic ESP32 D0WD-Q5 hardware revision 1.01 (read via Arduino core; not re-queried with esptool), IDF v6.1.1, dual-core, 16 MB external flash; Arduino 3.3.11 as component in minimal repro | Reading the non-running OTA slot with esp_ota_get_state_partition() after tasks on both cores start can assert in esp_ipc_isr_release_other_cpu(); a later minimal repro reports 3/3 WDT resets. | Medium: later reproducer is strong, but an earlier maintainer stress attempt did not reproduce the original assert. Keep panic and WDT signatures distinct; no confirmed root cause or fix. |
+| [ESP-IDF #19462](https://github.com/espressif/esp-idf/issues/19462) | ESP32-P4 rev1.3, IDF v6.1.1, PPA / DSI rotation | Two of 116 tested geometries stalled when the remaining tail equaled 1536 bits; on_trans_done did not fire. A local '<=' comparison completed all 116 geometries, but other 1536-bit shapes passed. | Medium-high reproducibility on reporter's setup; patch not upstream-verified. Sweep shape/rotation/scanout combinations before adopting. |
+| [ESP-IDF #19464](https://github.com/espressif/esp-idf/issues/19464) | ESP32-C5 rev1.0, IDF v6.0.3 and release/v6.0, external 32.768 kHz RTC crystal | WIFI_PS_MAX_MODEM + listen interval 30 + automatic light sleep reportedly misses about 3/4 beacon windows; measured 190–206 ms radio-on and 16.2–17.3 mAs per wake. | Medium: detailed current and Wi-Fi counters, but no stock-example reproducer and no confirmed root cause/workaround. |
+| [ESP-IDF #19463](https://github.com/espressif/esp-idf/issues/19463) | ESP32-S3 Border Router + ESP32-C6 Thread RCP, IDF v6.0.2 | DNS-SD discovery-proxy queries reportedly leak 32 bytes per lookup; heap tracing saw nine 32-byte blocks in two hours. Relevant implementation ships prebuilt. | Medium-high reporter evidence; not reproduced on newer hardware/SDK and no direct source patch available. |
+| [ESP-IDF #19466](https://github.com/espressif/esp-idf/issues/19466) | Classic ESP32 rev1.0, IDF v6.1.1, 240 MHz | One of six tested chips reportedly misread RTC fast-memory words at 240 MHz; task stacks placed there after heap-order changes, causing a boot loop. 80/160 MHz and other tested chips did not show it. | Medium, highly chip-specific. Disabling CONFIG_ESP_SYSTEM_ALLOW_RTC_FAST_MEM_AS_HEAP avoided the reporter's failure but changes available heap; verify exact silicon and official errata. |
+| [ESP-IDF #19468](https://github.com/espressif/esp-idf/issues/19468) | ESP32-D0WD-V3 rev3.0, IDF v6.1/v6.1.1, ESP32-CAM | I2C slave initialization aborts in lock_acquire_generic() when I2C debug logging is enabled; stack reaches i2c_select_periph_clock(). | Low-medium: debug logging was enabled, but why the log call triggers the lock abort remains unclear. Needs a minimal reproducer and maintainer analysis. |
+| [ESP-IDF #19495](https://github.com/espressif/esp-idf/issues/19495) | ESP32-S3, IDF v5.5.5 (ESPHome 2026.11.0) | Cancelling a Bluedroid LE connection during link formation reportedly leaves the GATT TCB closing; later opens to that peer fail with status 133 until reboot. | Low-medium: one live incident, no deliberate reproducer; code-path analysis is plausible but v5.5.6/v6.1.1/master were not re-run. |
+| [Arduino-ESP32 #13137](https://github.com/espressif/arduino-esp32/issues/13137) and [PR #13138](https://github.com/espressif/arduino-esp32/pull/13138) | ESP32-S3 native USB Serial/JTAG, Arduino 3.3.13; reporter also says 4.0.0 | Host data arriving before Serial.begin() can leave RX permanently NAKed because HWCDC::begin() clears the pending OUT-receive flag. Proposed PR preserves that flag; author reports 5/5 early-write tests pass with the patch vs 0/5 on 3.3.13. | High reporter-side reproduction, but PR remains open and unreleased. Do not call it fixed in a released core. |
+| [Arduino-ESP32 #13141](https://github.com/espressif/arduino-esp32/issues/13141) | ESP32-S3 native USB Serial/JTAG, Arduino 3.3.13, IDF 5.5.6, pioarduino 55.03.313 | With host port open, IN-token ISR reportedly consumes about 20% CPU at 80 MHz and causes UART0 RX overflow/loss in an 8.2 KB transfer at 230400 baud. | Medium-high measurements from one custom board; investigation remains open. Separate from #13137 and not fixed by PR #13138. |
+| [Arduino-ESP32 #13159](https://github.com/espressif/arduino-esp32/issues/13159) | ESP32-C6, Arduino 4.0.0 / IDF 6.1.1; 3.3.13 reportedly works | Stock Zigbee Contact Switch example boot loops with Load access fault in setAttributePersistent() during global construction. | Low: one report awaiting triage. Compare Zigbee mode/partition scheme and initialization order; do not generalize to all Zigbee endpoints. |
+
+### Domain coverage this week
+
+- **Wi-Fi / power save:** C5 beacon-window misses (#19464); no verified workaround.
+- **BLE / Bluedroid:** GATT cancel-open race (#19495); native USB regressions are a separate peripheral path.
+- **IEEE 802.15.4 / Zigbee:** ISR-to-PHY-lock abort (#19493); Arduino C6 Zigbee global-constructor boot loop (#13159).
+- **FreeRTOS / SMP:** OTA non-running-slot assertion (#19487); earlier #19450/#19456 remain tracked separately.
+- **Memory / PSRAM / DMA:** P4 JPEG cache-line corruption (#19496), P4 AES-GCM allocation leak (#19494), OpenThread BR leak (#19463), classic ESP32 RTC fast-memory anomaly (#19466).
+- **Flash / OTA:** #19487 is a runtime state-query issue, not evidence of general OTA image or partition corruption.
+- **Display / DMA:** P4 PPA exact-tail stall (#19462).
+- **USB / UART:** Arduino #13137/#13141; PR #13138 remains open.
+- **I2C:** #19468 needs a minimal reproducer and maintainer diagnosis.
+- **TLS/MQTT, Modbus/RS485/LoRa, ADC, Ethernet:** no new high-confidence issue from the selected primary sources this week.
+
+### Community-source cross-check and limits
+
+A targeted Reddit/Stack Overflow search did not surface an independent, current reproduction of these exact November 2026 regressions. Older USB/JTAG troubleshooting discussions are not evidence for the 3.3.13 regressions and were not used to infer root cause. No search-volume or popularity claims are made.
+
+All issue reports above are scoped to the reporter's exact target/revision/framework tuple. A proposed patch, reporter-side test, maintainer comment, merged upstream fix and released fix are different evidence states. Hardware, RF, power, cache-coherency and silicon-anomaly claims still require the exact board and instrumentation.

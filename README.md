@@ -119,7 +119,7 @@ See [harnesses/README.md](harnesses/README.md) for supported locations and capab
 
 ## Skills catalog
 
-The repository now contains **644 skills**. The latest 400-skill expansion is indexed in [docs/advanced-skill-expansion.md](docs/advanced-skill-expansion.md).
+The repository now contains **661 skills**. The latest 400-skill expansion is indexed in [docs/advanced-skill-expansion.md](docs/advanced-skill-expansion.md).
 
 <!-- SKILLS CATALOG START -->
 
