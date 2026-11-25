@@ -39,3 +39,14 @@ Never promise DMA from PSRAM without target/driver documentation. Do not use a p
 ## Version and safety boundary
 
 Check the selected target's datasheet, errata and framework release notes before choosing APIs or pin capabilities. Electrical protection, isolation, overcurrent limits and safe outputs must be designed independently of firmware. A passing host test is not evidence of electrical compliance or field reliability.
+
+
+## P4 JPEG encoder cache-ownership report (2026-11-25)
+
+[ESP-IDF #19496](https://github.com/espressif/esp-idf/issues/19496) is an open, reporter-specific report for ESP32-P4 rev1.3 / ESP-IDF v6.0.1. Under competing PSRAM traffic, jpeg_encoder_process() reportedly returns ESP_OK while a 64-byte cache-line-aligned zero block corrupts the compressed payload (about 1 in 100 busy encodes).
+
+The proposed mechanism is a dirty zero line left by jpeg_alloc_encoder_mem() being written back after 2D-DMA has produced the same line. This is the reporter's source analysis, not yet a maintainer-confirmed root cause.
+
+Before accepting a fix, verify the driver's cache/ownership contract: preserve the CPU-written header, synchronize only the aligned DMA payload before enqueue, and do not invent cache operations for another SoC. The report compares the encoder with decoder/PPA paths that invalidate output before DMA.
+
+Regression: encode identical frames with and without PSRAM contention; compare raw bytes/hashes and decoded images; sweep alignment and output size; record exact IDF commit and cache-line behavior. The issue had no maintainer response at this scan.

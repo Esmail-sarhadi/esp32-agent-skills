@@ -1,6 +1,6 @@
 spec_version: "0.1.0"
 name: esp32-agent-skills
-version: "1.8.0"
+version: "1.8.1"
 description: >-
   Agent skills and checkers for ESP32 firmware: 661 skills across pin safety,
   power, partitioning, industrial protocols and field failures, plus 10

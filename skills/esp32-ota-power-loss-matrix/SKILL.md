@@ -65,3 +65,10 @@ Regression test: request an erase range larger than the partition, assert the fi
 - ESP-IDF programming guide: https://docs.espressif.com/projects/esp-idf/en/stable/
 - Espressif technical documents: https://www.espressif.com/en/support/documents/technical-documents
 - ESP-IDF component registry: https://components.espressif.com/
+
+
+## Runtime read of the non-running OTA slot on classic ESP32
+
+[ESP-IDF #19487](https://github.com/espressif/esp-idf/issues/19487) reports ESP32 D0WD-Q5 rev1.1 / IDF v6.1.1 / dual-core / 16 MB external flash: calling esp_ota_get_state_partition() on the non-running partition (esp_ota_get_next_update_partition(NULL)) after tasks on both cores start asserted in esp_ipc_isr_release_other_cpu(). A later minimal Arduino-as-component reproducer reports 3/3 watchdog resets; an earlier maintainer stress attempt did not reproduce the original assert, so keep confidence medium and distinguish the WDT signature from the initial panic.
+
+Compare v6.1.0/v6.1.1, chip revision, caller core, scheduler state, Wi-Fi task activity and both-core traces. Avoid concurrent polling of the non-running slot on this exact tuple until upstream status is clarified; app_main-only success is not a universal workaround.

@@ -102,3 +102,12 @@ Use the exact vendor documentation for the selected target and SDK release first
 
 - https://github.com/espressif/arduino-esp32/blob/master/docs/en/troubleshooting.rst
 - https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/usb-serial-jtag-console.html
+
+
+## Native USB Serial/JTAG regressions in Arduino 3.3.13
+
+Keep two reports separate. [Arduino-ESP32 #13137](https://github.com/espressif/arduino-esp32/issues/13137) describes ESP32-S3 native USB RX becoming permanently NAKed when host data arrives after reset but before Serial.begin(); HWCDC::begin() cleared the pending OUT-receive flag. [PR #13138](https://github.com/espressif/arduino-esp32/pull/13138) preserves it and reports 5/5 early-write tests passing with the change versus 0/5 on 3.3.13, but the PR remains open and unreleased.
+
+[Arduino-ESP32 #13141](https://github.com/espressif/arduino-esp32/issues/13141) is distinct: with the native port open, an IN-token ISR reportedly consumes about 20% CPU at 80 MHz and caused UART0 loss during an 8.2 KB, 230400-baud transfer. PR #13138 does not address this interrupt-rate report.
+
+Test early-host-write and idle-host-open independently; measure CPU/ISR load and UART FIFO/ring-buffer errors on the exact S3, core, IDF and pioarduino tuple. Do not treat the PR for #13137 as a fix for #13141.
