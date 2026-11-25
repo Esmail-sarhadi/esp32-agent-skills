@@ -186,7 +186,7 @@ class NovemberRuntimeFindingTests(unittest.TestCase):
 
     def test_classic_esp32_ota_read_race_is_version_and_scheduler_scoped(self):
         text = read_skill("esp32-ota-power-loss-matrix")
-        for token in ("#19487", "D0WD-Q5 rev1.1", "v6.1.1",
+        for token in ("#19487", "D0WD-Q5 hardware revision 1.01", "v6.1.1",
                       "esp_ota_get_state_partition()", "esp_ipc_isr_release_other_cpu()",
                       "3/3 watchdog resets", "maintainer stress attempt did not reproduce",
                       "app_main-only success is not a universal workaround"):
